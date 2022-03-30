@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+}
