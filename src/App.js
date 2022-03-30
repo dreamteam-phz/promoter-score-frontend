@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./components/footer/Footer";
 import Input from "./components/input/Input";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <div>
       Dreamteam phz project
       <Input />
+      <Footer />
     </div>
   );
 }
