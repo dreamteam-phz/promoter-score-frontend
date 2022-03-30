@@ -113,7 +113,7 @@ textarea {
   resize: none;
 }
 
-button {
+.button {
   width: 200px;
   height: 30px;
   border: none;
@@ -126,7 +126,7 @@ button {
   cursor: pointer;
   font-weight: bold;
 }
-button:hover {
+.button:hover {
   background-color: var(--green);
 }
 @media (max-width: 1000px) {
