@@ -1,0 +1,9 @@
+.header {
+  background-color: rgb(218, 161, 161);
+  height: 10vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "Merriweather";
+  width: 100vw;
+}

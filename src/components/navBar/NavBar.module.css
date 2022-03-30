@@ -1,0 +1,15 @@
+.navigation {
+  display: flex;
+  padding: 50px;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Lato";
+  text-decoration: none;
+  width: 15rem;
+}
+.navigation li {
+  list-style: none;
+}
+.link {
+  text-decoration: none;
+}

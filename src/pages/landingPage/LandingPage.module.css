@@ -1,0 +1,24 @@
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: f;
+}
+
+.containerLeft {
+  display: flex;
+  flex: 50%;
+  background-color: green;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.containerRight {
+  display: flex;
+  flex: 50%;
+  background-color: red;
+  justify-content: center;
+}
+
+.title {
+  font-family: "Lato";
+}
