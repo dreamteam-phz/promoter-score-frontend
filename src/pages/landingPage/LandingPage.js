@@ -4,7 +4,7 @@ import Input from '../../components/input/Input'
 
 const LandingPage = () => {
   return (
-    <div>
+    <div className={styles.title}>
       Hello I am a landing page
       <main>
         <div className={styles.containerLeft}>

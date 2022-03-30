@@ -18,3 +18,7 @@ main {
   background-color: red;
   justify-content: center;
 }
+
+.title {
+  font-family: "Lato";
+}

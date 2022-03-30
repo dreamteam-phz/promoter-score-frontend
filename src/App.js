@@ -1,14 +1,19 @@
 import React from "react";
-import Footer from "./components/footer/Footer";
-import Input from "./components/input/Input";
+import Dashboard from "./pages/dashboard/Dashboard";
 import LandingPage from "./pages/landingPage/LandingPage";
+import Header from "./components/header/Header";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      Dreamteam phz project
-      <LandingPage/>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/Dashboard" element={<Dashboard />}></Route>
+      </Routes>
+    </Router>
   );
 }
 
