@@ -3,7 +3,11 @@ import styles from "./Input.module.css";
 const Input = (props) => {
   return (
     <div>
-      <input className={styles.input} placeholder={props.text} />
+      <input
+        className={styles.input}
+        placeholder={props.text}
+        name={props.name}
+      />
     </div>
   );
 };
