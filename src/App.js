@@ -6,6 +6,8 @@ import LandingPage from "./pages/landingPage/LandingPage";
 function App() {
   return (
     <div>
+      Dreamteam phz project
+      <LandingPage/>
     </div>
   );
 }
