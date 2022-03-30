@@ -6,7 +6,7 @@ const NavBar = () => {
     <ul className={classes.navigation}>
       <li>
         <NavLink className={classes.link} to="/" exact>
-          Landing page
+          Home
         </NavLink>
       </li>
 
