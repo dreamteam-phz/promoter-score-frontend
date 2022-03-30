@@ -4,6 +4,7 @@ import Input from '../../components/input/Input'
 
 const LandingPage = () => {
   return (
+    <>
     <div className={styles.title}>
       Hello I am a landing page
       <main>
@@ -22,7 +23,7 @@ const LandingPage = () => {
         </div>
       </main>
     </div>
-
+    </>
   )};
 
 export default LandingPage;
