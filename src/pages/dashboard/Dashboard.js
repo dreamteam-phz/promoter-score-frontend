@@ -4,7 +4,20 @@ import Form from "../../components/form/Form";
 const Dashboard = () => {
   return (
     <div className={styles.main}>
-      <Form />
+      <div className={styles.container}>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+      </div>
     </div>
   );
 };
