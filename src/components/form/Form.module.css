@@ -80,7 +80,7 @@ sup {
   transition-duration: 0.5s;
   transition-delay: 0s;
 }
-input {
+input[type="radio"] {
   display: none;
 }
 input[type="radio"]:checked + label {
