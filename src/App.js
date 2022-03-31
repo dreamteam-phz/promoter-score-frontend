@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <Router>
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path="/form" element={<Form />}></Route>
         <Route path="/" element={<LandingPage />}></Route>
