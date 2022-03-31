@@ -5,7 +5,7 @@ const Input = (props) => {
     <div>
       <input
         className={styles.input}
-        placeholder={props.text}
+        placeholder={styles.text}
         name={props.name}
       />
     </div>

@@ -12,7 +12,6 @@ function App() {
       {/* <Header /> */}
       <Routes>
         <Route path="/form" element={<Form />}></Route>
-
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/Dashboard" element={<Dashboard />}></Route>
       </Routes>
