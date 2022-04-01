@@ -1,6 +1,6 @@
 import React from "react";
 import Dashboard from "./pages/dashboard/Dashboard";
-import LandingPage from "./pages/landingPage/LandingPage";
+import Home from "./pages/home/Home";
 import Form from "./components/form/Form";
 import Header from "./components/header/Header";
 import Instructions from "./pages/instructions/Instructions";
@@ -14,7 +14,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/form" element={<Form />}></Route>
-        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/Survey" element={<Survey />}></Route>
         <Route path="/Settings" element={<Settings />}></Route>
         <Route path="/Dashboard" element={<Dashboard />}></Route>
