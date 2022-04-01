@@ -77,7 +77,7 @@ sup {
   background-color: whitesmoke;
   cursor: pointer;
   transition: ease-in-out;
-  transition-duration: 0.5s;
+  transition-duration: 0.2s;
   transition-delay: 0s;
 }
 input[type="radio"] {
@@ -114,15 +114,15 @@ textarea {
 }
 
 .button {
-  width: 200px;
+  width: 150px;
   height: 30px;
   border: none;
   border-radius: 15px;
   background-color: var(--lightblue);
   margin-top: -10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   transition: ease-in-out;
-  transition-duration: 0.3s;
+  transition-duration: 0.2s;
   cursor: pointer;
   font-weight: bold;
 }
