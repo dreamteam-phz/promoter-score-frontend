@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Instructions.module.css";
 const Instructions = () => {
-  return <div></div>;
+  return <div className={styles.main}>Instructions go here</div>;
 };
 
 export default Instructions;
