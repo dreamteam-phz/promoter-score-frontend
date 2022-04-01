@@ -11,6 +11,10 @@ const Form = () => {
   })
 
   useEffect(() => {
+    axios.get('http://localhost:3000/api/formscores').then(data => console.log(data.data))
+  },[]);
+
+  useEffect(() => {
     getIP();
   }, []);
   const getIP = () => {
