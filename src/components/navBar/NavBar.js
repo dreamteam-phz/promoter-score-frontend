@@ -11,8 +11,23 @@ const NavBar = () => {
       </li>
 
       <li>
+        <NavLink className={classes.link} to="/Survey">
+          Create survey
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className={classes.link} to="/Settings">
+          Settings
+        </NavLink>
+      </li>
+      <li>
         <NavLink className={classes.link} to="/Dashboard">
           Dashboard
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className={classes.link} to="/Instructions">
+          Instructions
         </NavLink>
       </li>
     </ul>
