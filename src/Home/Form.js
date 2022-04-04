@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Form.module.css";
-import Label from "./Label";
+import Label from "../components/form/Label";
 import axios from 'axios';
 
 const Form = () => {
@@ -29,7 +29,7 @@ const Form = () => {
     setForm({...form, [event.target.name]: +event.target.value});
   }
   const labelsToDisplay = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(item => {
-    return <Label id={item} change={scoreHandler} />
+    return <Label id={item} change={scoreHandler} content={item} />
   })
   // check console when pressing submit form
   const submitHandler = (event) => {
@@ -60,9 +60,9 @@ const Form = () => {
         <p>not likely at all</p>
         <p>extreamly likely</p>
       </div>
-
       {survey.comment && 
-      <div className={styles.precomment}><p>What is the main reason for your score?<sup>*</sup></p></div> &&
+      <div className={styles.precomment}><p>What is the main reason for your score?<sup>*</sup></p></div>}
+      {survey.comment && 
       <textarea onChange={textAreaHandler} name="comment" rows="6" cols="30" placeholder="type your message here" />}
 
       <button onClick={submitHandler} className={styles.button}>Submit</button>

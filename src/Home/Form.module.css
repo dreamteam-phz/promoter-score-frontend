@@ -23,7 +23,7 @@
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  background-color: var(--whitish);
+  background-color: transparent;
   gap: 25px;
 }
 
@@ -102,10 +102,13 @@ input[type="radio"]:checked + label {
   display: flex;
   justify-content: flex-start;
   font-size: 14px;
+  margin-top: -15px;
 }
 textarea {
   min-width: 350px;
   width: var(--formwidth);
+  border: none;
+  border-radius: 5px;
   margin-top: -20px;
   font-size: 12px;
   padding: 5px;
@@ -114,20 +117,17 @@ textarea {
 }
 
 .button {
-  width: 150px;
-  height: 30px;
+  width: 100px;
+  height: 35px;
+  background-color: var(--black);
+  color: var(--white);
   border: none;
-  border-radius: 15px;
-  background-color: var(--lightblue);
-  margin-top: -10px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-  transition: ease-in-out;
-  transition-duration: 0.2s;
+  border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
+  margin-top: -10px;
 }
 .button:hover {
-  background-color: var(--green);
+  background-color: var(--lightblue);
 }
 @media (max-width: 1000px) {
   :root {
