@@ -1,0 +1,45 @@
+.bar {
+    background-color: var(--whitesmoke);
+    min-width: 200px;
+    width: var(--barWidth);
+    height: 100vh;
+    box-shadow: 0 0 4px 0 var(--shadow);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.nav {
+    margin-top: 75px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 35px;
+}
+.bar input {
+    display: none;
+}
+.nav label {
+    color: var(--shadow);
+    cursor: pointer;
+    font-weight: 600;
+    
+}
+.nav button {
+    color: var(--shadow);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: transparent;
+    border: none;
+}
+.bar a {
+    background-color: transparent;
+    color: var(--shadow);
+}
+
+.bar input[type='radio']:checked + label{
+    color: var(--black);
+    background-color: transparent;
+}
+
