@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import styles from "./Create.module.css";
 import Label from './Label'
@@ -9,7 +10,11 @@ export default function Create() {
   }
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(data);
+    axios.post('http://localhost:4000/api/newsurvey', {
+      question: data.question,
+      comment: (data.comment) ? true : false
+    }).then(res => console.log(res))
+    
   } 
 
 
