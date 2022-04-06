@@ -39,6 +39,7 @@ const Form = () => {
   }
  
   return (
+    <>
     <div className={styles.main}>
       <div className={styles.title}>
         <h1>NPS Survey Form</h1>
@@ -67,6 +68,7 @@ const Form = () => {
 
       <button onClick={submitHandler} className={styles.button}>Submit</button>
     </div>
+    </>
   );
 };
 
