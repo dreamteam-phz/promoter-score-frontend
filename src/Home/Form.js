@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Form.module.css";
 import Label from "../components/form/Label";
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 const Form = () => {
   const [form, setForm] = useState({score: '', comment: ''});
@@ -9,9 +10,13 @@ const Form = () => {
     question: 'Would you recomend PHZ Full Stack for your friends as an employer?',
     comment: true
   })
+  const params = useParams();
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/formscores').then(data => console.log(data.data))
+    axios.get('http://localhost:4000/api/surveys/' + params.id).then(response => {
+      console.log(response.data)
+      setSurvey(response.data);
+    })
   },[]);
 
   useEffect(() => {
@@ -34,8 +39,13 @@ const Form = () => {
   // check console when pressing submit form
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log('data to be sent:')
-    console.log(form)
+    axios.patch('http://localhost:4000/api/update/' + params.id, {
+      results: [
+        form
+      ]
+    }).then(response => {
+      console.log(response)
+    });
   }
  
   return (

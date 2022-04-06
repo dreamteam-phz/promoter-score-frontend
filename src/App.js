@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Welcome />}/>
         <Route path="home" element={<Home />}/>
-        <Route path="form" element={<Form />}/>
+        <Route path=":id" element={<Form />}/>
       </Routes>
     </BrowserRouter>
     </Provider>
