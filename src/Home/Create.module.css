@@ -97,6 +97,9 @@ h1 {
 .button:hover {
   background-color: var(--lightblue);
 }
+.button a {
+  background-color: transparent;
+}
 .span {
   font-size: 1.2rem;
 }
