@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import styles from "./Create.module.css";
 import Label from "./Label";
+
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
@@ -10,6 +11,7 @@ export default function Create() {
   const [data, setData] = useState({ question: "", comment: true });
   const [linkToForm, setLinkToForm] = useState("");
   const [open, setOpen] = useState(false);
+
   const handleToClose = (event, reason) => {
     if ("clickaway" === reason) return;
     setOpen(false);
@@ -89,7 +91,7 @@ export default function Create() {
   } else {
     return (
       <div className={styles.formLink}>
-        <label>Link to the form:</label>
+        <label>URL of the form:</label>
         <span
           className={styles.span}
         >{`http://localhost:3000/${linkToForm}`}</span>

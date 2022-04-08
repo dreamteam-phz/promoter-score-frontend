@@ -7,10 +7,15 @@ export default function Dashboard() {
 
   useEffect(() => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
-      setData(response.data);
-      console.log(response.data);
+      // setData(response.data);
+      setData(response.data[0].results.map((item) => item.score));
+
+      // console.log(response.data);
     });
   }, []);
+
+  console.log(data);
+
   // data.map((item) => console.log(item.results));
   return (
     <div className={styles.dashboard}>

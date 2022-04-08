@@ -68,7 +68,7 @@ const Form = () => {
     <>
       <div className={styles.main}>
         <div className={styles.title}>
-          <h1>NPS Survey Form</h1>
+          <h1>PS Survey Form</h1>
           <p>
             Questions marked with <sup>*</sup> are required
           </p>
@@ -113,7 +113,7 @@ const Form = () => {
           }}
           open={open}
           autoHideDuration={3000}
-          message="Thank you for your answer! We appreciate your time!"
+          message="Thank you for your Feedback! We appreciate your time!"
           onClose={handleToClose}
           action={
             <React.Fragment>
