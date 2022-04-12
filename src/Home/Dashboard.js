@@ -23,12 +23,13 @@ export default function Dashboard() {
     else if (score <= 6) det = det + 1;
   }
   pass = data.length - (prom + det);
-  console.log(pass);
-  console.log(prom);
-  console.log(det);
+  console.log("passives: " + pass);
+  console.log("promoters: " + prom);
+  console.log("detractors: " + det);
+  console.log("Total: " + data.length);
   const result = ((prom - det) / data.length) * 100;
   const promScore = result.toFixed(2);
-  console.log(promScore);
+  console.log("Score: " + promScore);
 
   // console.log(data);
   // data.map((item) => console.log(item.results));
