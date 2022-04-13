@@ -77,3 +77,6 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
 }
+.create button:hover {
+    background-color: var(--effect-PHZorane);
+}

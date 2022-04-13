@@ -4,7 +4,7 @@ import styles from "./Create.module.css";
 import Label from './Label'
 
 export default function Create() {
-  const [data, setData] = useState({comment: true});
+  const [data, setData] = useState({});
   const inputHandler = (event) => {
     setData({...data, [event.target.name]: event.target.value});
   }
@@ -12,7 +12,8 @@ export default function Create() {
     event.preventDefault();
     axios.post('http://localhost:4000/api/newsurvey', {
       question: data.question,
-      comment: (data.comment) ? true : false
+      name: data.name,
+      comment: true
     }).then(res => console.log(res))
     
   } 
@@ -22,13 +23,10 @@ export default function Create() {
     <div className={styles.create}>
       <div className={styles.data}>
         <h1>CREATE SURVEY</h1>
-        <input name='question' type='text' placeholder='Enter your question' onChange={inputHandler} />
+        <input name='name' type='text' placeholder='Name of survey' onChange={inputHandler} />
+        <input name='question' type='text' placeholder='Main question' onChange={inputHandler} />
         <div className={styles.container}>
-          <div className={styles.comment}>
-            <Label id='on' name='comment' checked={true} content='on' change={inputHandler}/>
-            <Label id='off' name='comment' content='off' change={inputHandler}/>
-          </div>
-          <button onClick={submitHandler}>SUBMIT</button>
+        <button onClick={submitHandler}>SUBMIT</button>
         </div>
       </div>
     </div>

@@ -52,7 +52,7 @@ sup {
   margin-top: -20px;
 }
 .tool label {
-  width: 34px;
+  min-width: 34px;
   height: 34px;
   display: flex;
   align-items: center;
@@ -111,7 +111,7 @@ textarea {
   margin-top: -10px;
 }
 .button:hover {
-  background-color: var(--lightblue);
+  background-color: var(--effect-PHZorane);
 }
 @media (max-width: 1000px) {
   :root {
