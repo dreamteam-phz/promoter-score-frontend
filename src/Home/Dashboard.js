@@ -27,10 +27,10 @@ export default function Dashboard() {
   // console.log("detractors: " + det);
   // console.log("Total: " + data.length);
   const result = ((prom - det) / data.length) * 100;
-  const promScore = result.toFixed(2);
+  const promScore = Math.floor(result);
 
   // console.log("Score: " + promScore);
-  console.log(promScore);
+  // console.log(promScore);
 
   return (
     <div className={styles.dashboard}>
@@ -46,26 +46,24 @@ export default function Dashboard() {
         </div>
 
         <div className={styles.panel}>
-          <div className={styles.respondersWraper}>
-            {data.length > 0 ? (
-              <div>
-                <RespondersChart
-                  promoters={prom}
-                  detractors={det}
-                  passives={pass}
-                />
-                <div className={styles.resultWraper}>
-                  <h4>Total responders</h4>
-                  <span>{data.length}</span>
-                </div>
-              </div>
-            ) : (
+          {data.length > 0 ? (
+            <div className={styles.respondersWraper}>
+              <RespondersChart
+                promoters={prom}
+                detractors={det}
+                passives={pass}
+              />
               <div className={styles.resultWraper}>
                 <h4>Total responders</h4>
                 <span>{data.length}</span>
               </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className={styles.resultWraper}>
+              <h4>Total responders</h4>
+              <span>{data.length}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
