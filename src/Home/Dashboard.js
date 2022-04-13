@@ -1,25 +1,26 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styles from "./Dashboard.module.css";
-
 
 export default function Dashboard() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/formscores').then(response => {
-      setData(response.data);
-      console.log(data);
+    axios.get("http://localhost:4000/api/formscores").then((response) => {
+      // setData(response.data);
+      setData(response.data[0].results.map((item) => item.score));
+
+      // console.log(response.data);
     });
-  }, [])
+  }, []);
 
+  console.log(data);
 
+  // data.map((item) => console.log(item.results));
   return (
     <div className={styles.dashboard}>
       <h1>DASHBOARD</h1>
-      <div className={styles.data}>
-        
-      </div>
+      <div className={styles.data}></div>
     </div>
-  )
+  );
 }
