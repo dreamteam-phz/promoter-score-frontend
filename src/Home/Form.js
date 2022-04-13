@@ -44,11 +44,11 @@ const Form = () => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
   const scoreHandler = (event) => {
-    setForm({ ...form, [event.target.name]: +event.target.value });
-  };
-  const labelsToDisplay = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
-    return <Label key={item} id={item} change={scoreHandler} content={item} />;
-  });
+    setForm({...form, [event.target.name]: +event.target.value});
+  }
+  const labelsToDisplay = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(item => {
+    return <Label id={item} change={scoreHandler} content={item} />
+  })
   // check console when pressing submit form
   const submitHandler = (event) => {
     event.preventDefault();
