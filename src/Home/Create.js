@@ -15,7 +15,6 @@ export default function Create() {
       name: data.name,
       comment: true
     }).then(res => console.log(res))
-    
   } 
 
 
