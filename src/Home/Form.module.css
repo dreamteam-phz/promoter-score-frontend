@@ -113,6 +113,17 @@ textarea {
 .button:hover {
   background-color: var(--effect-PHZorane);
 }
+.cookieMessage{
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+.cookieMessage .message{
+  font-size: 2em;
+  font-weight: bolder;
+  color: var(--effect-PHZorane)
+}
 @media (max-width: 1000px) {
   :root {
     --formwidth: 60vw;
