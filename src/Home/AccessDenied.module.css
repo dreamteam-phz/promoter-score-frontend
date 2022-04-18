@@ -1,0 +1,13 @@
+.cookieMessage{
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    background-color: var(--background-white);
+  }
+  .cookieMessage .message{
+    font-size: 2em;
+    font-weight: bolder;
+    color: var(--effect-PHZorane); 
+   text-align: center;
+  }
