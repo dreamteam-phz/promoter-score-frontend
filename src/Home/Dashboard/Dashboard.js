@@ -1,45 +1,67 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+
 import styles from "./Dashboard.module.css";
-import PeriodFilter from "./PeriodFilter";
-import ScoreChart from "./ScoreChart";
-import { testData } from "./data";
-import Label from "../Label";
+import RespondersChart from "./RespondersChart";
+import DisplayFilter from "./DisplayFilter";
+import PromoterScore from "./PromoterScore";
+import PromMonthlyChart from "./PromMonthlyChart";
+import PromMonthlyBars from "./PromMonthlyBars";
+import PromoterScoreChart from "./PromoterScoreChart";
 
 export default function Dashboard() {
-  const [chosenPeriod, setChosenPeriod] = useState("6");
-  const extractPeriodHandler = (period) => {
-    setChosenPeriod(period);
+  const [data, setData] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState("6");
+  const [extractedDate, setExtractedDate] = useState([]);
+  const filterChangeHandler = (month) => {
+    setSelectedMonth(month);
+    // console.log(month + " from dash");
   };
-  const [data, setData] = useState({
-    labels: testData.map((item) => item.month),
-    datasets: [{ label: "nps", data: testData.map((item) => item.promoters) }],
-  });
-  const filteredData = (testData) => {
-    for (let i = testData.length - 1; i <= chosenPeriod; i--) {
-      return testData.nps;
-    }
-  };
-
-  const dispatch = useDispatch();
-  const labelHandler = (event) => {
-    dispatch({
-      type: "DASHBOARD",
-      payload: event.target.value,
+  useEffect(() => {
+    axios.get("http://localhost:4000/api/formscores").then((response) => {
+      setData(response.data[0].results.map((item) => item.score));
+      const date = response.data[0].results.map((item) => item.date);
+      setExtractedDate(date.map((item) => console.log(item)));
     });
-    console.log(event.target.value);
-  };
+  }, []);
+  // NetPromScore logic
+
+  let prom = 0;
+  let det = 0;
+  let pass = 0;
+  for (let score of data) {
+    if (score >= 9) prom++;
+    else if (score <= 6) det++;
+  }
+  pass = data.length - (prom + det);
+  // console.log("passives: " + pass);
+  // console.log("promoters: " + prom);
+  // console.log("detractors: " + det);
+  // console.log("Total: " + data.length);
+  const result = ((prom - det) / data.length) * 100;
+  const promScore = Math.floor(result);
+
+  // console.log("Score: " + promScore);
+  // console.log(promScore);
+
   return (
     <div className={styles.dashboard}>
-      <div className={styles.header}>
-        <h1>DASHBOARD</h1>
-        <PeriodFilter selected={chosenPeriod} onFilter={extractPeriodHandler} />
-      </div>
-
+      <h1>DASHBOARD</h1>
+      <DisplayFilter selected={selectedMonth} onFilter={filterChangeHandler} />
       <div className={styles.data}>
-        {/* {console.log(chosenPeriod)} */}
-
-        <ScoreChart score={data} />
+        <PromoterScore
+          data={data}
+          promScore={promScore}
+          month={selectedMonth}
+        />
+        <PromMonthlyChart data={data} promScore={promScore} />
+        <PromoterScoreChart
+          data={data}
+          promoters={prom}
+          detractors={det}
+          passives={pass}
+        />
+        <PromMonthlyBars data={data} promScore={promScore} />
       </div>
     </div>
   );
