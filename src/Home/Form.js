@@ -7,6 +7,7 @@ import Loader from "../components/loader/Loader";
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
+import AccessDenied from "./AccessDenied";
 
 const Form = () => {
 
@@ -80,9 +81,8 @@ const Form = () => {
   return (
     <>
       {!accessable &&
-        <div className={styles.cookieMessage}>
-          <p className={styles.message}>What the f...?! Are you trying to take this survey again?!</p>
-        </div>}
+        <AccessDenied />
+      }
       {accessable &&
         <div className={styles.main}>
           <div className={styles.title}>
