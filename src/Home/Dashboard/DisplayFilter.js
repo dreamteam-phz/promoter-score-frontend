@@ -1,10 +1,10 @@
 import styles from "./DisplayFilter.module.css";
 const DisplayFilter = (props) => {
   const options = [
-    { label: "1 month", value: "1" },
-    { label: "3 months", value: "3" },
-    { label: "6 months", value: "6" },
-    { label: "1 year", value: "12" },
+    { label: "1 month", value: "30" },
+    { label: "3 months", value: "90" },
+    { label: "6 months", value: "180" },
+    { label: "1 year", value: "365" },
   ];
   const selectChangeHandler = (event) => {
     props.onFilter(event.target.value);

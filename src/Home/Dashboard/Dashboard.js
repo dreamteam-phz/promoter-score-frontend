@@ -7,19 +7,22 @@ import PromoterScore from "./PromoterScore";
 import PromMonthlyChart from "./PromMonthlyChart";
 import PromMonthlyBars from "./PromMonthlyBars";
 import PromoterScoreChart from "./PromoterScoreChart";
+import {dateHelper} from '../../helpers/dateHelper';
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
+  const [test, setTest] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("6");
   const [extractedDate, setExtractedDate] = useState([]);
 
   const filterChangeHandler = (month) => {
     setSelectedMonth(month);
-    // console.log(month);
+    console.log(month);
   };
   useEffect(() => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
       setData(response.data[0].results.map((item) => item.score));
+      setTest(response.data[0].results);
       const month = response.data[0].results.map((item) => item.date);
       setExtractedDate(month);
       const currDate = new Date();
@@ -31,8 +34,29 @@ export default function Dashboard() {
       // console.log(new Date(currDate) - new Date("2022-02-19T00:00:00.502Z"));
     });
   }, []);
-
+  
   // NetPromScore logic
+  const  dummyData = [
+    {
+      date: '2022-01-19T00:00:00.502Z'
+    },
+    {
+      date: '2022-02-19T00:00:00.502Z'
+    },
+    {
+      date: '2022-03-19T00:00:00.502Z'
+    },
+    {
+      date: '2022-04-19T00:00:00.502Z'
+    },
+    {
+      date: '2021-09-19T00:00:00.502Z'
+    }
+  ]
+  const dataToDisplay = dummyData.filter(item => {
+    return dateHelper(item.date, selectedMonth);
+  })
+  console.log(dataToDisplay);
 
   let prom = 0;
   let det = 0;
