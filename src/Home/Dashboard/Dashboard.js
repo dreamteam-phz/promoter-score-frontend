@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import styles from "./Dashboard.module.css";
-import RespondersChart from "./RespondersChart";
 import DisplayFilter from "./DisplayFilter";
 import PromoterScore from "./PromoterScore";
 import PromMonthlyChart from "./PromMonthlyChart";
@@ -13,17 +12,26 @@ export default function Dashboard() {
   const [data, setData] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("6");
   const [extractedDate, setExtractedDate] = useState([]);
+
   const filterChangeHandler = (month) => {
     setSelectedMonth(month);
-    // console.log(month + " from dash");
+    // console.log(month);
   };
   useEffect(() => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
       setData(response.data[0].results.map((item) => item.score));
-      const date = response.data[0].results.map((item) => item.date);
-      setExtractedDate(date.map((item) => console.log(item)));
+      const month = response.data[0].results.map((item) => item.date);
+      setExtractedDate(month);
+      const currDate = new Date();
+
+      // console.log(currDate.getMonth());
+      console.log(
+        (currDate - Date.parse("2022-03-19T00:00:00.502Z")) / 86400000
+      );
+      // console.log(new Date(currDate) - new Date("2022-02-19T00:00:00.502Z"));
     });
   }, []);
+
   // NetPromScore logic
 
   let prom = 0;
@@ -34,16 +42,9 @@ export default function Dashboard() {
     else if (score <= 6) det++;
   }
   pass = data.length - (prom + det);
-  // console.log("passives: " + pass);
-  // console.log("promoters: " + prom);
-  // console.log("detractors: " + det);
-  // console.log("Total: " + data.length);
   const result = ((prom - det) / data.length) * 100;
   const promScore = Math.floor(result);
-
-  // console.log("Score: " + promScore);
-  // console.log(promScore);
-
+  // console.log(extractedDate);
   return (
     <div className={styles.dashboard}>
       <h1>DASHBOARD</h1>
