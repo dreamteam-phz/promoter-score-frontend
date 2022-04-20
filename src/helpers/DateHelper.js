@@ -1,4 +1,4 @@
-export const differenceInDays = (date, period) => {
+export const dateHelper = (date, period) => {
   const currentDate = new Date();
   const oneDay = 86400000;
   const difInMil = currentDate - new Date(date);
