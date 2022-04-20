@@ -79,10 +79,8 @@ const Form = () => {
 
   return (
     <>
-      {!accessable &&
-        <AccessDenied />
-      }
-      {accessable &&
+      {!accessable && <AccessDenied />}
+      {accessable && (
         <div className={styles.main}>
           <div className={styles.title}>
             <h1>PS Survey Form</h1>
