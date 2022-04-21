@@ -10,7 +10,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import AccessDenied from "./AccessDenied";
 
 const Form = () => {
-
   const [accessable, setAccessable] = useState(true);
 
   const [form, setForm] = useState({ score: "", comment: "" });
@@ -57,17 +56,17 @@ const Form = () => {
         console.log(response.data);
         setSurvey(response.data);
       });
-  }
+  };
 
   const textAreaHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
   const scoreHandler = (event) => {
     setForm({ ...form, [event.target.name]: +event.target.value });
-  }
-  const labelsToDisplay = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(item => {
-    return <Label key={item} id={item} change={scoreHandler} content={item} />
-  })
+  };
+  const labelsToDisplay = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
+    return <Label key={item} id={item} change={scoreHandler} content={item} />;
+  });
   // check console when pressing submit form
   const submitHandler = (event) => {
     event.preventDefault();
@@ -85,23 +84,20 @@ const Form = () => {
   const accessSetter = () => {
     let now = new Date();
     let minutes = 2;
-    now.setTime(now.getTime() + (minutes * 60 * 1000));
-    document.cookie = `name=${params.id}; expires=${now.toUTCString()};`
-  }
+    now.setTime(now.getTime() + minutes * 60 * 1000);
+    document.cookie = `name=${params.id}; expires=${now.toUTCString()};`;
+  };
   const cookieChecker = () => {
     if (document.cookie === `name=${params.id}`) {
       console.log("cookie is set", document.cookie);
       setAccessable(false);
-    };
+    }
   };
 
   return (
     <>
-      {!accessable &&
-        <AccessDenied />
-      }
-      {accessable &&
-
+      {!accessable && <AccessDenied />}
+      {accessable && (
         <div className={styles.main}>
           <p>this window width x height {windowSize.width} x{windowSize.height}</p>
 
@@ -125,9 +121,7 @@ const Form = () => {
           </div>
           {survey.comment && (
             <div className={styles.precomment}>
-              <p>
-                What is the main reason for your score?
-              </p>
+              <p>What is the main reason for your score?</p>
             </div>
           )}
           {survey.comment && (
@@ -167,7 +161,7 @@ const Form = () => {
             }
           />
         </div>
-      }
+      )}
     </>
   );
 };

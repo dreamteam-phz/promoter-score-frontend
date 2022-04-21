@@ -14,8 +14,8 @@ const RespondersChart = ({ promoters, detractors, passives }) => {
   return (
     <Pie
       options={{
-        width: "400",
-        height: "400",
+        width: "200",
+        height: "200",
       }}
       data={{
         labels: labels,
