@@ -54,8 +54,8 @@ main {
   width: 100vw;
 }
 
-@media (max-width: 1000px) {
+/*@media (max-width: 1000px) {
   :root {
     --formwidth: 60vw;
   }
-}
+}*/
