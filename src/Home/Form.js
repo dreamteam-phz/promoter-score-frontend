@@ -19,12 +19,6 @@ const Form = () => {
       "Would you recomend PHZ Full Stack for your friends as an employer?",
     comment: true,
   });
-  //added by SL
-  const [windowSize, setWindowSize] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth
-  });
-  const widthBreakpoint = 620;
 
   const params = useParams();
 
@@ -34,20 +28,12 @@ const Form = () => {
   };
 
   useEffect(() => {
-    //SL
-    windowSizeChecker();
     cookieChecker();
     if (accessable) getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //SL
-  const windowSizeChecker = () => {
-    setWindowSize({
-      height: window.innerHeight,
-      width: window.innerWidth
-    })
-  }
+ 
 
   const getData = () => {
     axios
@@ -99,7 +85,6 @@ const Form = () => {
       {!accessable && <AccessDenied />}
       {accessable && (
         <div className={styles.main}>
-          <p>this window width x height {windowSize.width} x{windowSize.height}</p>
 
           <div className={styles.title}>
             <h1>PS Survey Form</h1>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CloseIcon from "@material-ui/icons/Close";
 import styles from "./FormMobile.module.css";
 import axios from "axios";
 import Label from './Label';
@@ -14,23 +13,45 @@ const FormMobile = () => {
     });
 
     const [submittable, setSubmittable] = useState(false);
-
+    const [accessable, setAccessable] = useState(true);
     const [form, setForm] = useState({ score: "", comment: "" });
     const params = useParams();
-
+    useEffect(() => {
+        cookieChecker();
+        if (accessable) getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, []);
+    
+      const getData = () => {
+        axios
+          .get("http://localhost:4000/api/surveys/" + params.id)
+          .then((response) => {
+            console.log(response.data);
+            setSurvey(response.data);
+          });
+      };
+    const textAreaHandler = (event) => {
+        setForm({ ...form, [event.target.name]: event.target.value });
+      };
     const scoreHandler = (event) => {
         setTimeout(() => {
             setForm({ ...form, [event.target.name]: +event.target.value });
             setSubmittable(true)
         }, 3000);
     }
+    const clickHandler = (event) => {
+        console.log(event.target.outerText);
+        if (form.score == event.target.outerText) {
+            setSubmittable(true);
+        }
+    }
 
     const labelsToDisplay = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map(item => {
         if (form.score == item) {
-            return <Label key={item} id={item} change={scoreHandler} content={item} name="score" checked={true} />
+            return <Label key={item} id={item} change={scoreHandler} content={item} name="score" checked={true} onclick={clickHandler} />
         }
         else {
-            return <Label key={item} id={item} change={scoreHandler} content={item} name="score" />
+            return <Label key={item} id={item} change={scoreHandler} content={item} name="score" onclick={clickHandler} />
         }
 
     });
@@ -52,10 +73,15 @@ const FormMobile = () => {
         setSubmittable(false);
         console.log("form.score is", form.score)
     }
+    const cookieChecker = () => {
+        if (document.cookie === `name=${params.id}`) {
+          console.log("cookie is set", document.cookie);
+          setAccessable(false);
+        }
+    };
 
     return (
-        <div className={styles.main}>
-            <CloseIcon className={styles.closeIcon} />
+        <div className={styles.mobile}>
             <div className={styles.question}>
                 <p>
                     {survey.question}
@@ -64,11 +90,11 @@ const FormMobile = () => {
             </div>
             {!submittable &&
                 <>
-                    <p className='small-text'>not likely at all</p>
+                    <p className='small-text'>extreamly likely</p>
                     <div className={styles.tool}>{labelsToDisplay}
                     </div>
                     <div className={styles.describers}>
-                        <p className='small-text'>extreamly likely</p>
+                        <p className='small-text'>not likely at all</p>
                     </div>
                 </>
             }
@@ -87,6 +113,7 @@ const FormMobile = () => {
                     )}
                     {survey.comment && (
                         <textarea
+                            onChange={textAreaHandler}
                             name="comment"
                             rows="6"
                             cols="30"

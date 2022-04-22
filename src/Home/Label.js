@@ -4,7 +4,7 @@ export default function Label(props) {
   return (
     <>
       <input key={props.id} type="radio" id={props.id} name={props.name} value={props.id} defaultChecked={props.checked} onChange={props.change} />
-      <label htmlFor={props.id}>{props.content} </label>
+      <label name={props.id} htmlFor={props.id} onClick={props.onclick}>{props.content}</label>
     </>
   )
 }
