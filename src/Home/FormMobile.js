@@ -20,24 +20,24 @@ const FormMobile = () => {
         cookieChecker();
         if (accessable) getData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
-    
-      const getData = () => {
+    }, []);
+
+    const getData = () => {
         axios
-          .get("http://localhost:4000/api/surveys/" + params.id)
-          .then((response) => {
-            console.log(response.data);
-            setSurvey(response.data);
-          });
-      };
+            .get("http://localhost:4000/api/surveys/" + params.id)
+            .then((response) => {
+                console.log(response.data);
+                setSurvey(response.data);
+            });
+    };
     const textAreaHandler = (event) => {
         setForm({ ...form, [event.target.name]: event.target.value });
-      };
+    };
     const scoreHandler = (event) => {
         setTimeout(() => {
             setForm({ ...form, [event.target.name]: +event.target.value });
             setSubmittable(true)
-        }, 3000);
+        }, 450);
     }
     const clickHandler = (event) => {
         console.log(event.target.outerText);
@@ -75,8 +75,8 @@ const FormMobile = () => {
     }
     const cookieChecker = () => {
         if (document.cookie === `name=${params.id}`) {
-          console.log("cookie is set", document.cookie);
-          setAccessable(false);
+            console.log("cookie is set", document.cookie);
+            setAccessable(false);
         }
     };
 
@@ -85,7 +85,7 @@ const FormMobile = () => {
             <div className={styles.question}>
                 <p>
                     {survey.question}
-                    <span>*</span>
+                    <span> *</span>
                 </p>
             </div>
             {!submittable &&

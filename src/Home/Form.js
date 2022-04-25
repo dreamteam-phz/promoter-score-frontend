@@ -11,12 +11,12 @@ import AccessDenied from "./AccessDenied";
 
 const Form = () => {
   const [accessable, setAccessable] = useState(true);
-
+  const [submittable, setSubmittable] = useState(false);
   const [form, setForm] = useState({ score: "", comment: "" });
   const [open, setOpen] = useState(false);
   const [survey, setSurvey] = useState({
     question:
-      "Would you recomend PHZ Full Stack for your friends as an employer?",
+      "Would you recommend PHZ Full Stack for your friends as an employer?",
     comment: true,
   });
 
@@ -33,7 +33,7 @@ const Form = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
- 
+
 
   const getData = () => {
     axios
@@ -49,6 +49,7 @@ const Form = () => {
   };
   const scoreHandler = (event) => {
     setForm({ ...form, [event.target.name]: +event.target.value });
+    setSubmittable(true);
   };
   const labelsToDisplay = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
     return <Label key={item} id={item} change={scoreHandler} content={item} />;
@@ -84,18 +85,12 @@ const Form = () => {
     <>
       {!accessable && <AccessDenied />}
       {accessable && (
-        <div className={styles.main}>
+        <div className={styles.main + ' ' + styles.desktop}>
 
-          <div className={styles.title}>
-            <h1>PS Survey Form</h1>
-            <p>
-              Questions marked with <sup>*</sup> are required
-            </p>
-          </div>
           <div className={styles.question}>
             <p>
               {survey.question}
-              <sup>*</sup>
+              <span> *</span>
             </p>
           </div>
 
@@ -106,7 +101,7 @@ const Form = () => {
           </div>
           {survey.comment && (
             <div className={styles.precomment}>
-              <p>What is the main reason for your score?</p>
+              <p>Why / Why not? </p>
             </div>
           )}
           {survey.comment && (
@@ -119,10 +114,13 @@ const Form = () => {
               value={form.comment}
             />
           )}
+          <div className={styles.buttonArea}>
+            <button className={styles.cancelButton}>CANCEL</button>
+            <button onClick={submitHandler} className={styles.button} disabled={!submittable}>
+              Submit
+            </button>
 
-          <button onClick={submitHandler} className={styles.button}>
-            Submit
-          </button>
+          </div>
           <Snackbar
             anchorOrigin={{
               horizontal: "center",

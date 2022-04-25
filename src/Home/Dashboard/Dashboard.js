@@ -7,7 +7,7 @@ import PromoterScore from "./PromoterScore";
 import PromMonthlyChart from "./PromMonthlyChart";
 import PromMonthlyBars from "./PromMonthlyBars";
 import PromoterScoreChart from "./PromoterScoreChart";
-import {dateHelper} from '../../helpers/dateHelper';
+import { dateHelper } from '../../helpers/DateHelper';
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
@@ -34,9 +34,9 @@ export default function Dashboard() {
       // console.log(new Date(currDate) - new Date("2022-02-19T00:00:00.502Z"));
     });
   }, []);
-  
+
   // NetPromScore logic
-  const  dummyData = [
+  const dummyData = [
     {
       date: '2022-01-19T00:00:00.502Z'
     },
