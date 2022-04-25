@@ -5,14 +5,15 @@ import styles from "./Dashboard.module.css";
 import DisplayFilter from "./DisplayFilter";
 import PromoterScore from "./PromoterScore";
 import PromMonthlyChart from "./PromMonthlyChart";
-import PromMonthlyBars from "./PromMonthlyBars";
+import Comments from "./Comments";
 import PromoterScoreChart from "./PromoterScoreChart";
-import {dateHelper} from '../../helpers/dateHelper';
+import { dateHelper } from "../../helpers/dateHelper";
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
   const [test, setTest] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState("6");
+  const [comments, setComments] = useState();
+  const [selectedMonth, setSelectedMonth] = useState("180");
   const [extractedDate, setExtractedDate] = useState([]);
 
   const filterChangeHandler = (month) => {
@@ -23,6 +24,7 @@ export default function Dashboard() {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
       setData(response.data[0].results.map((item) => item.score));
       setTest(response.data[0].results);
+      setComments(response.data[0].results.map((item) => item.comment));
       const month = response.data[0].results.map((item) => item.date);
       setExtractedDate(month);
       const currDate = new Date();
@@ -34,28 +36,28 @@ export default function Dashboard() {
       // console.log(new Date(currDate) - new Date("2022-02-19T00:00:00.502Z"));
     });
   }, []);
-  
+  // console.log(comments);
   // NetPromScore logic
-  const  dummyData = [
+  const dummyData = [
     {
-      date: '2022-01-19T00:00:00.502Z'
+      date: "2022-01-19T00:00:00.502Z",
     },
     {
-      date: '2022-02-19T00:00:00.502Z'
+      date: "2022-02-19T00:00:00.502Z",
     },
     {
-      date: '2022-03-19T00:00:00.502Z'
+      date: "2022-03-19T00:00:00.502Z",
     },
     {
-      date: '2022-04-19T00:00:00.502Z'
+      date: "2022-04-19T00:00:00.502Z",
     },
     {
-      date: '2021-09-19T00:00:00.502Z'
-    }
-  ]
-  const dataToDisplay = dummyData.filter(item => {
+      date: "2021-09-19T00:00:00.502Z",
+    },
+  ];
+  const dataToDisplay = dummyData.filter((item) => {
     return dateHelper(item.date, selectedMonth);
-  })
+  });
   console.log(dataToDisplay);
 
   let prom = 0;
@@ -86,7 +88,7 @@ export default function Dashboard() {
           detractors={det}
           passives={pass}
         />
-        <PromMonthlyBars data={data} promScore={promScore} />
+        <Comments data={data} comments={test} />
       </div>
     </div>
   );
