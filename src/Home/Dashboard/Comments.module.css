@@ -1,0 +1,73 @@
+.panel {
+  width: 90%;
+  height: 90%;
+
+  margin: 2rem;
+  background-color: var(--white-grey);
+  box-shadow: 0 0 4px 0 var(--shadow);
+  border-radius: 5px;
+}
+.comments {
+  list-style: none;
+  width: 100%;
+  font-size: 1rem;
+  color: black;
+  font-family: "Lato", sans-serif;
+}
+.comments li {
+  width: 100%;
+  margin: 0.8rem 0;
+  font-size: small;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.table tbody {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  height: 250px;
+  background-color: var(--whitesmoke);
+}
+
+.table thead tr {
+  display: block;
+}
+
+.table thead {
+  background: var(--blackish);
+  color: #fff;
+}
+.table th {
+  font-weight: 400;
+}
+.table th,
+.table td {
+  padding: 5px;
+  text-align: left;
+  width: 200px;
+}
+.date {
+  width: 2rem;
+}
+.scores {
+  width: 6rem;
+}
+/* th {
+  font-weight: 300;
+  background-color: var(--blackish);
+  color: var(--white);
+  height: 2rem;
+}
+tbody {
+  background-color: var(--whitesmoke);
+}
+tr {
+  text-align: center;
+}
+td {
+  overflow: scroll;
+}*/

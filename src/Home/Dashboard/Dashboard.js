@@ -11,7 +11,7 @@ import { dateHelper } from "../../helpers/dateHelper";
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
-  const [test, setTest] = useState([]);
+  const [scores, setScores] = useState([]);
   const [comments, setComments] = useState();
   const [selectedMonth, setSelectedMonth] = useState("180");
   const [extractedDate, setExtractedDate] = useState([]);
@@ -22,17 +22,17 @@ export default function Dashboard() {
   };
   useEffect(() => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
-      setData(response.data[0].results.map((item) => item.score));
-      setTest(response.data[0].results);
+      setScores(response.data[0].results.map((item) => item.score));
+      setData(response.data[0].results);
       setComments(response.data[0].results.map((item) => item.comment));
       const month = response.data[0].results.map((item) => item.date);
       setExtractedDate(month);
       const currDate = new Date();
 
       // console.log(currDate.getMonth());
-      console.log(
-        (currDate - Date.parse("2022-03-19T00:00:00.502Z")) / 86400000
-      );
+      // console.log(
+      //   (currDate - Date.parse("2022-03-19T00:00:00.502Z")) / 86400000
+      // );
       // console.log(new Date(currDate) - new Date("2022-02-19T00:00:00.502Z"));
     });
   }, []);
@@ -58,12 +58,12 @@ export default function Dashboard() {
   const dataToDisplay = dummyData.filter((item) => {
     return dateHelper(item.date, selectedMonth);
   });
-  console.log(dataToDisplay);
+  // console.log(dataToDisplay);
 
   let prom = 0;
   let det = 0;
   let pass = 0;
-  for (let score of data) {
+  for (let score of scores) {
     if (score >= 9) prom++;
     else if (score <= 6) det++;
   }
@@ -77,18 +77,18 @@ export default function Dashboard() {
       <DisplayFilter selected={selectedMonth} onFilter={filterChangeHandler} />
       <div className={styles.data}>
         <PromoterScore
-          data={data}
+          score={scores}
           promScore={promScore}
           month={selectedMonth}
         />
-        <PromMonthlyChart data={data} promScore={promScore} />
+        <PromMonthlyChart score={scores} promScore={promScore} />
         <PromoterScoreChart
-          data={data}
+          score={scores}
           promoters={prom}
           detractors={det}
           passives={pass}
         />
-        <Comments data={data} comments={test} />
+        <Comments data={data} />
       </div>
     </div>
   );
