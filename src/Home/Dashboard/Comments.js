@@ -11,8 +11,9 @@ const Comments = ({ data, comments }) => {
           {data.length > 0 ? (
             <ul className={styles.comments}>
               {comments.map((item) => (
-                <li>
-                  {item.date.slice(0, 10)}:{item.comment}
+                <li key={item.date}>
+                  {item.date.slice(0, 10)} {item.score}
+                  {item.comment}
                 </li>
               ))}
             </ul>
