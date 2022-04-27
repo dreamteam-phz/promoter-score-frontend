@@ -8,7 +8,7 @@ import PromMonthlyChart from "./PromMonthlyChart";
 import Comments from "./Comments";
 import PromoterScoreChart from "./PromoterScoreChart";
 import { dateHelper } from "../../helpers/DateHelper";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
@@ -16,12 +16,14 @@ export default function Dashboard() {
   const [comments, setComments] = useState();
   const [selectedMonth, setSelectedMonth] = useState("180");
   const [extractedDate, setExtractedDate] = useState([]);
+  const dispatch = useDispatch();
   const dashboard = useSelector((state) => state.dashboard);
   console.log(dashboard);
+
   const filterChangeHandler = (month) => {
     dispatch({
-      type: 'DASHBOARD',
-      payload: {selectedMonth: month}
+      type: "DASHBOARD",
+      payload: { selectedMonth: month },
     });
   };
   useEffect(() => {
@@ -78,7 +80,10 @@ export default function Dashboard() {
   return (
     <div className={styles.dashboard}>
       <h1>DASHBOARD</h1>
-      <DisplayFilter selected={dashboard.selectedMonth} onFilter={filterChangeHandler} />
+      <DisplayFilter
+        selected={dashboard.selectedMonth}
+        onFilter={filterChangeHandler}
+      />
       <div className={styles.data}>
         <PromoterScore
           score={scores}
