@@ -4,14 +4,20 @@
   justify-content: flex-end;
   align-items: center;
   background-color: var(--white-grey);
+  box-shadow: 0 0 4px 0 var(--shadow);
   height: 3rem;
   padding: 0 2rem;
-  border-radius: 10px;
+  margin-bottom: 5px;
+  border-radius: 2px;
+}
+.selectWrapper:hover {
+  box-shadow: 0 0 8px 0 var(--shadow);
 }
 .select {
-  height: 1.8rem;
+  height: 1.4rem;
   width: 10rem;
-  border-radius: 15px;
+  border-radius: 5px;
   text-align: center;
   cursor: pointer;
+  outline: none;
 }

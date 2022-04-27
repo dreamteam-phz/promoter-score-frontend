@@ -1,6 +1,7 @@
+import { useSelector } from "react-redux";
 import styles from "./Comments.module.css";
 
-const Comments = ({ data }) => {
+const Comments = () => {
   // const dummyData = [
   //   {
   //     score: 10,
@@ -93,6 +94,7 @@ const Comments = ({ data }) => {
   //     date: "2022-04-26T13:00:46.995+00:00",
   //   },
   // ];
+  const data = useSelector(state => state.dashboard.data)
   const filteredData = data.filter((item) => item.comment.length > 0);
   const dataToDispaly = filteredData.reverse();
   // console.log(dataToDispaly);

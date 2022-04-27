@@ -2,20 +2,21 @@ import React from "react";
 import "chart.js/auto";
 import { Pie, getElementAtEvent } from "react-chartjs-2";
 import { useRef } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
-const RespondersChart = ({ promoters, detractors, passives }) => {
+const RespondersChart = () => {
+  const scoreData = useSelector(state => state.dashboard.scoreData);
   const labels = ["Promoters", "Detractors", "Passives"],
     datasets = [
       {
-        data: [promoters, detractors, passives],
+        data: [scoreData.promoters, scoreData.detractors, scoreData.passives],
         backgroundColor: ["#1D4E89", "#0092AE", "#7DCFB6"],
       },
     ];
   const dispatch = useDispatch();
   const chartRef = useRef();
-  const onClick = (event) => {
+  const clickHandler = (event) => {
     dispatch({
       type: 'DASHBOARD',
       payload: {comments: labels[getElementAtEvent(chartRef.current, event)[0].index]}
@@ -25,16 +26,9 @@ const RespondersChart = ({ promoters, detractors, passives }) => {
   return (
     <Pie
       ref={chartRef}
-      options={{
-        width: "200",
-        height: "200",
-      }}
-      data={{
-        labels: labels,
-        datasets: datasets,
-      }}
-      onClick={onClick}
-    />
+      options={{ width: "300", height: "300" }}
+      data={{ labels: labels, datasets: datasets }}
+      onClick={clickHandler} />
   );
 };
 
