@@ -3,7 +3,7 @@ const initialState = {
     dashboard: {
         comments: '',
         selectedMonth: 180
-    }
+}
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,9 +11,10 @@ const reducer = (state = initialState, action) => {
         case 'LOCATION':
             return {...state, location: action.payload};
         case 'DASHBOARD':
+
             return {...state, dashboard: {
-                comments: action.payload.comments,
-                selectedMonth: action.payload.selectedMonth
+                ...state.dashboard,
+                ...action.payload
             }};
         default:
             return {...state, location: 'dashboard'};
