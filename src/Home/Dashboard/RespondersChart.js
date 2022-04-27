@@ -10,6 +10,7 @@ const RespondersChart = ({ promoters, detractors, passives }) => {
         backgroundColor: ["#1D4E89", "#0092AE", "#7DCFB6"],
       },
     ];
+  
 
   return (
     <Pie
