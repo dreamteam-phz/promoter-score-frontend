@@ -55,9 +55,9 @@ export default function Dashboard() {
       date: "2021-09-19T00:00:00.502Z",
     },
   ];
-  const dataToDisplay = dummyData.filter((item) => {
-    return dateHelper(item.date, selectedMonth);
-  });
+  // const dataToDisplay = dummyData.filter((item) => {
+  //   return dateHelper(item.date, selectedMonth);
+  // });
   // console.log(dataToDisplay);
 
   let prom = 0;
