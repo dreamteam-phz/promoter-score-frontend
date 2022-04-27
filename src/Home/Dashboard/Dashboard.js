@@ -8,18 +8,20 @@ import PromMonthlyChart from "./PromMonthlyChart";
 import PromMonthlyBars from "./PromMonthlyBars";
 import PromoterScoreChart from "./PromoterScoreChart";
 import { dateHelper } from '../../helpers/DateHelper';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
   const [test, setTest] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState("6");
   const [extractedDate, setExtractedDate] = useState([]);
   const dashboard = useSelector((state) => state.dashboard);
+  const dispatch = useDispatch();
   console.log(dashboard)
   const filterChangeHandler = (month) => {
-    setSelectedMonth(month);
-    console.log(month);
+    dispatch({
+      type: 'DASHBOARD',
+      payload: {selectedMonth: month}
+    });
   };
   useEffect(() => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
@@ -57,7 +59,7 @@ export default function Dashboard() {
     }
   ]
   const dataToDisplay = dummyData.filter(item => {
-    return dateHelper(item.date, selectedMonth);
+    return dateHelper(item.date, dashboard.selectedMonth);
   })
   // console.log(dataToDisplay);
 
@@ -75,12 +77,12 @@ export default function Dashboard() {
   return (
     <div className={styles.dashboard}>
       <h1>DASHBOARD</h1>
-      <DisplayFilter selected={selectedMonth} onFilter={filterChangeHandler} />
+      <DisplayFilter selected={dashboard.selectedMonth} onFilter={filterChangeHandler} />
       <div className={styles.data}>
         <PromoterScore
           data={data}
           promScore={promScore}
-          month={selectedMonth}
+          month={dashboard.selectedMonth}
         />
         <PromMonthlyChart data={data} promScore={promScore} />
         <PromoterScoreChart
