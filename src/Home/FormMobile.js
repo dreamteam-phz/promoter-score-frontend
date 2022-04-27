@@ -106,9 +106,7 @@ const FormMobile = () => {
 
                     {survey.comment && (
                         <div className={styles.precomment}>
-                            <p>
-                                What is the main reason for your score?
-                            </p>
+                            <p>Why / Why not?</p>
                         </div>
                     )}
                     {survey.comment && (
