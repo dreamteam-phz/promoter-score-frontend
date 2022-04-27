@@ -1,14 +1,14 @@
 import styles from "./Dashboard.module.css";
 import RespondersChart from "./RespondersChart";
 
-const PromoterScoreChart = ({ data, promoters, detractors, passives }) => {
+const PromoterScoreChart = ({ score, promoters, detractors, passives }) => {
   return (
     <div className={styles.panel}>
-      {data.length > 0 ? (
+      {score.length > 0 ? (
         <div className={styles.respondersWraper}>
           <div className={styles.resultWraper}>
             <h5>Total responders</h5>
-            <span>{data.length}</span>
+            <span>{score.length}</span>
           </div>
           <RespondersChart
             promoters={promoters}
@@ -19,7 +19,7 @@ const PromoterScoreChart = ({ data, promoters, detractors, passives }) => {
       ) : (
         <div className={styles.resultWraper}>
           <h4>Total responders</h4>
-          <span>{data.length}</span>
+          <span>{score.length}</span>
         </div>
       )}
     </div>
