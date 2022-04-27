@@ -8,13 +8,15 @@ import PromMonthlyChart from "./PromMonthlyChart";
 import PromMonthlyBars from "./PromMonthlyBars";
 import PromoterScoreChart from "./PromoterScoreChart";
 import { dateHelper } from '../../helpers/DateHelper';
+import { useSelector } from "react-redux";
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
   const [test, setTest] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("6");
   const [extractedDate, setExtractedDate] = useState([]);
-
+  const dashboard = useSelector((state) => state.dashboard);
+  console.log(dashboard)
   const filterChangeHandler = (month) => {
     setSelectedMonth(month);
     console.log(month);
@@ -33,6 +35,7 @@ export default function Dashboard() {
       );
       // console.log(new Date(currDate) - new Date("2022-02-19T00:00:00.502Z"));
     });
+    
   }, []);
 
   // NetPromScore logic
@@ -56,7 +59,7 @@ export default function Dashboard() {
   const dataToDisplay = dummyData.filter(item => {
     return dateHelper(item.date, selectedMonth);
   })
-  console.log(dataToDisplay);
+  // console.log(dataToDisplay);
 
   let prom = 0;
   let det = 0;
