@@ -1,99 +1,99 @@
 import styles from "./Comments.module.css";
 
 const Comments = ({ data }) => {
-  const dummyData = [
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-    {
-      score: 10,
-      comment: "Answer 1 ",
-      date: "2022-04-26T13:00:46.995+00:00",
-    },
-  ];
-  const filteredData = dummyData.filter((item) => item.comment.length > 0);
+  // const dummyData = [
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  //   {
+  //     score: 10,
+  //     comment: "Answer 1 ",
+  //     date: "2022-04-26T13:00:46.995+00:00",
+  //   },
+  // ];
+  const filteredData = data.filter((item) => item.comment.length > 0);
   const dataToDispaly = filteredData.reverse();
   // console.log(dataToDispaly);
   return (
