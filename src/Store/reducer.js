@@ -14,8 +14,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         dashboard: {
-          comments: action.payload.comments,
-          selectedMonth: action.payload.selectedMonth,
+          ...state.dashboard,
+          ...action.payload,
         },
       };
     default:
