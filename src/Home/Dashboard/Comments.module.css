@@ -1,11 +1,13 @@
 .panel {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
 
-  margin: 2rem;
   background-color: var(--white-grey);
   box-shadow: 0 0 4px 0 var(--shadow);
   border-radius: 5px;
+}
+.panel:hover {
+  box-shadow: 0 0 8px 0 var(--shadow);
 }
 .comments {
   list-style: none;
