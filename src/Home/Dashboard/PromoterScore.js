@@ -3,6 +3,7 @@ import styles from "./Dashboard.module.css";
 
 const PromoterScore = () => {
   const data = useSelector(state => state.dashboard.data)
+  const scoreData = useSelector(state => state.dashboard.scoreData)
   const period = useSelector(state => state.dashboard.selectedMonth)
   const scores = data.map((item) => item.score);
   
@@ -22,7 +23,7 @@ const PromoterScore = () => {
       <div className={styles.resultWraper}>
         {period === "1" && <h5>Promoter Score last month</h5>}
         {period !== "1" && <h5>Promoter Score last {period} days</h5>}
-        <span>{scores.length > 0 ? promScore : <p>No data to display</p>}</span>
+        <span>{scoreData.scores.length > 0 ? scoreData.promScore : <p>No data to display</p>}</span>
       </div>
     </div>
   );
