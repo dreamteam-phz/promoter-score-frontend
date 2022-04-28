@@ -12,7 +12,7 @@ export default function Dashboard() {
   const loaded = useSelector((state) => state.loaded);
   const dashboard = useSelector((state) => state.dashboard); // for testing
   const dispatch = useDispatch();
-  console.log(dashboard); // for testing
+  // console.log(dashboard); // for testing
   useEffect(() => {
     getResults();
   }, []);
@@ -62,7 +62,7 @@ export default function Dashboard() {
     let prom = 0;
     let det = 0;
     let pass = 0;
-    console.log(data[0].results)
+    // console.log(data[0].results)
     const scores = data[0].results.map((item) => item.score);
     for (let score of scores) {
       if (score >= 9) prom++;
@@ -113,7 +113,7 @@ export default function Dashboard() {
           <PromoterScore />
           <PromMonthlyChart />
           <PromoterScoreChart />
-          {/* <Comments /> */}
+          <Comments />
         </div >
       </div>
     );

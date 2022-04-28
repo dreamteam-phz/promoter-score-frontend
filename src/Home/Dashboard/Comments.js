@@ -95,9 +95,10 @@ const Comments = () => {
   //   },
   // ];
   const data = useSelector(state => state.dashboard.data)
+  // console.log(data)
   const filteredData = data.filter((item) => item.comment.length > 0);
   const dataToDispaly = filteredData.reverse();
-  // console.log(dataToDispaly);
+  console.log(dataToDispaly);
   return (
     <div className={styles.panel}>
       <table className={styles.table}>
@@ -113,21 +114,21 @@ const Comments = () => {
             <td className={styles.date}>
               <ul className={styles.comments}>
                 {dataToDispaly.map((item) => (
-                  <li key={item.date}>{item.date.slice(0, 10)}</li>
+                  <li key={item.date + item.comment}>{item.date.slice(0, 10)}</li>
                 ))}
               </ul>
             </td>
             <td className={styles.scores}>
               <ul className={styles.comments}>
                 {dataToDispaly.map((item) => (
-                  <li key={item.date}>{item.score}</li>
+                  <li key={item.date + item.comment}>{item.score}</li>
                 ))}
               </ul>
             </td>
             <td>
               <ul className={styles.comments}>
                 {dataToDispaly.map((item) => (
-                  <li key={item.date}>{item.comment}</li>
+                  <li key={item.date + item.comment}>{item.comment}</li>
                 ))}
               </ul>
             </td>

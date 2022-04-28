@@ -42,9 +42,10 @@ const DisplayFilter = (props) => {
     updateResults(event.target.value);
   };
   const updateResults = (surveyID) => {
+    let data = dashboard.response.data.filter(item => item.surveyID === surveyID);
     dispatch({ 
       type: 'DASHBOARD',
-      payload: {data: dashboard.response.data.filter(item => item.surveyID === surveyID)}
+      payload: {data: data[0].results}
     });
     props.update(dashboard.response.data.filter(item => item.surveyID === surveyID));
   }
