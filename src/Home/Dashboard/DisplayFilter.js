@@ -47,7 +47,7 @@ const DisplayFilter = () => {
           key={survey._id} 
           value={survey._id}
         >
-          {survey.question}
+          {survey.name}
         </option>)}
 
       </select>

@@ -8,7 +8,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 
 export default function Create() {
-  const [data, setData] = useState({ question: "", comment: true });
+  const [data, setData] = useState({ name: "", question: "", comment: true });
   const [linkToForm, setLinkToForm] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -34,6 +34,7 @@ export default function Create() {
   //       <button onClick={submitHandler}>SUBMIT</button>
     axios
       .post("http://localhost:4000/api/newsurvey", {
+        name: data.name,
         question: data.question,
         comment: true
       })
@@ -41,7 +42,7 @@ export default function Create() {
         console.log(res);
         setLinkToForm(res.data._id);
       });
-    setData({ question: "", name: ""});
+    setData({ name:"", question: ""});
     setOpen(true);
   };
   if (linkToForm === "") {
