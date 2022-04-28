@@ -2,14 +2,19 @@ const initialState = {
     location: 'dashboard',
     dashboard: {
         comments: '',
-        selectedMonth: 180
-}
+        selectedMonth: 180,
+        data: [],
+        scoreData: {}
+    },
+    loaded: false
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'LOCATION':
             return {...state, location: action.payload};
+        case 'LOADED':
+            return {...state, loaded: action.payload};
         case 'DASHBOARD':
 
             return {...state, dashboard: {
