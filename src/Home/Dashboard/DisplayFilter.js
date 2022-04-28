@@ -4,7 +4,8 @@ import { useState,useEffect } from "react";
 import styles from "./DisplayFilter.module.css";
 import axios from "axios";
 
-const DisplayFilter = () => {
+const DisplayFilter = (props) => {
+  const dashboard = useSelector((state) => state.dashboard); // for testing
   const period = useSelector(state => state.dashboard.selectedMonth)
   const dispatch = useDispatch();
 
@@ -33,13 +34,26 @@ const DisplayFilter = () => {
       payload: {[event.target.name]: event.target.value}
     });
   };
+  const filterChangeHandlerSurvey = (event) => {
+    dispatch({
+      type: 'DASHBOARD',
+      payload: {'selectedSurvey': event.target.value}
+    });
+    updateResults(event.target.value);
+  };
+  const updateResults = (surveyID) => {
+    dispatch({ 
+      type: 'DASHBOARD',
+      payload: {data: dashboard.response.data.filter(item => item.surveyID === surveyID)}
+    });
+    props.update(dashboard.response.data.filter(item => item.surveyID === surveyID));
+  }
   
   return (
     <div className={styles.selectWrapper}>
       <select 
       name="selectedSurvey"
-      value={period} 
-      onChange={filterChangeHandler} 
+      onChange={filterChangeHandlerSurvey} 
       className={styles.select}
       >
         {selectSurvey.map((survey) => 

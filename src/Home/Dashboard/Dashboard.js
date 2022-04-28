@@ -14,38 +14,77 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   console.log(dashboard); // for testing
   useEffect(() => {
+    getResults();
+  }, []);
+
+  
+  
+
+  const getResults = () => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
       let data = response.data[0].results;
       dispatch({
         type: 'DASHBOARD',
         payload: {data: data}
       });
-      
-      let prom = 0;
-      let det = 0;
-      let pass = 0;
-      const scores = data.map((item) => item.score);
-      for (let score of scores) {
-        if (score >= 9) prom++;
-        else if (score <= 6) det++;
-        }
-      pass = data.length - (prom + det);
-      const result = ((prom - det) / data.length) * 100;
-      const promScore = Math.floor(result);
       dispatch({
         type: 'DASHBOARD',
-        payload: {scoreData: {
-          promoters: prom,
-          detractors: det,
-          passives: pass,
-          result: result,
-          promScore: promScore,
-          scores: scores
-        }}
-      })
+        payload: {response: response}
+      });
+      let prom = 0;
+    let det = 0;
+    let pass = 0;
+    const scores = data.map((item) => item.score);
+    for (let score of scores) {
+      if (score >= 9) prom++;
+      else if (score <= 6) det++;
+      } 
+    pass = data.length - (prom + det);
+    const result = ((prom - det) / data.length) * 100;
+    const promScore = Math.floor(result);
+    dispatch({
+      type: 'DASHBOARD',
+      payload: {scoreData: {
+        promoters: prom,
+        detractors: det,
+        passives: pass,
+        result: result,
+        promScore: promScore,
+        scores: scores
+      }}
+    })
       
-      dispatch({type: 'LOADED', payload: true} )
-    })}, []);
+    dispatch({type: 'LOADED', payload: true})
+      
+    });
+  }
+  const calculations = (data) => {
+    let prom = 0;
+    let det = 0;
+    let pass = 0;
+    console.log(data[0].results)
+    const scores = data[0].results.map((item) => item.score);
+    for (let score of scores) {
+      if (score >= 9) prom++;
+      else if (score <= 6) det++;
+      } 
+    pass = data[0].results.length - (prom + det);
+    const result = ((prom - det) / data[0].results.length) * 100;
+    const promScore = Math.floor(result);
+    dispatch({
+      type: 'DASHBOARD',
+      payload: {scoreData: {
+        promoters: prom,
+        detractors: det,
+        passives: pass,
+        result: result,
+        promScore: promScore,
+        scores: scores
+      }}
+    })
+      
+    dispatch({type: 'LOADED', payload: true})
+  }
 
   const dummyData = [
     {
@@ -69,12 +108,12 @@ export default function Dashboard() {
     return (
       <div className={styles.dashboard}>
         <h1>DASHBOARD</h1>
-        <DisplayFilter />
+        <DisplayFilter update={calculations} />
         <div className={styles.data}>
           <PromoterScore />
           <PromMonthlyChart />
           <PromoterScoreChart />
-          <Comments />
+          {/* <Comments /> */}
         </div >
       </div>
     );

@@ -6,7 +6,8 @@ const initialState = {
         data: [],
         scoreData: {}
     },
-    loaded: false
+    loaded: false,
+    selectedSurvey: ''
 };
 
 const reducer = (state = initialState, action) => {
