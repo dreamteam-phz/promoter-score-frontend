@@ -1,4 +1,3 @@
-
 .main {
   display: flex;
   align-items: center;
@@ -8,9 +7,7 @@
   height: 100vh;
   background: #f5f5f5;
   gap: 25px;
-  scale: 1.5;
 }
-
 
 .desktop span {
   color: var(--effect-PHZorane);
@@ -25,7 +22,7 @@
   text-align: center;
   align-items: center;
   justify-content: center;
- 
+
   margin-bottom: 1em;
   color: var(--black);
 }
@@ -94,21 +91,20 @@ textarea {
   resize: none;
   padding: 10px;
 }
-.desktop .buttonArea{
+.desktop .buttonArea {
   width: var(--formwidth);
   display: flex;
   justify-content: space-between;
-  
 }
 .button {
-  max-width: 220px;     
-  width:  100%; 
-  height: 50px;      
+  max-width: 220px;
+  width: 100%;
+  height: 50px;
   border-radius: 70px;
   text-transform: uppercase;
   font-size: 16px;
   background-color: var(--green-accent);
-  color: var(--background-white); 
+  color: var(--background-white);
   border: none;
   cursor: pointer;
   /*width: 100px;
@@ -120,38 +116,37 @@ textarea {
   
   margin-top: -10px; */
 }
-.desktop button:disabled{
+.desktop button:disabled {
   background-color: var(--white);
   border: solid 2px var(--green-accent);
   color: var(--black);
   pointer-events: none;
 }
 
-
-.desktop .cancelButton{
+.desktop .cancelButton {
   background-color: transparent;
   color: var(--green-accent);
   border: none;
-  max-width: 100px;     
-  width:  80%; 
+  max-width: 100px;
+  width: 80%;
   font-size: 16px;
   cursor: pointer;
-  margin-left:20px;
+  margin-left: 20px;
 }
-.desktop textarea:focus{
+.desktop textarea:focus {
   border: 1px solid var(--effect-PHZorane);
 }
 
-.cookieMessage{
-  display: flex; 
+.cookieMessage {
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 60vh;
 }
-.cookieMessage .message{
+.cookieMessage .message {
   font-size: 2em;
   font-weight: bolder;
-  color: var(--effect-PHZorane)
+  color: var(--effect-PHZorane);
 }
 @media (max-width: 1000px) {
   :root {
