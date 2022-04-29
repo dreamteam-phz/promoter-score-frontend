@@ -34,6 +34,7 @@ export default function Create() {
   //       <button onClick={submitHandler}>SUBMIT</button>
     axios
       .post("http://localhost:4000/api/newsurvey", {
+        name: data.name,
         question: data.question,
         comment: true
       })
