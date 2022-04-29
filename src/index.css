@@ -37,6 +37,8 @@ body {
   background-color: var(--background-white);
   width: 100vw;
   height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   /* font-family: 'Merriweather', serif;*/
 }
