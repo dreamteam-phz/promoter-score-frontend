@@ -17,9 +17,6 @@ export default function Dashboard() {
     getResults();
   }, []);
 
-  
-  
-
   const getResults = () => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
       let data = response.data[0].results;
