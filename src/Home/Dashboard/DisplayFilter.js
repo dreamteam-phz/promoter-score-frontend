@@ -24,11 +24,13 @@ const DisplayFilter = (props) => {
       .get(URL_SURVEY_API)
       .then((response) => {
         const data = response.data;
+        console.log(data.name);
         setSelectSurvey(data);
       })
       .catch((error) => console.log(error.message));
   }, []);
-
+  console.log(selectSurvey);
+  console.log(selectSurvey.map((item) => item.name)); // to extract the survey name
   const filterChangeHandler = (event) => {
     dispatch({
       type: "DASHBOARD",
@@ -43,6 +45,8 @@ const DisplayFilter = (props) => {
     updateResults(event.target.value);
   };
   const updateResults = (surveyID) => {
+    // Adding here an if statement to wrap the survey fetch
+
     let data = dashboard.response.data.filter(
       (item) => item.surveyID === surveyID
     );
@@ -51,7 +55,7 @@ const DisplayFilter = (props) => {
       payload: { data: data[0].results },
     });
     props.update(
-      dashboard.response.data.filter((item) => item.surveyID === surveyID)
+      dashboard.response.data.filter((item) => item.surveyID === surveyID) // Sergei Pleaaaase explain this !! :)
     );
   };
 
