@@ -14,9 +14,12 @@ const RespondersChart = () => {
         backgroundColor: ["#1D4E89", "#0092AE", "#7DCFB6"],
       },
     ];
+
   const dispatch = useDispatch();
+
   const chartRef = useRef();
   const clickHandler = (event) => {
+    event.preventDefault();
     dispatch({
       type: 'DASHBOARD',
       payload: { comments: labels[getElementAtEvent(chartRef.current, event)[0].index] }
@@ -27,17 +30,17 @@ const RespondersChart = () => {
   //https://www.youtube.com/watch?v=tx5kw9KAhEA
   const centerScoreValue = {
     id: 'doughnutScoreValue',
+
     afterDraw(chart, args, options) {
       const { ctx, chartArea: { width, height } } = chart;
       //ctx.save();
-      console.log(chart);
-      ctx.font = "bolder 60px Arial";
-      ctx.fillStyle = '#ed6930';
+      ctx.font = "50px Lato,sans-serif";
+      ctx.fillStyle = '#545454';
       ctx.textAlign = 'center';
-      ctx.center = 'center';
-      ctx.fillText(`${scoreData.promScore}`, chart.chartArea.width / 2, (chart.chartArea.height / 2) + 50)
+      //ctx.center = 'center';
+      ctx.fillText(`${scoreData.promScore}`, chart.chartArea.width / 2, (chart.chartArea.height / 2) + 50);
+      //ctx.restore();
     }
-
   }
 
   //responsive chart 
@@ -47,11 +50,18 @@ const RespondersChart = () => {
   return (
     <Doughnut
       ref={chartRef}
-      // options={{
-      //   width: "235", height: "279",
-      // }}
-      plugins={[centerScoreValue]}
 
+      options={{
+        cutout: 90,
+        //   width: "235", height: "279",
+        // animation: false // how animation can be turned off 
+        legend: {
+          display: true,
+          position: "bottom"
+
+        }
+      }}
+      plugins={[centerScoreValue]}
       data={{ labels: labels, datasets: datasets }}
       onClick={clickHandler} />
   );

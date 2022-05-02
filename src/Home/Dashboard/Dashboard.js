@@ -22,37 +22,39 @@ export default function Dashboard() {
       let data = response.data[0].results;
       dispatch({
         type: 'DASHBOARD',
-        payload: {data: data}
+        payload: { data: data }
       });
       dispatch({
         type: 'DASHBOARD',
-        payload: {response: response}
+        payload: { response: response }
       });
       let prom = 0;
-    let det = 0;
-    let pass = 0;
-    const scores = data.map((item) => item.score);
-    for (let score of scores) {
-      if (score >= 9) prom++;
-      else if (score <= 6) det++;
-      } 
-    pass = data.length - (prom + det);
-    const result = ((prom - det) / data.length) * 100;
-    const promScore = Math.floor(result);
-    dispatch({
-      type: 'DASHBOARD',
-      payload: {scoreData: {
-        promoters: prom,
-        detractors: det,
-        passives: pass,
-        result: result,
-        promScore: promScore,
-        scores: scores
-      }}
-    })
-      
-    dispatch({type: 'LOADED', payload: true})
-      
+      let det = 0;
+      let pass = 0;
+      const scores = data.map((item) => item.score);
+      for (let score of scores) {
+        if (score >= 9) prom++;
+        else if (score <= 6) det++;
+      }
+      pass = data.length - (prom + det);
+      const result = ((prom - det) / data.length) * 100;
+      const promScore = Math.floor(result);
+      dispatch({
+        type: 'DASHBOARD',
+        payload: {
+          scoreData: {
+            promoters: prom,
+            detractors: det,
+            passives: pass,
+            result: result,
+            promScore: promScore,
+            scores: scores
+          }
+        }
+      })
+
+      dispatch({ type: 'LOADED', payload: true })
+
     });
   }
   const calculations = (data) => {
@@ -64,23 +66,25 @@ export default function Dashboard() {
     for (let score of scores) {
       if (score >= 9) prom++;
       else if (score <= 6) det++;
-      } 
+    }
     pass = data[0].results.length - (prom + det);
     const result = ((prom - det) / data[0].results.length) * 100;
     const promScore = Math.floor(result);
     dispatch({
       type: 'DASHBOARD',
-      payload: {scoreData: {
-        promoters: prom,
-        detractors: det,
-        passives: pass,
-        result: result,
-        promScore: promScore,
-        scores: scores
-      }}
+      payload: {
+        scoreData: {
+          promoters: prom,
+          detractors: det,
+          passives: pass,
+          result: result,
+          promScore: promScore,
+          scores: scores
+        }
+      }
     })
-      
-    dispatch({type: 'LOADED', payload: true})
+
+    dispatch({ type: 'LOADED', payload: true })
   }
 
   const dummyData = [
@@ -99,12 +103,11 @@ export default function Dashboard() {
     {
       date: "2021-09-19T00:00:00.502Z",
     },
-  ]; 
+  ];
 
   if (loaded) {
     return (
       <div className={styles.dashboard}>
-        <h1>DASHBOARD</h1>
         <DisplayFilter update={calculations} />
         <div className={styles.data}>
           <PromoterScore />
