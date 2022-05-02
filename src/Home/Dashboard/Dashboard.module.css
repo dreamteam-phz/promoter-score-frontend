@@ -76,3 +76,19 @@ h5 {
 .header {
   font-size: 1rem;
 }
+ul {
+  list-style: none; /* Remove default bullets */
+}
+ul > li {padding: 10px 10px} /* Stretching li elements a little so it looks prettier */
+.squareBullets >li{
+  position: relative;
+}
+.squareBullets > li::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    border: 1px solid black; 
+}

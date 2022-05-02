@@ -62,19 +62,20 @@ const RespondersChart = () => {
             //   fontColor: "#545454",
             // },
           },
+
         }
         //   width: "235", height: "279",
         //animation: false // how animation can be turned off 
       }}
-      legend={{
-        display: true,
-        position: "right",
-        align: "center",
-        labels: {
-          usePointStyle: true,
-          fontColor: "#006192",
-        },
-      }}
+      // legend={{
+      //   display: true,
+      //   position: "right",
+      //   align: "center",
+      //   labels: {
+      //     usePointStyle: true,
+      //     fontColor: "#006192",
+      //   },
+      // }}
 
       plugins={
         [centerScoreValue]
