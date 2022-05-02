@@ -1,6 +1,6 @@
 import React from "react";
 import "chart.js/auto";
-import { Pie, getElementAtEvent } from "react-chartjs-2";
+import { Doughnut, Pie, getElementAtEvent } from "react-chartjs-2";
 import { useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,14 +19,39 @@ const RespondersChart = () => {
   const clickHandler = (event) => {
     dispatch({
       type: 'DASHBOARD',
-      payload: {comments: labels[getElementAtEvent(chartRef.current, event)[0].index]}
+      payload: { comments: labels[getElementAtEvent(chartRef.current, event)[0].index] }
     });
   }
 
+  //doughnut chart plugin 
+  //https://www.youtube.com/watch?v=tx5kw9KAhEA
+  const centerScoreValue = {
+    id: 'doughnutScoreValue',
+    afterDraw(chart, args, options) {
+      const { ctx, chartArea: { width, height } } = chart;
+      //ctx.save();
+      console.log(chart);
+      ctx.font = "bolder 60px Arial";
+      ctx.fillStyle = '#ed6930';
+      ctx.textAlign = 'center';
+      ctx.center = 'center';
+      ctx.fillText(`${scoreData.promScore}`, chart.chartArea.width / 2, (chart.chartArea.height / 2) + 50)
+    }
+
+  }
+
+  //responsive chart 
+  //https://www.chartjs.org/docs/latest/configuration/responsive.html 
+  // note! https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
+
   return (
-    <Pie
+    <Doughnut
       ref={chartRef}
-      options={{ width: "300", height: "300" }}
+      // options={{
+      //   width: "235", height: "279",
+      // }}
+      plugins={[centerScoreValue]}
+
       data={{ labels: labels, datasets: datasets }}
       onClick={clickHandler} />
   );
