@@ -7,17 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 const RespondersChart = () => {
   const scoreData = useSelector(state => state.dashboard.scoreData);
-  const labels = ["Promoters", "Detractors", "Passives"],
-    datasets = [
-      {
-        data: [scoreData.promoters, scoreData.detractors, scoreData.passives],
-        backgroundColor: ["#1D4E89", "#0092AE", "#7DCFB6"],
-      },
-    ];
+  const labels = ["Promoters", "Detractors", "Passives"]
+  const datasets = [
+    {
+      data: [scoreData.promoters, scoreData.detractors, scoreData.passives],
+      backgroundColor: ["#1D4E89", "#0092AE", "#7DCFB6"],
+    },
+  ];
 
   const dispatch = useDispatch();
 
   const chartRef = useRef();
+
   const clickHandler = (event) => {
     event.preventDefault();
     dispatch({
@@ -38,10 +39,11 @@ const RespondersChart = () => {
       ctx.fillStyle = '#545454';
       ctx.textAlign = 'center';
       //ctx.center = 'center';
-      ctx.fillText(`${scoreData.promScore}`, chart.chartArea.width / 2, (chart.chartArea.height / 2) + 50);
+      ctx.fillText(`${scoreData.promScore}`, chart.chartArea.width / 2, (chart.chartArea.height / 2) + 20);
       //ctx.restore();
     }
   }
+
 
   //responsive chart 
   //https://www.chartjs.org/docs/latest/configuration/responsive.html 
@@ -50,18 +52,34 @@ const RespondersChart = () => {
   return (
     <Doughnut
       ref={chartRef}
-
       options={{
-        cutout: 90,
-        //   width: "235", height: "279",
-        // animation: false // how animation can be turned off 
-        legend: {
-          display: true,
-          position: "bottom"
-
+        cutout: 95,
+        plugins: {
+          legend: {
+            display: false
+            // position: "bottom",
+            // labels: {
+            //   fontColor: "#545454",
+            // },
+          },
         }
+        //   width: "235", height: "279",
+        //animation: false // how animation can be turned off 
       }}
-      plugins={[centerScoreValue]}
+      legend={{
+        display: true,
+        position: "right",
+        align: "center",
+        labels: {
+          usePointStyle: true,
+          fontColor: "#006192",
+        },
+      }}
+
+      plugins={
+        [centerScoreValue]
+      }
+
       data={{ labels: labels, datasets: datasets }}
       onClick={clickHandler} />
   );
