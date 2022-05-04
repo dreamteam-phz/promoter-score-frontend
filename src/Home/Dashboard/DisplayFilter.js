@@ -4,6 +4,8 @@ import { useState,useEffect } from "react";
 import styles from "./DisplayFilter.module.css";
 import axios from "axios";
 
+import Date from "../../components/datePicker/Date";
+
 const DisplayFilter = (props) => {
   const dashboard = useSelector((state) => state.dashboard); // for testing
   const period = useSelector(state => state.dashboard.selectedMonth)
@@ -16,7 +18,7 @@ const DisplayFilter = (props) => {
     { label: "1 month", value: "30" },
     { label: "3 months", value: "90" },
     { label: "6 months", value: "180" },
-    { label: "1 year", value: "365" },
+    { label: "1 year", value: "365" }
   ];
 
   useEffect (() => { 
@@ -67,7 +69,14 @@ const DisplayFilter = (props) => {
 
       </select>
       <select name="selectedMonth" value={period} onChange={filterChangeHandler} className={styles.select}>
-        {options.map(option => <option key={option.value} value={option.value}>{option.label}</option> )}
+        {options.map(option => 
+          <option 
+            key={option.value} 
+            value={option.value}
+          >
+            {option.label}
+          </option>
+        )}
       </select>
     </div>
   );

@@ -1,16 +1,25 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Create.module.css";
-import Label from "./Label";
-
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 
 export default function Create() {
-  const [data, setData] = useState({ question: "", comment: true });
+  const [data, setData] = useState({ name:"",question: "", comment: true });
   const [linkToForm, setLinkToForm] = useState("");
   const [open, setOpen] = useState(false);
+  const URL_SURVEY_API = 'http://localhost:4000/api/surveys';
+  const [selectSurvey, setSelectSurvey] = useState([]);
+
+  useEffect (() => { 
+    axios.get(URL_SURVEY_API)
+      .then(response => {
+        const data = response.data;
+        setSelectSurvey(data);
+      })
+      .catch((error)=> console.log(error.message));
+  },[]);
 
   const handleToClose = (event, reason) => {
     if ("clickaway" === reason) return;
@@ -21,17 +30,6 @@ export default function Create() {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    
-  
-
-  // return (
-  //   <div className={styles.create}>
-  //     <div className={styles.data}>
-  //       <h1>CREATE SURVEY</h1>
-  //       <input name='name' type='text' placeholder='Name of survey' onChange={inputHandler} />
-  //       <input name='question' type='text' placeholder='Main question' onChange={inputHandler} />
-  //       <div className={styles.container}>
-  //       <button onClick={submitHandler}>SUBMIT</button>
     axios
       .post("http://localhost:4000/api/newsurvey", {
         name: data.name,
@@ -91,6 +89,22 @@ export default function Create() {
             />
           </div>
         </div>
+        <div className={styles.data}>
+          <h1>Previous surveys</h1>
+              {selectSurvey.map( survey =>
+                <div
+                  key={survey._id}
+                  name={survey.name}
+                  question={survey.question}
+                >
+                  <a 
+                    href={`http://localhost:3000/${survey._id}`}
+                  >
+                    {survey.name}
+                  </a>
+                </div>  
+              )}
+        </div>
       </div>
     );
   } else {
@@ -108,6 +122,9 @@ export default function Create() {
           >
             Link to the form
           </a>
+        </button>
+        <button className={styles.button} onClick={ () => setLinkToForm('')}>
+          Previous
         </button>
       </div>
     );
