@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "./DisplayFilter.module.css";
 import axios from "axios";
 
-const DisplayFilter = () => {
+const DisplayFilter = (props) => {
   const dashboard = useSelector((state) => state.dashboard); // for testing
   const period = useSelector((state) => state.dashboard.selectedMonth);
   const dispatch = useDispatch();
@@ -54,9 +54,9 @@ const DisplayFilter = () => {
       type: "DASHBOARD",
       payload: { data: data[0].results },
     });
-    // props.update(
-    //   dashboard.response.data.filter((item) => item.surveyID === surveyID) // Sergei Pleaaaase explain this !! :)
-    // );
+    props.update(
+      dashboard.response.data.filter((item) => item.surveyID === surveyID) // Sergei Pleaaaase explain this !! :)
+    );
   };
 
   return (
