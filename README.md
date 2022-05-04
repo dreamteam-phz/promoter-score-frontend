@@ -126,8 +126,3 @@ Application has several layouts:
 
     - A helper to interact with the UI and events in the test runner, and translate to a code in cypress.spec.js file, in case we don't know what to target exactly.
     - implementation: in the cypress.json: `"experimentalStudio": true`
-
-8.  Failing a test:
-    ![Screenshot 2022-04-30 at 16.29.10.png](:/e549ba154a5243e79243ef16d4e0774b)
-9.  Tested suits:
-    ![Screenshot 2022-05-04 at 14.06.20.png](:/7db1e47b66144bbcafaf20f6e29a00a5)
