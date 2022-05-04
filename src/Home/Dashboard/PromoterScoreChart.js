@@ -6,7 +6,6 @@ import RespondersChart from "./RespondersChart";
 const PromoterScoreChart = () => {
   const scoreData = useSelector(state => state.dashboard.scoreData);
   const period = useSelector(state => state.dashboard.selectedMonth)
-  console.log((scoreData));
 
   return (
     <div className={styles.panel}>
