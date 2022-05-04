@@ -17,18 +17,18 @@ const PromoterScoreChart = () => {
             <h2>PROMOTER SCORE</h2>
             {period === "1" && <h3>last month</h3>}
             {period !== "1" && <h3>last {period} days</h3>}
-
           </div>
           <div className={styles.resultWraper}>
             <h5>responses {scoreData.scores.length}</h5>
+
+            <RespondersChart />
           </div>
-          <RespondersChart />
           <div className={styles.respondersChartLegend}>
-            <ul className={styles.squareBullets}>
+            {/* <ul className={styles.squareBullets}>
               <li className={styles.promotersLi}>Promoters  {scoreData.promoters} ({Math.round(scoreData.promoters * 100 / scoreData.scores.length)}%)</li>
               <li className={styles.passivesLi}>Passives {scoreData.passives} ({Math.round(scoreData.passives * 100 / scoreData.scores.length)}%)</li>
               <li className={styles.detractors}>Detractors {scoreData.detractors} ({Math.round(scoreData.detractors * 100 / scoreData.scores.length)}%)</li>
-            </ul>
+            </ul> */}
 
           </div>
         </div>
