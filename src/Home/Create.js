@@ -21,28 +21,26 @@ export default function Create() {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    
-  
 
-  // return (
-  //   <div className={styles.create}>
-  //     <div className={styles.data}>
-  //       <h1>CREATE SURVEY</h1>
-  //       <input name='name' type='text' placeholder='Name of survey' onChange={inputHandler} />
-  //       <input name='question' type='text' placeholder='Main question' onChange={inputHandler} />
-  //       <div className={styles.container}>
-  //       <button onClick={submitHandler}>SUBMIT</button>
+    // return (
+    //   <div className={styles.create}>
+    //     <div className={styles.data}>
+    //       <h1>CREATE SURVEY</h1>
+    //       <input name='name' type='text' placeholder='Name of survey' onChange={inputHandler} />
+    //       <input name='question' type='text' placeholder='Main question' onChange={inputHandler} />
+    //       <div className={styles.container}>
+    //       <button onClick={submitHandler}>SUBMIT</button>
     axios
       .post("http://localhost:4000/api/newsurvey", {
         name: data.name,
         question: data.question,
-        comment: true
+        comment: true,
       })
       .then((res) => {
         console.log(res);
         setLinkToForm(res.data._id);
       });
-    setData({ question: "", name: ""});
+    setData({ question: "", name: "" });
     setOpen(true);
   };
   if (linkToForm === "") {
@@ -50,13 +48,13 @@ export default function Create() {
       <div className={styles.create}>
         <div className={styles.data}>
           <h1>CREATE SURVEY</h1>
-          <input 
-            name='name' 
-            type='text' 
-            placeholder='Name of survey' 
+          <input
+            name="name"
+            type="text"
+            placeholder="Name of survey"
             onChange={inputHandler}
             value={data.name}
-            />
+          />
           <input
             name="question"
             type="text"
@@ -65,7 +63,6 @@ export default function Create() {
             value={data.question}
           />
           <div className={styles.container}>
-            
             <button onClick={submitHandler}>SUBMIT</button>
             <Snackbar
               anchorOrigin={{
