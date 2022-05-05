@@ -20,8 +20,8 @@ export default function Surveys() {
         <div className={styles.surveys}>
             <div className={styles.data}>
                 <h1>Existing Surveys</h1>
-                <p>Copy paste link in browser to access to a particular survey</p>
-                <Table selectSurvey={selectSurvey}/>
+                <p>Copy/paste a link in browser to access to that particular survey.</p>
+                {selectSurvey.length > 0 ? <Table selectSurvey={selectSurvey}/> : <span><p>No surveys to display.</p></span>}
             </div>
       </div>
     )
