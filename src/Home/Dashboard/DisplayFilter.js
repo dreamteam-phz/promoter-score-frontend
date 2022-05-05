@@ -74,7 +74,6 @@ const DisplayFilter = (props) => {
           </option>
         ))}
       </select>
-<<<<<<< HEAD
       <select name="selectedMonth" value={period} onChange={filterChangeHandler} className={styles.select}>
         {options.map(option => 
           <option 
@@ -84,19 +83,6 @@ const DisplayFilter = (props) => {
             {option.label}
           </option>
         )}
-=======
-      <select
-        name="selectedMonth"
-        value={period}
-        onChange={filterChangeHandler}
-        className={styles.select}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
->>>>>>> main
       </select>
     </div>
   );
