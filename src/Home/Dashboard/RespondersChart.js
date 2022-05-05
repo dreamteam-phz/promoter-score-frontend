@@ -1,34 +1,52 @@
 import React from "react";
 import "chart.js/auto";
-import { Pie, getElementAtEvent } from "react-chartjs-2";
+import { Doughnut, getElementAtEvent } from "react-chartjs-2";
 import { useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import styles from './Dashboard.module.css'
 
 
 const RespondersChart = () => {
   const scoreData = useSelector(state => state.dashboard.scoreData);
-  const labels = ["Promoters", "Detractors", "Passives"],
-    datasets = [
-      {
-        data: [scoreData.promoters, scoreData.detractors, scoreData.passives],
-        backgroundColor: ["#1D4E89", "#0092AE", "#7DCFB6"],
-      },
-    ];
+  const labels = ["Promoters", "Detractors", "Passives", "some"]
+
+  const datasets = [
+    {
+      data: [scoreData.promoters, scoreData.detractors, scoreData.passives],
+      backgroundColor: ["#1D4E89", "#0092ae", "#7DCFB6"],
+    },
+  ];
   const dispatch = useDispatch();
   const chartRef = useRef();
+
   const clickHandler = (event) => {
+    event.preventDefault();
     dispatch({
       type: 'DASHBOARD',
-      payload: {comments: labels[getElementAtEvent(chartRef.current, event)[0].index]}
+      payload: { comments: labels[getElementAtEvent(chartRef.current, event)[0].index] }
     });
   }
 
   return (
-    <Pie
-      ref={chartRef}
-      options={{ width: "300", height: "300" }}
-      data={{ labels: labels, datasets: datasets }}
-      onClick={clickHandler} />
+    <div className={styles.doughnutWrap}>
+      <Doughnut
+        ref={chartRef}
+        options={{
+          cutout: 95,
+          width: "200px",
+          height: 200,
+          plugins: {
+            legend: {
+              display: false
+            }
+
+          }
+        }}
+        data={{ labels: labels, datasets: datasets }}
+        onClick={clickHandler}
+      />
+      <p id={styles.score} className={styles.centerValue}>{scoreData.promScore}</p>
+    </div>
   );
 };
 

@@ -13,7 +13,9 @@
   --background-white: #fafafa;
   --whitesmoke: #fafafa;
   --white: #ffffff;
+  --text-white:#f5f5f5;
   --white-grey: #eeeeee;
+  --dashboard-background:#e5e5e5; 
   --effect-PHZorane: #ed6930;
   --black: #545454;
   --blackish: #6e6e6e;
@@ -25,6 +27,10 @@
   --shadow: rgba(0, 0, 0, 0.2);
   --gentleblue: #339989;
   --gentlepink: #7de2d1;
+
+  /* 2.5. added dashboard color variables SL */
+  --passive-green: #00B2CA; 
+  --promoters-navy: #1D4e89; 
 
   --mistake: #ef476f;
   --lightblue: #48cae4;
