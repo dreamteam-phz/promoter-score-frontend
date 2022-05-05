@@ -6,17 +6,17 @@ const PromoterScore = () => {
   const scoreData = useSelector(state => state.dashboard.scoreData)
   const period = useSelector(state => state.dashboard.selectedMonth)
   const scores = data.map((item) => item.score);
-  
-  let prom = 0;
-  let det = 0;
-  let pass = 0;
-  for (let score of scores) {
-    if (score >= 9) prom++;
-    else if (score <= 6) det++;
-  }
-  pass = data.length - (prom + det);
-  const result = ((prom - det) / data.length) * 100;
-  const promScore = Math.floor(result);
+
+  // let prom = 0;
+  // let det = 0;
+  // let pass = 0;
+  // for (let score of scores) {
+  //   if (score >= 9) prom++;
+  //   else if (score <= 6) det++;
+  // }
+  // pass = data.length - (prom + det);
+  // const result = ((prom - det) / data.length) * 100;
+  // const promScore = Math.floor(result);
 
   return (
     <div className={styles.panel}>
