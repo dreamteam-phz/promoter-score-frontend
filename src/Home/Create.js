@@ -100,7 +100,7 @@ export default function Create() {
         </div>
         <div className={styles.data}>
           <h1>Previous surveys</h1>
-          <Table selectSurvey={selectSurvey}/>
+          {selectSurvey.length > 0 ? <Table selectSurvey={selectSurvey}/> : <span><p>No surveys to display.</p></span>}
         </div>
       </div>
     );
