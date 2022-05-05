@@ -3,7 +3,7 @@ import styles from "./Console.module.css";
 import { useSelector } from "react-redux";
 import Create from "./Create";
 import Dashboard from "./Dashboard/Dashboard";
-import Settings from "./Settings";
+import Surveys from "./Surveys";
 import Instructions from "./Instructions";
 
 export default function Console() {
@@ -24,7 +24,7 @@ export default function Console() {
     case "settings":
       return (
         <div className={styles.console}>
-          <Settings />
+          <Surveys />
         </div>
       );
     case "instructions":

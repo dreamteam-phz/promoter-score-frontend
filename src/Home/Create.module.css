@@ -111,3 +111,8 @@ h1 {
 .create button:hover {
     background-color: var(--effect-PHZorane);
 }
+
+.listed {
+  color:black;
+  background-color: lightyellow;
+}

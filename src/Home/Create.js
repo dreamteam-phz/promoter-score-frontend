@@ -1,16 +1,26 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Create.module.css";
-import Label from "./Label";
-
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
+import Table from "../components/table/Table";
 
 export default function Create() {
-  const [data, setData] = useState({ question: "", comment: true });
+  const [data, setData] = useState({ name:"",question: "", comment: true });
   const [linkToForm, setLinkToForm] = useState("");
   const [open, setOpen] = useState(false);
+  const URL_SURVEY_API = 'http://localhost:4000/api/surveys';
+  const [selectSurvey, setSelectSurvey] = useState([]);
+
+  useEffect (() => { 
+    axios.get(URL_SURVEY_API)
+      .then(response => {
+        const data = response.data;
+        setSelectSurvey(data);
+      })
+      .catch((error)=> console.log(error.message));
+  },[]);
 
   const handleToClose = (event, reason) => {
     if ("clickaway" === reason) return;
@@ -88,6 +98,10 @@ export default function Create() {
             />
           </div>
         </div>
+        <div className={styles.data}>
+          <h1>Previous surveys</h1>
+          <Table selectSurvey={selectSurvey}/>
+        </div>
       </div>
     );
   } else {
@@ -106,6 +120,9 @@ export default function Create() {
             Link to the form
           </a>
         </button>
+        {/* <button className={styles.button} onClick={ () => setLinkToForm('')}>
+          Previous
+        </button> */}
       </div>
     );
   }
