@@ -21,9 +21,9 @@ export default function Bar() {
             <div className={styles.nav}>
                 <Label id='create' name='location' content='Create survey' change={labelHandler}/>
                 <Label id='dashboard' name='location' checked={true} content='Dashboard' change={labelHandler}/>
-                <Label id='settings' name='location' content='Settings' change={labelHandler}/>
+                <Label id='settings' name='location' content='Existing surveys' change={labelHandler}/>
                 <Label id='instructions' name='location' content='Instructions' change={labelHandler}/>
-                <button><Link to='/'>Log out</Link></button>
+                <button><Link to='/'>Exit</Link></button>
             </div>
         </div>
     )

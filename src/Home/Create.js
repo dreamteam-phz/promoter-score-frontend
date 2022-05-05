@@ -4,6 +4,7 @@ import styles from "./Create.module.css";
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
+import Table from "../components/table/Table";
 
 export default function Create() {
   const [data, setData] = useState({ name:"",question: "", comment: true });
@@ -91,19 +92,7 @@ export default function Create() {
         </div>
         <div className={styles.data}>
           <h1>Previous surveys</h1>
-              {selectSurvey.map( survey =>
-                <div
-                  key={survey._id}
-                  name={survey.name}
-                  question={survey.question}
-                >
-                  <a 
-                    href={`http://localhost:3000/${survey._id}`}
-                  >
-                    {survey.name}
-                  </a>
-                </div>  
-              )}
+          <Table selectSurvey={selectSurvey}/>
         </div>
       </div>
     );
@@ -123,9 +112,9 @@ export default function Create() {
             Link to the form
           </a>
         </button>
-        <button className={styles.button} onClick={ () => setLinkToForm('')}>
+        {/* <button className={styles.button} onClick={ () => setLinkToForm('')}>
           Previous
-        </button>
+        </button> */}
       </div>
     );
   }

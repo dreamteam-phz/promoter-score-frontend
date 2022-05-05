@@ -16,8 +16,8 @@ const NavBar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink className={classes.link} to="/Settings">
-          Settings
+        <NavLink className={classes.link} to="/Surveys">
+          Surveys
         </NavLink>
       </li>
       <li>
