@@ -9,7 +9,8 @@ const Table = ({selectSurvey}) => {
               <tr>
                   <th>Name</th>
                   <th>Question</th>
-                  <th>Link</th>
+                  <th>url</th>
+                  <th>Embeded link format</th>
               </tr>
           </thead>
           <tbody>
@@ -18,7 +19,8 @@ const Table = ({selectSurvey}) => {
                 key={survey._id}
                 name={survey.name}
                 question={survey.question}
-                link={`http://localhost:3000/${survey._id}`}
+                url={`http://localhost:3000/${survey._id}`}
+                link={`<iframe src="http://localhost:3000/${survey._id}" frameborder="0" width="100%" height="500px" ></iframe>`}
               />  
             ))}
           </tbody>
