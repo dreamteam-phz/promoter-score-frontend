@@ -94,7 +94,7 @@ const Comments = () => {
   //     date: "2022-04-26T13:00:46.995+00:00",
   //   },
   // ];
-  const data = useSelector(state => state.dashboard.data)
+  const data = useSelector((state) => state.dashboard.data);
   // console.log(data)
   const filteredData = data.filter((item) => item.comment.length > 0);
   const dataToDispaly = filteredData.reverse();
@@ -114,7 +114,13 @@ const Comments = () => {
             <td className={styles.date}>
               <ul className={styles.comments}>
                 {dataToDispaly.map((item) => (
-                  <li key={item.date + item.comment}>{item.date.slice(0, 10)}</li>
+                  <li key={item.date + item.comment}>
+                    <li key={item.date + item.comment}>
+                      {new Date(item.date).toLocaleDateString("uk", {
+                        timeZone: "Europe/Helsinki",
+                      })}
+                    </li>
+                  </li>
                 ))}
               </ul>
             </td>
