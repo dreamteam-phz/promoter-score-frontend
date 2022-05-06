@@ -48,9 +48,14 @@
 }
 .table th,
 .table td {
-  padding: 5px;
   text-align: left;
   width: 200px;
+}
+.table th {
+  padding: 10px;
+}
+.table th:first-child {
+  cursor: pointer;
 }
 .date {
   width: 2rem;
