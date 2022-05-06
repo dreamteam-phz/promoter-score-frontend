@@ -32,8 +32,8 @@ const RespondersChart = () => {
       <Doughnut
         ref={chartRef}
         options={{
-          cutout: 95,
-          width: "200px",
+          cutout: 130,
+          width: "100px",
           height: 200,
           plugins: {
             legend: {

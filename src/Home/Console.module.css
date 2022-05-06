@@ -1,8 +1,9 @@
 .console {
-    max-width: calc(100vw - 200px);
-    width: 83vw;
+    max-width: calc(100vw - 100px);
+    width: 87vw;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
