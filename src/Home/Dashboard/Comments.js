@@ -100,48 +100,54 @@ const Comments = () => {
   const dataToDispaly = filteredData.reverse();
   console.log(dataToDispaly);
   return (
-    <div className={styles.panel}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Score</th>
-            <th>Comments</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className={styles.date}>
-              <ul className={styles.comments}>
-                {dataToDispaly.map((item) => (
-                  <li key={item.date + item.comment}>
-                    <li key={item.date + item.comment}>
-                      {new Date(item.date).toLocaleDateString("uk", {
-                        timeZone: "Europe/Helsinki",
-                      })}
-                    </li>
-                  </li>
-                ))}
-              </ul>
-            </td>
-            <td className={styles.scores}>
-              <ul className={styles.comments}>
-                {dataToDispaly.map((item) => (
-                  <li key={item.date + item.comment}>{item.score}</li>
-                ))}
-              </ul>
-            </td>
-            <td>
-              <ul className={styles.comments}>
-                {dataToDispaly.map((item) => (
-                  <li key={item.date + item.comment}>{item.comment}</li>
-                ))}
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <span></span>
+    <div>
+      {dataToDispaly.length > 0 ? (
+        <div className={styles.panel}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Score</th>
+                <th>Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className={styles.date}>
+                  <ul className={styles.comments}>
+                    {dataToDispaly.map((item) => (
+                      <li key={item.date + item.comment}>
+                        <li key={item.date + item.comment}>
+                          {new Date(item.date).toLocaleDateString("uk", {
+                            timeZone: "Europe/Helsinki",
+                          })}
+                        </li>
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+                <td className={styles.scores}>
+                  <ul className={styles.comments}>
+                    {dataToDispaly.map((item) => (
+                      <li key={item.date + item.comment}>{item.score}</li>
+                    ))}
+                  </ul>
+                </td>
+                <td>
+                  <ul className={styles.comments}>
+                    {dataToDispaly.map((item) => (
+                      <li key={item.date + item.comment}>{item.comment}</li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <span></span>
+        </div>
+      ) : (
+        <p> No </p>
+      )}
     </div>
   );
 };
