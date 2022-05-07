@@ -37,7 +37,7 @@
   --green: #02c39a;
 
   --formwidth: 40vw;
-  --barWidth: 17vw;
+  --barWidth: 13vw;
 }
 body {
   background-color: var(--background-white);

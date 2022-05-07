@@ -1,6 +1,6 @@
 .bar {
     background-color: var(--whitesmoke);
-    min-width: 200px;
+    min-width: 100px;
     width: var(--barWidth);
     height: 100vh;
     box-shadow: 0 0 4px 0 var(--shadow);
