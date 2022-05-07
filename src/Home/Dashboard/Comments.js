@@ -52,7 +52,11 @@ const Comments = () => {
     setDataToDisplay([...newOrder]);
   };
   const dates = dataToDisplay.map((item) => (
-    <li key={item.date + item.comment}>{item.date.slice(0, 10)}</li>
+    <li key={item.date + item.comment}>
+      {new Date(item.date).toLocaleDateString("uk", {
+        timeZone: "Europe/Helsinki",
+      })}
+    </li>
   ));
   const scores = dataToDisplay.map((item) => (
     <li key={item.date + item.comment}>{item.score}</li>
@@ -61,32 +65,38 @@ const Comments = () => {
     <li key={item.date + item.comment}>{item.comment}</li>
   ));
   return (
-    <div className={styles.panel}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th onClick={sortingHandler}>
-              Date <b>&#8691;</b>
-            </th>
-            <th>Score</th>
-            <th>Comments</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className={styles.date}>
-              <ul className={styles.comments}>{dates}</ul>
-            </td>
-            <td className={styles.scores}>
-              <ul className={styles.comments}>{scores}</ul>
-            </td>
-            <td>
-              <ul className={styles.comments}>{comments}</ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <span></span>
+    <div className={styles.rendered}>
+      {dataToDisplay.length > 0 ? (
+        <div className={styles.panel}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th onClick={sortingHandler}>
+                  Date <b>&#8691;</b>
+                </th>
+                <th>Score</th>
+                <th>Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className={styles.date}>
+                  <ul className={styles.comments}>{dates}</ul>
+                </td>
+                <td className={styles.scores}>
+                  <ul className={styles.comments}>{scores}</ul>
+                </td>
+                <td>
+                  <ul className={styles.comments}>{comments}</ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <span></span>
+        </div>
+      ) : (
+        <p>No comments to display</p>
+      )}
     </div>
   );
 };
