@@ -44,24 +44,10 @@ const DisplayFilter = (props) => {
       type: "DASHBOARD",
       payload: { selectedSurvey: event.target.value }, 
     });
-    // updateResults(event.target.value);
     props.update(dashboard.data, event.target.value)
     console.log(dashboard);
   };
-  // const updateResults = (surveyID) => {
-  //   // Adding here an if statement to wrap the survey fetch
 
-  //   // let data = dashboard.response.data.filter(
-  //   //   (item) => item.surveyID === surveyID
-  //   // );
-  //   // dispatch({
-  //   //   type: "DASHBOARD",
-  //   //   payload: { data: data[0].results },
-  //   // });
-  //   props.update(
-  //     dashboard.response.data.filter((item) => item.surveyID === surveyID) // Sergei Pleaaaase explain this !! :)
-  //   );
-  // };
 
   return (
     <div className={styles.selectWrapper}>
