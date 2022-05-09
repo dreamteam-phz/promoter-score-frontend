@@ -5,6 +5,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import Table from "../components/table/Table";
+import {CSSTransition} from 'react-transition-group'; // ES6
+import "../animation.css";
+
 
 export default function Create() {
   const [data, setData] = useState({ name:"",question: "", comment: true });
@@ -12,8 +15,11 @@ export default function Create() {
   const [open, setOpen] = useState(false);
   const URL_SURVEY_API = 'http://localhost:4000/api/surveys';
   const [selectSurvey, setSelectSurvey] = useState([]);
+  const [display, setDisplay] = useState(false);
 
-  useEffect (() => { 
+
+  useEffect (() => {
+    setDisplay(true);
     axios.get(URL_SURVEY_API)
       .then(response => {
         const data = response.data;
@@ -55,6 +61,7 @@ export default function Create() {
   };
   if (linkToForm === "") {
     return (
+      <CSSTransition in={display} timeout={1000} classNames="my-node">
       <div className={styles.create}>
         <div className={styles.data}>
           <h1>CREATE SURVEY</h1>
@@ -73,7 +80,7 @@ export default function Create() {
             value={data.question}
           />
           <div className={styles.container}>
-            <button onClick={submitHandler}>SUBMIT</button>
+          <button onClick={submitHandler}>SUBMIT</button>
             <Snackbar
               anchorOrigin={{
                 horizontal: "center",
@@ -99,31 +106,26 @@ export default function Create() {
           </div>
         </div>
         <div className={styles.data}>
-          <h1>Previous surveys</h1>
-          {selectSurvey.length > 0 ? <Table selectSurvey={selectSurvey}/> : <span><p>No surveys to display.</p></span>}
+          {/* <h1>Previous surveys</h1>
+          {selectSurvey.length > 0 ? <Table selectSurvey={selectSurvey}/> : <span><p>No surveys to display.</p></span>} */}
         </div>
       </div>
+      </CSSTransition>
     );
   } else {
     return (
+      <CSSTransition in={display} timeout={0} classNames="my-node">
       <div className={styles.formLink}>
         <label>URL of the form:</label>
-        <span
-          className={styles.span}
-        >{`http://localhost:3000/${linkToForm}`}</span>
+        <span className={styles.span}>{`http://localhost:3000/${linkToForm}`}</span>
         <button className={styles.button}>
-          <a
-            href={`http://localhost:3000/${linkToForm}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Link to the form
-          </a>
+          <a href={`http://localhost:3000/${linkToForm}`} target="_blank" rel="noreferrer">Link to the form</a>
         </button>
         {/* <button className={styles.button} onClick={ () => setLinkToForm('')}>
           Previous
         </button> */}
       </div>
+      </CSSTransition>
     );
   }
 }
