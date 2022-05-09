@@ -5,8 +5,8 @@
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
   /*font-weight: 500;*/
-  transition: ease-in-out;
-  transition-duration: 0.3s;
+  transition: ease;
+  transition-duration: 0.2s;
 }
 :root {
   /* colors according to style guide */
@@ -17,14 +17,14 @@
   --white-grey: #eeeeee;
   --dashboard-background:#e5e5e5; 
   --effect-PHZorane: #ed6930;
-  --black: #545454;
+  --black: #303030;
   --blackish: #6e6e6e;
   --green-accent: #7dcfb6;
   --button: #7dcfb6;
   --button-hover: #0092ae;
 
   /*needs to be checked / unified*/
-  --shadow: rgba(0, 0, 0, 0.2);
+  --shadow: rgba(15, 13, 13, 0.2);
   --gentleblue: #339989;
   --gentlepink: #7de2d1;
 
@@ -37,7 +37,7 @@
   --green: #02c39a;
 
   --formwidth: 40vw;
-  --barWidth: 17vw;
+  --barWidth: 13vw;
 }
 body {
   background-color: var(--background-white);
@@ -54,6 +54,7 @@ h1 {
 }
 main {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -68,3 +69,20 @@ button {
     --formwidth: 60vw;
   }
 }*/
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 1s;
+  transition-delay: 0.05s;
+}
+
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 0.05ы;
+  
+}

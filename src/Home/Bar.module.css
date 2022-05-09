@@ -1,28 +1,35 @@
 .bar {
-    background-color: var(--whitesmoke);
-    min-width: 200px;
-    width: var(--barWidth);
-    height: 100vh;
-    box-shadow: 0 0 4px 0 var(--shadow);
+    background-color: var(--black);
+    width: 100vw;
+    height: 6vh;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 4px 0 var(--shadow);
 }
 .nav {
-    margin-top: 75px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 35px;
+    gap: 25px;
+}
+.nav:first-child {
+    margin-left: 3vw;
+}
+.nav:last-child {
+    margin-right: 3vw;
 }
 .bar input {
     display: none;
 }
 .nav label {
-    color: var(--shadow);
+    color: whitesmoke;
     cursor: pointer;
     font-weight: 600;
+    font-size: 25px;
+    transition-duration: 100ms;
+    transition: ease;
+    margin-bottom: -5px;
     
 }
 .nav button {
@@ -32,14 +39,41 @@
     font-weight: 600;
     background-color: transparent;
     border: none;
+    margin-bottom: -5px;
+
 }
 .bar a {
     background-color: transparent;
     color: var(--shadow);
+    font-size: 25px;
+    color: whitesmoke;
+}
+.bar a:hover {
+    color: var(--passive-green);
 }
 
 .bar input[type='radio']:checked + label{
-    color: var(--black);
+    color: var(--passive-green);
     background-color: transparent;
 }
-
+.select:last-child {
+    width: 280px;
+}
+.select {
+    height: 1.4rem;
+    color: var(--white);
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    margin: 1.4rem 0 1.4rem 0;
+    background-color: transparent;
+    border: none;
+}
+.select:first-child {
+    background-color: var(--whitesmoke);
+    color: var(--black);
+    text-align: center;
+    width: 90px;
+    border-radius: 10px;
+}
+  

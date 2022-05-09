@@ -1,7 +1,7 @@
 .dashboard {
-  width: 80vw;
-  height: 95vh;
-  background-color:var(--dashboard-background);
+  width: 95vw;
+  height: 90vh;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -107,7 +107,25 @@ ul > li {
   position: absolute;
   width:50%;
   text-align: center;
-  top:calc(300px/2 - 30px);
-  left:25%; 
+  top:calc((100% - 40px) / 2);
+  left: 25%; 
   font-size: 40px;
+  font-weight: bold;
+}
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 1s;
+  transition-delay: 0.05s;
+}
+
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 0.05ы;
+  
 }

@@ -13,12 +13,3 @@
 .selectWrapper:hover {
   box-shadow: 0 0 8px 0 var(--shadow);
 }
-.select {
-  height: 1.4rem;
-  width: 10rem;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  margin: 1.4rem 0 1.4rem 0;
-}

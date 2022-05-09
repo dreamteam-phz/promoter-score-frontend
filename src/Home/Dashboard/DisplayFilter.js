@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "./DisplayFilter.module.css";
 import axios from "axios";
 
-import Date from "../../components/datePicker/Date";
+// import Date from "../../components/datePicker/Date";
 
 const DisplayFilter = (props) => {
   const dashboard = useSelector((state) => state.dashboard); // for testing
@@ -26,13 +26,12 @@ const DisplayFilter = (props) => {
       .get(URL_SURVEY_API)
       .then((response) => {
         const data = response.data;
-        console.log(data.name);
         setSelectSurvey(data);
       })
       .catch((error) => console.log(error.message));
   }, []);
-  console.log(selectSurvey);
-  console.log(selectSurvey.map((item) => item.name)); // to extract the survey name
+  // console.log(selectSurvey);
+  // console.log(selectSurvey.map((item) => item.name)); // to extract the survey name
   const filterChangeHandler = (event) => {
     dispatch({
       type: "DASHBOARD",
@@ -40,26 +39,15 @@ const DisplayFilter = (props) => {
     });
   };
   const filterChangeHandlerSurvey = (event) => {
+    dispatch({ type: "LOADED", payload: false });
     dispatch({
       type: "DASHBOARD",
-      payload: { selectedSurvey: event.target.value },
+      payload: { selectedSurvey: event.target.value }, 
     });
-    updateResults(event.target.value);
+    props.update(dashboard.data, event.target.value)
+    console.log(dashboard);
   };
-  const updateResults = (surveyID) => {
-    // Adding here an if statement to wrap the survey fetch
 
-    let data = dashboard.response.data.filter(
-      (item) => item.surveyID === surveyID
-    );
-    dispatch({
-      type: "DASHBOARD",
-      payload: { data: data[0].results },
-    });
-    props.update(
-      dashboard.response.data.filter((item) => item.surveyID === surveyID) // Sergei Pleaaaase explain this !! :)
-    );
-  };
 
   return (
     <div className={styles.selectWrapper}>
