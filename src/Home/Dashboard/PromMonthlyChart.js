@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import BarChart from "./BarChart";
+import BarChart from "./Barchart";
 import styles from "./Dashboard.module.css";
 
 
