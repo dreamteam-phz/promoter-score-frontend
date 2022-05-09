@@ -4,10 +4,9 @@ import styles from "./Create.module.css";
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
-import Table from "../components/table/Table";
 import {CSSTransition} from 'react-transition-group'; // ES6
 import "../animation.css";
-
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 export default function Create() {
   const [data, setData] = useState({ name:"",question: "", comment: true });
@@ -17,6 +16,7 @@ export default function Create() {
   const [selectSurvey, setSelectSurvey] = useState([]);
   const [display, setDisplay] = useState(false);
 
+  const [clipboard,setClipboard] = useState('');
 
   useEffect (() => {
     setDisplay(true);
@@ -28,6 +28,7 @@ export default function Create() {
       .catch((error)=> console.log(error.message));
   },[]);
 
+  
   const handleToClose = (event, reason) => {
     if ("clickaway" === reason) return;
     setOpen(false);
@@ -39,18 +40,24 @@ export default function Create() {
     event.preventDefault();
     
     axios
-      .post("http://localhost:4000/api/newsurvey", {
-        name: data.name,
-        question: data.question,
-        comment: true,
-      })
-      .then((res) => {
-        console.log(res);
-        setLinkToForm(res.data._id);
-      });
+    .post("http://localhost:4000/api/newsurvey", {
+      name: data.name,
+      question: data.question,
+      comment: true,
+    })
+    .then((res) => {
+      console.log(res);
+      setLinkToForm(res.data._id);
+    });
     setData({ question: "", name: "" });
     setOpen(true);
   };
+  
+  const copyHandler = (event) => {
+    setClipboard(`<iframe src="http://localhost:3000/${linkToForm}" frameborder="0" width="100%" height="500px" ></iframe>`);
+    console.log(clipboard);
+  };
+
   if (linkToForm === "") {
     return (
       <CSSTransition in={display} timeout={1000} classNames="my-node">
@@ -97,10 +104,6 @@ export default function Create() {
             />
           </div>
         </div>
-        <div className={styles.data}>
-          {/* <h1>Previous surveys</h1>
-          {selectSurvey.length > 0 ? <Table selectSurvey={selectSurvey}/> : <span><p>No surveys to display.</p></span>} */}
-        </div>
       </div>
       </CSSTransition>
     );
@@ -108,22 +111,35 @@ export default function Create() {
     return (
       <CSSTransition in={display} timeout={0} classNames="my-node">
       <div className={styles.formLink}>
-        <label>URL of the form:</label>
-        <span className={styles.span}>{`http://localhost:3000/${linkToForm}`}</span>
-        <button className={styles.button}>
-          <a href={`http://localhost:3000/${linkToForm}`} target="_blank" rel="noreferrer">Link to the form</a>
-        </button>
-        <label>iframe html code:</label>
-        <span
-          className={styles.span}
-          
-        >{`<iframe src="http://localhost:3000/${linkToForm}" frameborder="0" width="100%" height="500px" ></iframe>`}</span>
-        <button className={styles.button}>
-          Copy html to clipboard
-        </button>
-        {/* <button className={styles.button} onClick={ () => setLinkToForm('')}>
+        <div className={styles.formLink}>
+          <label>URL of the form:</label>
+          <span className={styles.span}>{`http://localhost:3000/${linkToForm}`}</span>
+          <button className={styles.button}>
+            <a href={`http://localhost:3000/${linkToForm}`} target="_blank" rel="noreferrer">Link to the form</a>
+          </button>
+        </div>
+        <div className={styles.formLink}>
+          <label>iframe html code:</label>
+          <span
+            className={styles.span}
+          >{`<iframe 
+                src="http://localhost:3000/${linkToForm}" 
+                frameborder="0" 
+                width="100%" 
+                height="500px" 
+              ></iframe>`}</span>
+          <CopyToClipboard text={clipboard}>
+            <button className={styles.button} onClick={copyHandler}>
+              Copy html to clipboard
+            </button>
+          </CopyToClipboard>
+        </div>
+        <div>
+        <button className={styles.button} onClick={ () => setLinkToForm('')}>
           Previous
-        </button> */}
+        </button>
+
+        </div>
       </div>
       </CSSTransition>
     );
