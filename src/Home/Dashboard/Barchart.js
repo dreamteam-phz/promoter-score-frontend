@@ -7,9 +7,8 @@ import styles from './Dashboard.module.css';
 
 const BarChart = () => {
   const data = useSelector(state => state.dashboard.data);
-  const scoreData = useSelector(state => state.dashboard.scoreData)
+  const scoreData = useSelector(state => state.dashboard.scoreData);
 
-  console.log("whaat", scoreData, "and data,", data);
 
 
   // playing with dates 
@@ -19,6 +18,7 @@ const BarChart = () => {
   const months = days.map(date => new Date(date).getMonth());
   console.log("months", months);
   console.log("dates: ", modifiedDates);
+
 
   const state = {
     // x-axis labels:
@@ -73,14 +73,17 @@ const BarChart = () => {
   };
 
   return (
-    <Bar
-      data={state}
-    // options={{
-    //   x: {
-    //     type: "date"
-    //   }
-    // }}
-    />
+    <>
+
+      <Bar
+        data={state}
+      // options={{
+      //   x: {
+      //     type: "date"
+      //   }
+      // }}
+      />
+    </>
   )
 }
 export default BarChart; 

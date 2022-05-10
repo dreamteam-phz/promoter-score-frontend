@@ -7,6 +7,11 @@ const PromoterScore = () => {
   const period = useSelector(state => state.dashboard.selectedMonth)
   const scores = data.map((item) => item.score);
 
+  // can be deleted
+  const startingPoint = useSelector(state => state.dashboard.startingDate);
+  const endingPoint = useSelector(state => state.dashboard.endingDate);
+
+
   // let prom = 0;
   // let det = 0;
   // let pass = 0;
@@ -21,6 +26,10 @@ const PromoterScore = () => {
   return (
     <div className={styles.panel}>
       <div className={styles.resultWraper}>
+        <ul className="someList"></ul>
+        <li key={startingPoint.toString()}>start {startingPoint.toString()}</li>
+        <li key={endingPoint.toString()}>end {endingPoint.toString()}</li>
+
         {period === "1" && <h5>Promoter Score last month</h5>}
         {period !== "1" && <h5>Promoter Score last {period} days</h5>}
         <span>{scoreData.scores.length > 0 ? scoreData.promScore : <p>No data to display</p>}</span>

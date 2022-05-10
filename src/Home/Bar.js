@@ -21,6 +21,10 @@ export default function Bar() {
   const period = useSelector((state) => state.dashboard.selectedMonth);
   const dispatch = useDispatch();
 
+  // can be deleted
+  const startingPoint = useSelector(state => state.dashboard.startingDate);
+  const endingPoint = useSelector(state => state.dashboard.endingDate);
+
   // setting date to first of 6 months ago
   let startingDate = new Date();
   startingDate.setMonth(startingDate.getMonth() - 6);
@@ -48,9 +52,24 @@ export default function Bar() {
         setSelectSurvey(data);
       })
       .catch((error) => console.log(error.message));
+    dispatch({
+      type: 'DASHBOARD',
+      payload: {
+        startingDate: startDate, endingDate: endDate
+      }
+    })
+
   }, []);
   // console.log(selectSurvey);
   // console.log(selectSurvey.map((item) => item.name)); // to extract the survey name
+
+  // compare datestamps as .toDateString
+  // useEffect(() => {
+  //   dispatch({
+  //     type: 'DASHBOARD',
+  //     payload: { startingDate: startDate.toDateString, endingDate: endDate.toDateString }
+  //   })
+  // }), [startDate, endDate];
   const filterChangeHandler = (event) => {
     dispatch({
       type: "DASHBOARD",
@@ -64,7 +83,7 @@ export default function Bar() {
       payload: { surveyID: event.target.value }
     });
     //   props.update(dashboard.data, event.target.value)
-    console.log(dashboard);
+    console.log("dashboard", dashboard);
   };
 
   const labelHandler = (event) => {
@@ -72,6 +91,24 @@ export default function Bar() {
       type: 'LOCATION',
       payload: event.target.value
     });
+  }
+  const startDateHandler = (event) => {
+    setStartDate(event);
+    dispatch({
+      type: 'DASHBOARD',
+      payload: {
+        startingDate: event
+      }
+    })
+  }
+  const endDateHandler = (event) => {
+    setEndDate(event);
+    dispatch({
+      type: 'DASHBOARD',
+      payload: {
+        endingDate: event
+      }
+    })
   }
 
   return (
@@ -89,9 +126,13 @@ export default function Bar() {
           <select name="selectedSurvey" onChange={filterChangeHandlerSurvey} className={styles.select}>
             {selectSurvey.map((survey) => <option key={survey._id} value={survey._id}>{survey.name} ({survey.question}) </option>)}
           </select>}
-        <DatePicker id="date" selected={startDate} dateFormat="dd/MM/yyyy"
-          onChange={(date) => setStartDate(date)} />
-        <DatePicker id="date" selected={endDate} dateFormat="dd/MM/yyyy" onChange={(date) => setStartDate(date)} />
+        {(location === 'dashboard') &&
+          <DatePicker key={startDate.toString()} id="date" selected={startDate} dateFormat="dd/MM/yyyy"
+            onChange={startDateHandler} />}
+        {(location === 'dashboard') &&
+          <DatePicker key={endDate.toString()} id="date" selected={endDate} dateFormat="dd/MM/yyyy" maxDate={new Date()} onChange={endDateHandler} />
+        }
+
       </div>
       <div className={styles.nav}>        {/* <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} /> */}
 
@@ -101,6 +142,6 @@ export default function Bar() {
 
         <button><Link to='/'><IoMdExit /></Link></button>
       </div>
-    </div>
+    </div >
   )
 }
