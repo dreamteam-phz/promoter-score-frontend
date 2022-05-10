@@ -37,12 +37,12 @@ export default function Bar() {
   const [endDate, setEndDate] = useState(new Date());
 
   // for monthly time selector 
-  // const options = [
-  //   { label: "1 month", value: "30" },
-  //   { label: "3 months", value: "90" },
-  //   { label: "6 months", value: "180" },
-  //   { label: "1 year", value: "365" }
-  // ];
+  const options = [
+    { label: "1 month", value: "30" },
+    { label: "3 months", value: "90" },
+    { label: "6 months", value: "180" },
+    { label: "1 year", value: "365" }
+  ];
 
   useEffect(() => {
     axios
@@ -134,11 +134,15 @@ export default function Bar() {
         }
 
       </div>
-      <div className={styles.nav}>        {/* <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} /> */}
+      <div className={styles.nav}>
+        {(location === 'dashboard') &&
+          <select name="selectedMonth" value={period} onChange={filterChangeHandler} className={styles.select}>
+            {options.map(option => <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+            )}
+          </select>}
 
-
-        {/* </div>
-            <div className={styles.nav}> */}
 
         <button><Link to='/'><IoMdExit /></Link></button>
       </div>
