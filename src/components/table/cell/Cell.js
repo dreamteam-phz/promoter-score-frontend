@@ -1,7 +1,7 @@
-const Cell = ({key, name, question, link}) => {
+const Cell = ({key, name, question, url, link}) => {
     return (
         <td>
-          {key} {name} {question} {link}
+          {key} {name} {question} {url} {link}
         </td>
     );
 };
