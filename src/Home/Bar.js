@@ -60,16 +60,7 @@ export default function Bar() {
     })
 
   }, []);
-  // console.log(selectSurvey);
-  // console.log(selectSurvey.map((item) => item.name)); // to extract the survey name
 
-  // compare datestamps as .toDateString
-  // useEffect(() => {
-  //   dispatch({
-  //     type: 'DASHBOARD',
-  //     payload: { startingDate: startDate.toDateString, endingDate: endDate.toDateString }
-  //   })
-  // }), [startDate, endDate];
   const filterChangeHandler = (event) => {
     dispatch({
       type: "DASHBOARD",
@@ -127,10 +118,27 @@ export default function Bar() {
             {selectSurvey.map((survey) => <option key={survey._id} value={survey._id}>{survey.name} ({survey.question}) </option>)}
           </select>}
         {(location === 'dashboard') &&
-          <DatePicker key={startDate.toString()} id="date" selected={startDate} dateFormat="dd/MM/yyyy"
-            onChange={startDateHandler} />}
+          <DatePicker
+            id="startDate"
+            selected={startDate}
+            dateFormat="dd/MM/yyyy"
+            maxDate={new Date()}
+            onChange={startDateHandler}
+            showYearDropdown
+            scrollableMonthYearDropdown />}
         {(location === 'dashboard') &&
-          <DatePicker key={endDate.toString()} id="date" selected={endDate} dateFormat="dd/MM/yyyy" maxDate={new Date()} onChange={endDateHandler} />
+          <DatePicker
+            id="endDate"
+            selected={endDate}
+            dateFormat="dd/MM/yyyy"
+            minDate={startDate}
+            maxDate={new Date()}
+            onChange={endDateHandler}
+            showYearDropdown
+            showMonthDropdown
+            scrollableMonthYearDropdown
+            showWeekNumbers
+          />
         }
 
       </div>

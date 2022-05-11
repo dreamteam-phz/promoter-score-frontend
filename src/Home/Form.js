@@ -33,7 +33,8 @@ const Form = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
+  // const ifr = parent.document.getElementById("_someIframe");
+  // ifr.parentNode.removeChild(ifr);
 
   const getData = () => {
     axios
@@ -115,7 +116,7 @@ const Form = () => {
             />
           )}
           <div className={styles.buttonArea}>
-            <button className={styles.cancelButton}>CANCEL</button>
+            <button className={styles.cancelButton} >CANCEL</button>
             <button onClick={submitHandler} className={styles.button} disabled={!submittable}>
               Submit
             </button>

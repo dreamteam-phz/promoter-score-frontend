@@ -8,21 +8,32 @@ import styles from './Dashboard.module.css';
 const BarChart = () => {
   const data = useSelector(state => state.dashboard.data);
   const scoreData = useSelector(state => state.dashboard.scoreData);
+  const startingDate = useSelector(state => state.dashboard.startingDate)
+  const endingDate = useSelector(state => state.dashboard.endingDate)
+  const preSelectedData = useSelector(state => state.dashboard.filteredData)
 
 
+  // selecting data in correct datrange
+  const dataToShow = preSelectedData.filter(item => {
+    return new Date(item.date) >= startingDate && new Date(item.date) <= endingDate;
+  })
 
-  // playing with dates 
-  const days = data.map((item) => item.date);
+  const options = { year: 'numeric', month: 'short', day: 'numeric' }
+  //     return new Date(date).toLocaleDateString('en-GB', options)
+
+  const days = dataToShow.map((item) => new Date(item).toLocaleDateString('en-GB', options));
   console.log("days: ", days);
   const modifiedDates = days.map(date => new Date(date).toLocaleDateString('uk', { timeZone: 'Europe/Helsinki' }));
-  const months = days.map(date => new Date(date).getMonth());
-  console.log("months", months);
+  console.log("filtered data", preSelectedData);
+  console.log('toShow', dataToShow)
+  const promotersDataset = dataToShow.map((item) => item.promoter);
+
   console.log("dates: ", modifiedDates);
 
 
   const state = {
     // x-axis labels:
-    labels: [modifiedDates],
+    labels: [{ days }],
     // array of objects, can show several datasets
     datasets: [
       {
@@ -32,8 +43,7 @@ const BarChart = () => {
         //borderColor: 
         //backgroundColor: single or array
         // one-dimensonal array
-        data:
-          [100, 200, 300, 200, 100],
+
         backgroundColor: ["#1D4E89"],
       },
       {
@@ -54,7 +64,7 @@ const BarChart = () => {
         //backgroundColor: single or array
         // one-dimensonal array
         data:
-          [10, 30, 500, 211, 111],
+          [35, 30, 500, 211, 111],
 
         backgroundColor: ["#7DCFB6"],
       },

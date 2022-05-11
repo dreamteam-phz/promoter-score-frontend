@@ -7,7 +7,8 @@ const initialState = {
     scoreData: {},
     surveyID: 0,
     startingDate: "",
-    endingDate: ""
+    endingDate: "",
+    filteredData: []
   },
   loaded: false,
   selectedSurvey: ""

@@ -9,7 +9,7 @@ import styles from './Dashboard.module.css';
 const RespondersChart = () => {
   const scoreData = useSelector(state => state.dashboard.scoreData);
   const labels = ["Promoters", "Detractors", "Passives", "some"]
-
+  console.log("scoreData is", scoreData)
   const datasets = [
     {
       data: [scoreData.promoters, scoreData.detractors, scoreData.passives],
