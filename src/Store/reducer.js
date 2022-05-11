@@ -5,10 +5,14 @@ const initialState = {
     selectedMonth: 180,
     data: [],
     scoreData: {},
-    surveyID: 0
+    surveyID: 0,
+    startingDate: "",
+    endingDate: "",
+    filteredData: []
   },
   loaded: false,
   selectedSurvey: ""
+
 };
 
 const reducer = (state = initialState, action) => {

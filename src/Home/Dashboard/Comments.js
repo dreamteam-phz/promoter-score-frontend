@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Comments.module.css";
 
 const Comments = () => {
   const data = useSelector((state) => state.dashboard.results);
   const whosComments = useSelector((state) => state.dashboard.comments);
-
+  const dispatch = useDispatch();
   // let filteredData = data.filter((item) => item.comment.length > 0);
 
   const filterComments = (data, whosComments) => {
@@ -28,11 +28,18 @@ const Comments = () => {
   useEffect(() => {
     setFilteredData(filterComments(data, whosComments));
   }, [whosComments]);
+
   const [filteredData, setFilteredData] = useState(
     filterComments(data, whosComments)
   );
+  console.log('filtteri', filteredData);
+
   useEffect(() => {
     setDataToDisplay(filteredData.reverse());
+    dispatch({
+      type: "DASHBOARD",
+      payload: { filteredData: filteredData }
+    });
   }, [filteredData]);
 
   const [dataToDisplay, setDataToDisplay] = useState(filteredData.reverse());
