@@ -1,3 +1,7 @@
+const date = new Date();
+date.setMonth(date.getMonth() - 6);
+date.setDate(1);
+
 const initialState = {
   location: "dashboard",
   dashboard: {
@@ -6,8 +10,8 @@ const initialState = {
     data: [],
     scoreData: {},
     surveyID: 0,
-    startingDate: "",
-    endingDate: "",
+    startDate: date,
+    endDate: new Date(),
     filteredData: []
   },
   loaded: false,
