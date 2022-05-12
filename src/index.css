@@ -85,3 +85,7 @@ button {
   opacity: 0;
   transition: opacity 0.05s;
 }
+.react-datepicker__day--selected{
+
+  background-color: var(--green-accent) !important;
+}

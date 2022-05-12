@@ -19,6 +19,7 @@ const Form = () => {
       "Would you recommend PHZ Full Stack for your friends as an employer?",
     comment: true,
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const params = useParams();
 
@@ -33,15 +34,30 @@ const Form = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const ifr = parent.document.getElementById("_someIframe");
-  // ifr.parentNode.removeChild(ifr);
-
   const getData = () => {
+    setIsLoading(true);
     axios
       .get("http://localhost:4000/api/surveys/" + params.id)
       .then((response) => {
-        console.log(response.data);
-        setSurvey(response.data);
+        console.log('getData', response);
+        if (response.status === 200) {
+          setSurvey(response.data);
+          setIsLoading(false)
+        }
+        else {
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 1000);
+          // error message "something wrong" here 
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 1000);
+          // error message "no Database connection" here 
+        }
       });
   };
 
@@ -49,29 +65,54 @@ const Form = () => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
   const scoreHandler = (event) => {
+    console.log(event, "in scoreHandler")
     setForm({ ...form, [event.target.name]: +event.target.value });
     setSubmittable(true);
   };
   const labelsToDisplay = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
-    return <Label key={item} id={item} change={scoreHandler} content={item} />;
+    return <Label key={item} id={item} change={scoreHandler} content={form.score} />;
   });
+
+  const createError = () => {
+    let message = document.createElement('p');
+    message.textContent = "you fucked up, come back again later";
+    return message;
+  }
+
   // check console when pressing submit form
   const submitHandler = (event) => {
+    setIsLoading(true);
     event.preventDefault();
     axios
       .patch("http://localhost:4000/api/update/" + params.id, {
         results: [form],
       })
       .then((response) => {
-        console.log(response);
+        console.log(response, response.status);
+        if (response.status === 200) {
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 1000);
+          setForm({ score: "", comment: "" });
+          accessSetter();
+          setOpen(true); // snackbar 
+        }
+        else {
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 1000);
+          // error message "something went wrong" not able to save 
+        }
       });
-    setForm({ score: "", comment: "" });
-    setOpen(true);
-    accessSetter();
   };
+  // when pressing clear it should clear the selections
+  const clearHandler = (event) => {
+    setForm({ score: "", comment: "" });
+  };
+
   const accessSetter = () => {
     let now = new Date();
-    let minutes = 2;
+    let minutes = 1;
     now.setTime(now.getTime() + minutes * 60 * 1000);
     document.cookie = `name=${params.id}; expires=${now.toUTCString()};`;
   };
@@ -82,72 +123,75 @@ const Form = () => {
     }
   };
 
-  return (
-    <>
-      {!accessable && <AccessDenied />}
-      {accessable && (
-        <div className={styles.main + ' ' + styles.desktop}>
-
-          <div className={styles.question}>
-            <p>
-              {survey.question}
-              <span> *</span>
-            </p>
-          </div>
-
-          <div className={styles.tool}>{labelsToDisplay}</div>
-          <div className={styles.describers}>
-            <p>not likely at all</p>
-            <p>extreamly likely</p>
-          </div>
-          {survey.comment && (
-            <div className={styles.precomment}>
-              <p>Why / Why not? </p>
+  if (!accessable) {
+    return <AccessDenied />
+  }
+  else {
+    if (isLoading) {
+      return <Loader />
+    } else {
+      return (
+        <>
+          <div className={styles.main + ' ' + styles.desktop}>
+            <div className={styles.question}>
+              <p>
+                {survey.question}
+                <span> *</span>
+              </p>
             </div>
-          )}
-          {survey.comment && (
-            <textarea
-              onChange={textAreaHandler}
-              name="comment"
-              rows="6"
-              cols="30"
-              placeholder="type your message here"
-              value={form.comment}
+            <div className={styles.tool}>{labelsToDisplay}</div>
+            <div className={styles.describers}>
+              <p>not likely at all</p>
+              <p>extreamly likely</p>
+            </div>
+            {survey.comment && (
+              <div className={styles.precomment}>
+                <p>Why / Why not? </p>
+              </div>
+            )}
+            {survey.comment && (
+              <textarea
+                onChange={textAreaHandler}
+                name="comment"
+                rows="6"
+                cols="30"
+                placeholder="type your message here"
+                value={form.comment}
+              />
+            )}
+            <div className={styles.buttonArea}>
+              <button onClick={clearHandler} className={styles.cancelButton} >CLEAR</button>
+              <button onClick={submitHandler} className={styles.button} disabled={!submittable}>
+                Submit
+              </button>
+            </div>
+            <Snackbar
+              anchorOrigin={{
+                horizontal: "center",
+                vertical: "top",
+              }}
+              open={open}
+              autoHideDuration={3000}
+              message="Thank you for your Feedback! We appreciate your time!"
+              onClose={handleToClose}
+              action={
+                <React.Fragment>
+                  <IconButton
+                    size="small"
+                    aria-label="close"
+                    color="inherit"
+                    onClick={handleToClose}
+                  >
+                    <CloseIcon fontSize="small" />
+                  </IconButton>
+                </React.Fragment>
+              }
             />
-          )}
-          <div className={styles.buttonArea}>
-            <button className={styles.cancelButton} >CANCEL</button>
-            <button onClick={submitHandler} className={styles.button} disabled={!submittable}>
-              Submit
-            </button>
-
           </div>
-          <Snackbar
-            anchorOrigin={{
-              horizontal: "center",
-              vertical: "top",
-            }}
-            open={open}
-            autoHideDuration={3000}
-            message="Thank you for your Feedback! We appreciate your time!"
-            onClose={handleToClose}
-            action={
-              <React.Fragment>
-                <IconButton
-                  size="small"
-                  aria-label="close"
-                  color="inherit"
-                  onClick={handleToClose}
-                >
-                  <CloseIcon fontSize="small" />
-                </IconButton>
-              </React.Fragment>
-            }
-          />
-        </div>
-      )}
-    </>
-  );
+        </>
+      )
+    };
+  }
 };
 
 export default Form;
