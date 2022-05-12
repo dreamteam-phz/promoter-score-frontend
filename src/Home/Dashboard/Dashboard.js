@@ -3,23 +3,24 @@ import React, { useEffect } from "react";
 import styles from "./Dashboard.module.css";
 import DisplayFilter from "./DisplayFilter";
 import PromoterScore from "./PromoterScore";
-import PromMonthlyChart from "./PromMonthlyChart";
+import Graph from "./Graph";
 import Comments from "./Comments";
-import PromoterScoreChart from "./PromoterScoreChart";
+import Pie from "./Pie";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/loader/Loader";
+import { dateHelper } from "../../helpers/DateHelper";
 
 export default function Dashboard() {
   const loaded = useSelector((state) => state.loaded);
   const dashboard = useSelector((state) => state.dashboard); // for testing
   const surveyID = useSelector((state) => state.dashboard.surveyID);
   const dispatch = useDispatch();
-  // console.log(dashboard); // for testing
+  const period = Math.round((dashboard.endDate - dashboard.startDate) / 86400000); // how many days
   useEffect(() => {
     getResults();
-  }, [surveyID]);
+  }, [surveyID, period]);
   
-
+  // console.log(dashboard.results)
   // get data
   const getResults = () => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
@@ -36,20 +37,23 @@ export default function Dashboard() {
       let index = arrayOfObjects.findIndex(item => item.surveyID === surveyID)
       results = arrayOfObjects[index].results;
     }
-    dispatch({
-          type: "DASHBOARD",
-          payload: { results: results },
-    });
+    console.log(results)
     let prom = 0;
     let det = 0;
     let pass = 0;
-    const scores = results.map((item) => item.score);
+    const filteredResults = results.filter((result) => dateHelper(result.date, period));
+    console.log(filteredResults)
+    dispatch({
+          type: "DASHBOARD",
+          payload: { results: filteredResults },
+    });
+    const scores = filteredResults.map((item) => item.score);
     for (let score of scores) {
       if (score >= 9) prom++;
       else if (score <= 6) det++;
     }
-    pass = results.length - (prom + det);
-    const result = ((prom - det) / results.length) * 100;
+    pass = filteredResults.length - (prom + det);
+    const result = ((prom - det) / filteredResults.length) * 100;
     const promScore = Math.floor(result);
     dispatch({
       type: "DASHBOARD",
@@ -76,10 +80,19 @@ export default function Dashboard() {
       {/* <DisplayFilter update={setData} /> */}
       {loaded &&
         <div className={styles.data}>
-          <PromoterScore />
-          <PromMonthlyChart />
-          <PromoterScoreChart />
-          <Comments />
+          <div className={styles.box}>
+            <Pie />
+            <Pie />
+            <Pie />
+          </div>
+          <div className={styles.box}>
+            <Graph />
+            <Comments />
+          </div>
+
+          
+          
+          
         </div>}
         {!loaded && <Loader/>}
     </div>

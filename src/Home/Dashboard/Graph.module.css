@@ -1,0 +1,21 @@
+.graph {
+  width: 60vw;
+  height: calc(39vh + 12.5px);
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+h2 {
+  background-color: var(--black);
+  height: 35px;
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.Bar {
+  width: 60vw;
+  height: calc(35vh + 12.5px);
+}

@@ -21,21 +21,8 @@ export default function Bar() {
   const period = useSelector((state) => state.dashboard.selectedMonth);
   const dispatch = useDispatch();
 
-  // can be deleted
-  const startingPoint = useSelector(state => state.dashboard.startingDate);
-  const endingPoint = useSelector(state => state.dashboard.endingDate);
-
-  // setting date to first of 6 months ago
-  let startingDate = new Date();
-  startingDate.setMonth(startingDate.getMonth() - 6);
-  startingDate.setDate(1);
-
-
   const URL_SURVEY_API = "http://localhost:4000/api/surveys";
   const [selectSurvey, setSelectSurvey] = useState([]);
-  const [startDate, setStartDate] = useState(startingDate);
-  const [endDate, setEndDate] = useState(new Date());
-
   // for monthly time selector 
   const options = [
     { label: "1 month", value: "30" },
@@ -48,16 +35,12 @@ export default function Bar() {
     axios
       .get(URL_SURVEY_API)
       .then((response) => {
-        const data = response.data;
+        const data = response.data.sort((a, b) => a.name.localeCompare(b.name))
+        console.log(data);
+
         setSelectSurvey(data);
       })
       .catch((error) => console.log(error.message));
-    dispatch({
-      type: 'DASHBOARD',
-      payload: {
-        startingDate: startDate, endingDate: endDate
-      }
-    })
 
   }, []);
 
@@ -83,22 +66,16 @@ export default function Bar() {
       payload: event.target.value
     });
   }
-  const startDateHandler = (event) => {
-    setStartDate(event);
+  const startDateHandler = (date) => {
     dispatch({
-      type: 'DASHBOARD',
-      payload: {
-        startingDate: event
-      }
+      type: "DASHBOARD",
+      payload: { startDate: date }
     })
   }
-  const endDateHandler = (event) => {
-    setEndDate(event);
+  const endDateHandler = (date) => {
     dispatch({
-      type: 'DASHBOARD',
-      payload: {
-        endingDate: event
-      }
+      type: "DASHBOARD",
+      payload: { endDate: date }
     })
   }
 
@@ -115,25 +92,25 @@ export default function Bar() {
         <Label id='instructions' name='location' content={<FiHelpCircle />} change={labelHandler} />
         {(location === 'dashboard') &&
           <select name="selectedSurvey" onChange={filterChangeHandlerSurvey} className={styles.select}>
-            {selectSurvey.map((survey) => <option key={survey._id} value={survey._id}>{survey.name} ({survey.question}) </option>)}
+            {selectSurvey.map((survey) => <option key={survey._id} value={survey._id}>{survey.name}</option>)}
           </select>}
         {(location === 'dashboard') &&
           <DatePicker
             id="startDate"
-            selected={startDate}
+            selected={dashboard.startDate}
             dateFormat="dd/MM/yyyy"
             maxDate={new Date()}
-            onChange={startDateHandler}
+            onSelect={startDateHandler}
             showYearDropdown
             scrollableMonthYearDropdown />}
         {(location === 'dashboard') &&
           <DatePicker
             id="endDate"
-            selected={endDate}
+            selected={dashboard.endDate}
             dateFormat="dd/MM/yyyy"
-            minDate={startDate}
+            minDate={dashboard.startDate}
             maxDate={new Date()}
-            onChange={endDateHandler}
+            onSelect={endDateHandler}
             showYearDropdown
             showMonthDropdown
             scrollableMonthYearDropdown

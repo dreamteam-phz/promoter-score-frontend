@@ -20,14 +20,20 @@ h5 {
 
 .data {
   width: 100%;
-  min-height: 620px;
+  height: 100%;
   background-color: transparent;
   border-radius: 5px;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 25px;
-  justify-content: space-around;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  gap: 25px;
+}
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 25px;
 }
 .panel {
   width: 100%;
