@@ -4,29 +4,22 @@ import Label from "../components/form/Label";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Loader from "../components/loader/Loader";
-import IconButton from "@material-ui/core/IconButton";
-import Snackbar from "@material-ui/core/Snackbar";
-import CloseIcon from "@material-ui/icons/Close";
 import AccessDenied from "./AccessDenied";
+import EndMessage from "./EndMesage";
 
 const Form = () => {
   const [accessable, setAccessable] = useState(true);
   const [submittable, setSubmittable] = useState(false);
   const [form, setForm] = useState({ score: "", comment: "" });
-  const [open, setOpen] = useState(false);
   const [survey, setSurvey] = useState({
     question:
       "Would you recommend PHZ Full Stack for your friends as an employer?",
     comment: true,
   });
-  const [isLoading, setIsLoading] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
   const params = useParams();
 
-  const handleToClose = (event, reason) => {
-    if ("clickaway" === reason) return;
-    setOpen(false);
-  };
 
   useEffect(() => {
     cookieChecker();
@@ -35,7 +28,7 @@ const Form = () => {
   }, []);
 
   const getData = () => {
-    setIsLoading(true);
+    //setIsLoading(true);
     axios
       .get("http://localhost:4000/api/surveys/" + params.id)
       .then((response) => {
@@ -81,7 +74,7 @@ const Form = () => {
 
   // check console when pressing submit form
   const submitHandler = (event) => {
-    setIsLoading(true);
+    //setIsLoading(true);
     event.preventDefault();
     axios
       .patch("http://localhost:4000/api/update/" + params.id, {
@@ -90,12 +83,13 @@ const Form = () => {
       .then((response) => {
         console.log(response, response.status);
         if (response.status === 200) {
-          setTimeout(() => {
-            setIsLoading(false)
-          }, 1000);
-          setForm({ score: "", comment: "" });
+          setIsLoading(false);
+          // setForm({ score: "", comment: "" });
           accessSetter();
-          setOpen(true); // snackbar 
+          // 
+          setTimeout(() => {
+            setShowMessage(true);
+          }, 400);
         }
         else {
           setTimeout(() => {
@@ -123,13 +117,18 @@ const Form = () => {
     }
   };
 
+
   if (!accessable) {
     return <AccessDenied />
   }
   else {
     if (isLoading) {
       return <Loader />
-    } else {
+    }
+    else if (showMessage) {
+      return <EndMessage />
+    }
+    else {
       return (
         <>
           <div className={styles.main + ' ' + styles.desktop}>
@@ -165,28 +164,6 @@ const Form = () => {
                 Submit
               </button>
             </div>
-            <Snackbar
-              anchorOrigin={{
-                horizontal: "center",
-                vertical: "top",
-              }}
-              open={open}
-              autoHideDuration={3000}
-              message="Thank you for your Feedback! We appreciate your time!"
-              onClose={handleToClose}
-              action={
-                <React.Fragment>
-                  <IconButton
-                    size="small"
-                    aria-label="close"
-                    color="inherit"
-                    onClick={handleToClose}
-                  >
-                    <CloseIcon fontSize="small" />
-                  </IconButton>
-                </React.Fragment>
-              }
-            />
           </div>
         </>
       )
