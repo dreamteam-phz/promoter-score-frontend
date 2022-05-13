@@ -11,10 +11,15 @@
   
   .data {
       width: 80%;
-      min-height: 200px;
+      /* min-height: 200px; */
       background-color: transparent;
       border-radius: 5px;
       display: flex;
       flex-direction: column;
       gap: 15px;
+      padding-bottom: 50px;
     }
+
+  img {
+    width: 70%;
+}
