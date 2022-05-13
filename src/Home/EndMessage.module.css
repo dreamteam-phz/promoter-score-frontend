@@ -1,0 +1,63 @@
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background: var(--text-white);
+    gap: 25px;
+  }
+.valueWrapper{
+    display:flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid var(  --effect-PHZorane); */
+    border-radius: 10px;
+    height: 50vh; 
+    width: 70vw;
+}
+.value {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    background: var(--background-white);
+    border: 8px solid rgba(125,207,182,.6);
+    border-radius: 50%; 
+  }
+
+
+   .CheckedIcon{
+    
+    animation: appear 1.2s ease-in-out;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
+    opacity:0%;     
+    
+   }
+    @keyframes appear {
+        0% {
+        opacity: 0;
+            }
+        100% {
+            opacity: 1;
+            }
+        }
+.valueMessage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:  center;
+    height: 20vh;
+    gap: 6px;
+}
+.valueMessage .message{
+    font-size: 2em;
+    font-weight: bolder;
+    color: var(--black); 
+    text-align: center;
+  }
