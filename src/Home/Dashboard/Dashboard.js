@@ -24,7 +24,7 @@ export default function Dashboard() {
   // get data
   const getResults = () => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
-      console.log(response.data)
+      // console.log(response.data)
       dispatch({ type: 'DASHBOARD', payload: { data: response.data} })
       setData(response.data, surveyID);
     });
@@ -37,12 +37,12 @@ export default function Dashboard() {
       let index = arrayOfObjects.findIndex(item => item.surveyID === surveyID)
       results = arrayOfObjects[index].results;
     }
-    console.log(results)
+    // console.log(results)
     let prom = 0;
     let det = 0;
     let pass = 0;
     const filteredResults = results.filter((result) => dateHelper(result.date, period));
-    console.log(filteredResults)
+    // console.log(filteredResults)
     dispatch({
           type: "DASHBOARD",
           payload: { results: filteredResults },

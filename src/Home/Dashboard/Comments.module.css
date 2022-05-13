@@ -1,5 +1,63 @@
 .Comments {
   width: 60vw;
   height: calc(39vh + 12.5px);
-  background-color: yellowgreen;
+  background-color: transparent;
+}
+.commentsContainer {
+  height: calc(39vh + 12.5px - 35px);
+  width: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 5px;
+}
+.comment {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.date, .score, .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(((39vh + 12.5px - 35px) / 5) - 6px);
+  height: 100%;
+  background-color: var(--comment);
+  border-radius: 3px;
+}
+.date {
+  width: 20%;
+}
+.score {
+  width: 10%;
+}
+.content {
+  width: 70%;
+  justify-content: flex-start;
+  padding: 10px;
+}
+.tableHeader {
+  height: 35px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--black);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.tableHeader .date, .tableHeader .score, .tableHeader .content {
+  height: 35px;
+  background-color: transparent;
+  color: var(--white);
+  font-weight: bold;
+  justify-content: center;
+}
+.tableHeader .score {
+  cursor: pointer;
 }
