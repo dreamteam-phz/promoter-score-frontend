@@ -42,10 +42,11 @@ const DisplayFilter = (props) => {
     dispatch({ type: "LOADED", payload: false });
     dispatch({
       type: "DASHBOARD",
-      payload: { selectedSurvey: event.target.value }, 
+      payload: { selectedSurvey: event.target.value },
     });
     props.update(dashboard.data, event.target.value)
     console.log(dashboard);
+
   };
 
 
@@ -63,9 +64,9 @@ const DisplayFilter = (props) => {
         ))}
       </select>
       <select name="selectedMonth" value={period} onChange={filterChangeHandler} className={styles.select}>
-        {options.map(option => 
-          <option 
-            key={option.value} 
+        {options.map(option =>
+          <option
+            key={option.value}
             value={option.value}
           >
             {option.label}

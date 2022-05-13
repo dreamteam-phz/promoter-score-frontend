@@ -1,102 +1,54 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Comment from "./Comment";
 import styles from "./Comments.module.css";
+import { FaSort } from 'react-icons/fa';
+
+
+const convertDate = (date) => {
+  const event = new Date(date);
+  const result = event.getDate().toString() + '.' + (event.getMonth() + 1).toString() + '.' + event.getFullYear().toString();
+  return result;
+}
 
 const Comments = () => {
-  const data = useSelector((state) => state.dashboard.results);
-  const whosComments = useSelector((state) => state.dashboard.comments);
+  const results = useSelector((state) => state.dashboard.results);
+  const resultsWithoutEmptyComments = results.filter(item => {
+    if (item.comment !== '') return item;
+  })
+  const [filteredResults, setFilteredResults] = useState(resultsWithoutEmptyComments);
+  const [abc, setAbc] = useState(false);
 
-  // let filteredData = data.filter((item) => item.comment.length > 0);
+  const commentsToDisplay = filteredResults.map(item => {
+    return <Comment key={item.date} date={convertDate(item.date)} score={item.score} content={item.comment} />
+  })
 
-  const filterComments = (data, whosComments) => {
-    return data.filter((item) => {
-      switch (whosComments) {
-        case "":
-          return item.comment.length > 0;
-        case "Promoters":
-          return item.score >= 9 && item.comment.length > 0;
-        case "Detractors":
-          return item.score <= 6 && item.comment.length > 0;
-        case "Passives":
-          return item.score > 6 && item.score < 9 && item.comment.length > 0;
-        default:
-          break;
-      }
-    });
-  };
-
-  useEffect(() => {
-    setFilteredData(filterComments(data, whosComments));
-  }, [whosComments]);
-  const [filteredData, setFilteredData] = useState(
-    filterComments(data, whosComments)
-  );
-  useEffect(() => {
-    setDataToDisplay(filteredData.reverse());
-  }, [filteredData]);
-
-  const [dataToDisplay, setDataToDisplay] = useState(filteredData.reverse());
-  console.log(dataToDisplay);
-
-  const sortingHandler = (event) => {
-    let parameter = event.target.innerText.toLowerCase();
-    let newOrder = filteredData.sort((a, b) => {
-      return a[parameter] - b[parameter];
-    });
-    if (newOrder[0] === dataToDisplay[0]) {
-      newOrder = filteredData.sort((a, b) => {
-        return b[parameter] - a[parameter];
+  const sortHandler = () => {
+    let refilteredResults = [];
+    if (abc) {
+      refilteredResults = filteredResults.sort((a, b) => {
+        return a.score - b.score;
       });
+      setAbc(false);
+    } else {
+      refilteredResults = filteredResults.sort((a, b) => {
+        return b.score - a.score;
+      });
+      setAbc(true);
     }
-    console.log(newOrder);
-    setDataToDisplay([...newOrder]);
-  };
-  const dates = dataToDisplay.map((item) => (
-    <li key={item.date + item.comment}>
-      {new Date(item.date).toLocaleDateString("uk", {
-        timeZone: "Europe/Helsinki",
-      })}
-    </li>
-  ));
-  const scores = dataToDisplay.map((item) => (
-    <li key={item.date + item.comment}>{item.score}</li>
-  ));
-  const comments = dataToDisplay.map((item) => (
-    <li key={item.date + item.comment}>{item.comment}</li>
-  ));
+    setFilteredResults([...refilteredResults]);
+
+  }
+ 
   return (
-    <div className={styles.rendered}>
-      {dataToDisplay.length > 0 ? (
-        <div className={styles.panel}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th onClick={sortingHandler}>
-                  Date <b>&#8691;</b>
-                </th>
-                <th>Score</th>
-                <th>Comments</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className={styles.date}>
-                  <ul className={styles.comments}>{dates}</ul>
-                </td>
-                <td className={styles.scores}>
-                  <ul className={styles.comments}>{scores}</ul>
-                </td>
-                <td>
-                  <ul className={styles.comments}>{comments}</ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <span></span>
-        </div>
-      ) : (
-        <p>No comments to display</p>
-      )}
+    <div className={styles.Comments}>
+      <div className={styles.tableHeader}>
+      <div className={styles.date}>DATE</div>
+      <div className={styles.score} onClick={sortHandler}>SCORE <FaSort/></div>
+      <div className={styles.content}>COMMENTS</div></div>
+      <div className={styles.commentsContainer}>
+        {commentsToDisplay}
+      </div>
     </div>
   );
 };

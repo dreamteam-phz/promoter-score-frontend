@@ -22,6 +22,7 @@
   --green-accent: #7dcfb6;
   --button: #7dcfb6;
   --button-hover: #0092ae;
+  --comment: #48cae4b7;
 
   /*needs to be checked / unified*/
   --shadow: rgba(15, 13, 13, 0.2);
@@ -83,6 +84,9 @@ button {
 }
 .my-node-exit-active {
   opacity: 0;
-  transition: opacity 0.05ы;
-  
+  transition: opacity 0.05s;
+}
+.react-datepicker__day--selected{
+
+  background-color: var(--green-accent) !important;
 }

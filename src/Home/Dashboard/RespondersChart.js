@@ -3,13 +3,13 @@ import "chart.js/auto";
 import { Doughnut, getElementAtEvent } from "react-chartjs-2";
 import { useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import styles from './Dashboard.module.css'
+import styles from './Dashboard.module.css';
 
 
 const RespondersChart = () => {
   const scoreData = useSelector(state => state.dashboard.scoreData);
   const labels = ["Promoters", "Detractors", "Passives", "some"]
-
+  console.log("scoreData is", scoreData)
   const datasets = [
     {
       data: [scoreData.promoters, scoreData.detractors, scoreData.passives],
@@ -39,7 +39,6 @@ const RespondersChart = () => {
             legend: {
               display: false
             }
-
           }
         }}
         data={{ labels: labels, datasets: datasets }}
