@@ -95,10 +95,8 @@ const howManyDetractors = (results, month) => {
 }
 
 const Graph = () => {
-  const dashboard = useSelector((state) => state.dashboard);
   const results = useSelector((state) => state.dashboard.results);
-  const period = Math.round((dashboard.endDate - dashboard.startDate) / 86400000); // how many days
-  console.log(results);
+  // console.log(results);
   // const results = [
   //   {score: 1, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
   //   {score: 2, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
@@ -143,7 +141,7 @@ const Graph = () => {
   }
   
 
-  console.log(promoters, detractors, passives);
+  // console.log(promoters, detractors, passives);
 
   const data = {
     labels,
