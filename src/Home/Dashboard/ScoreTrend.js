@@ -88,10 +88,12 @@ export default function ResponseTrend() {
   for (let label of labelz) {
     labels.push('');
   }
+  
   const nps = [];
   for (let label of labelz) {
     let responds = howManyPromoters(results, label) + howManyDetractors(results, label) + howManyPassives(results, label);
-    let score = Math.floor((howManyPromoters(results, label) - howManyPassives(results, label)) / responds * 100)
+    let score = (howManyPromoters(results, label) - howManyDetractors(results, label)) / responds * 100;
+    console.log(score)
     nps.push(score);
   }
 

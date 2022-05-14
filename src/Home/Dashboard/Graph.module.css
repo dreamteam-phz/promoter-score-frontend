@@ -1,7 +1,7 @@
 .graph {
   width: 60vw;
-  height: calc(39vh + 12.5px);
-  background-color: transparent;
+  height: calc(42vh + 12.5px);
+  background-color: var(--comment);
   display: flex;
   flex-direction: column;
 }
@@ -17,6 +17,7 @@ h2 {
   border-top-right-radius: 8px;
 }
 .Bar {
-  width: 60vw;
+  width: 90%;
+  margin-left: 5%;
   height: calc(35vh + 12.5px);
 }
