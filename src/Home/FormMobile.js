@@ -46,7 +46,7 @@ const FormMobile = () => {
         }
     }
 
-    const labelsToDisplay = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map(item => {
+    const labelsToDisplay = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(item => {
         if (form.score == item) {
             return <Label key={item} id={item} change={scoreHandler} content={item} name="score" checked={true} onclick={clickHandler} />
         }
@@ -90,11 +90,11 @@ const FormMobile = () => {
             </div>
             {!submittable &&
                 <>
-                    <p className='small-text'>extreamly likely</p>
+                    <p className={styles.smallText}>extreamly likely</p>
                     <div className={styles.tool}>{labelsToDisplay}
                     </div>
                     <div className={styles.describers}>
-                        <p className='small-text'>not likely at all</p>
+                        <p className={styles.smallText}>not likely at all</p>
                     </div>
                 </>
             }

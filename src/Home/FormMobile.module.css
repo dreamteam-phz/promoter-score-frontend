@@ -27,6 +27,10 @@
 span{
     color: var(--effect-PHZorane);
 }
+.smallText{
+  color: var(--black);
+  opacity:0.8;
+}
 .mobile .tool{
   display: flex; 
   justify-content: space-evenly;

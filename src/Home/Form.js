@@ -89,7 +89,7 @@ const Form = () => {
           // 
           setTimeout(() => {
             setShowMessage(true);
-          }, 400);
+          }, 800);
         }
         else {
           setTimeout(() => {
@@ -154,7 +154,7 @@ const Form = () => {
                 name="comment"
                 rows="6"
                 cols="30"
-                placeholder="type your message here"
+                placeholder="Your message here"
                 value={form.comment}
               />
             )}

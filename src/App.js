@@ -23,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="home" element={<Home />} />
-          <Route path=":id" element={ (width > 600) ? <Form /> : <FormMobile />} />
+          <Route path=":id" element={(width > 721) ? <Form /> : <FormMobile />} />
         </Routes>
       </BrowserRouter>
     </Provider>
