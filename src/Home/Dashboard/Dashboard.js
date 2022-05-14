@@ -9,7 +9,8 @@ import Pie from "./Pie";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/loader/Loader";
 import { dateHelper } from "../../helpers/DateHelper";
-import Trend from "./Trend";
+import ResponseTrend from "./ResponseTrend";
+import ScoreTrend from "./ScoreTrend";
 
 export default function Dashboard() {
   const loaded = useSelector((state) => state.loaded);
@@ -83,8 +84,8 @@ export default function Dashboard() {
         <div className={styles.data}>
           <div className={styles.box}>
             <Pie />
-            <Trend />
-            <Trend />
+            <ResponseTrend />
+            <ScoreTrend />
           </div>
           <div className={styles.box}>
             <Graph />
