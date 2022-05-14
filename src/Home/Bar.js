@@ -87,7 +87,7 @@ export default function Bar() {
           <div className={styles.nav}>   */}
 
         <Label id='create' name='location' content={<BiAddToQueue />} change={labelHandler} />
-        <Label id='dashboard' name='location' checked={true} content={<IoMdStats />} change={labelHandler} />
+        <Label id='dashboard' name='location' value={true} content={<IoMdStats />} change={labelHandler} />
         <Label id='settings' name='location' content={<MdOutlineStorage />} change={labelHandler} />
         <Label id='instructions' name='location' content={<FiHelpCircle />} change={labelHandler} />
         {(location === 'dashboard') &&
