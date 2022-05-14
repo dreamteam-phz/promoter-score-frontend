@@ -1,5 +1,26 @@
 .Pie {
   width: 20vw;
-  height: 26vh;
-  background-color: yellowgreen;
+  height: 41vh;
+  background-color: transparent;
+  position: relative;
+}
+.pieContainer {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  font-size: 35px;
+  font-weight: bold;
+  position: absolute;
+  left: calc(50% - 25px);
+  top: calc(20.5vh - 35px - 10px);
 }

@@ -9,7 +9,7 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   padding-top: 5px;
 }
 .comment {
@@ -24,19 +24,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(((39vh + 12.5px - 35px) / 5) - 6px);
+  min-height: calc(((39vh + 12.5px - 35px) / 10) - 6px);
   height: 100%;
   background-color: var(--comment);
   border-radius: 3px;
+  font-size: 14px;
 }
 .date {
   width: 20%;
 }
 .score {
-  width: 10%;
+  width: 15%;
 }
 .content {
-  width: 70%;
+  width: 65%;
   justify-content: flex-start;
   padding: 10px;
 }
@@ -58,6 +59,10 @@
   font-weight: bold;
   justify-content: center;
 }
-.tableHeader .score {
+.tableHeader .score, .tableHeader .date {
   cursor: pointer;
+}
+.tableHeader span{
+  color: var(--green-accent);
+  margin-top: 3px;
 }
