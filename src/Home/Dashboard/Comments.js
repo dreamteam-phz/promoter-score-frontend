@@ -7,7 +7,13 @@ import { FaSort } from 'react-icons/fa';
 
 const convertDate = (date) => {
   const event = new Date(date);
-  const result = event.getDate().toString() + '.' + (event.getMonth() + 1).toString() + '.' + event.getFullYear().toString();
+  let day = event.getDate().toString();
+  let month = (event.getMonth() + 1).toString();
+  let year = event.getFullYear().toString();
+  //editing dates
+  if (day.length == 1) day = '0' + day;
+  if (month.length == 1) month = '0' + month;
+  const result = day + '.' + month + '.' + year;
   return result;
 }
 
@@ -18,12 +24,13 @@ const Comments = () => {
   })
   const [filteredResults, setFilteredResults] = useState(resultsWithoutEmptyComments);
   const [abc, setAbc] = useState(false);
-
+  const [dateSort, setDateSort] = useState(false);
+  
   const commentsToDisplay = filteredResults.map(item => {
     return <Comment key={item.date} date={convertDate(item.date)} score={item.score} content={item.comment} />
   })
 
-  const sortHandler = () => {
+  const sortHandlerScore = () => {
     let refilteredResults = [];
     if (abc) {
       refilteredResults = filteredResults.sort((a, b) => {
@@ -37,15 +44,33 @@ const Comments = () => {
       setAbc(true);
     }
     setFilteredResults([...refilteredResults]);
-
+  }
+  const sortHandlerDate = () => {
+    let refilteredResults = [];
+    if (dateSort) {
+      refilteredResults = filteredResults.sort((a, b) => {
+        let i = new Date(a.date);
+        let j = new Date(b.date);
+        return i - j;
+      });
+      setDateSort(false);
+    } else {
+      refilteredResults = filteredResults.sort((a, b) => {
+        let i = new Date(a.date);
+        let j = new Date(b.date);
+        return j - i;
+      });
+      setDateSort(true);
+    }
+    setFilteredResults([...refilteredResults]);
   }
  
   return (
     <div className={styles.Comments}>
       <div className={styles.tableHeader}>
-      <div className={styles.date}>DATE</div>
-      <div className={styles.score} onClick={sortHandler}>SCORE <FaSort/></div>
-      <div className={styles.content}>COMMENTS</div></div>
+      <div className={styles.date} onClick={sortHandlerDate}>Date <span><FaSort/></span></div>
+      <div className={styles.score} onClick={sortHandlerScore}>Score <span><FaSort/></span></div>
+      <div className={styles.content}>Comments</div></div>
       <div className={styles.commentsContainer}>
         {commentsToDisplay}
       </div>
