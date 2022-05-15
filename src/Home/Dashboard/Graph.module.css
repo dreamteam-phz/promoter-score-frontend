@@ -4,6 +4,7 @@
   background-color: var(--comment);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 h2 {
   background-color: var(--black);

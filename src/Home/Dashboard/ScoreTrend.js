@@ -93,7 +93,6 @@ export default function ResponseTrend() {
   for (let label of labelz) {
     let responds = howManyPromoters(results, label) + howManyDetractors(results, label) + howManyPassives(results, label);
     let score = (howManyPromoters(results, label) - howManyDetractors(results, label)) / responds * 100;
-    console.log(score)
     nps.push(score);
   }
 
@@ -122,14 +121,23 @@ export default function ResponseTrend() {
       }
     ],
   };
+  if (results.length == 0) {
+    return (
+      <div className={styles.ResponseTrend}>
+        <h2>Score trend</h2>
+        <div className='noData'>No data</div>
+      </div>
+    );
+  } else {
+    return (
+      <div className={styles.ResponseTrend}>
+        <h2>Score trend</h2>
+      <div className={styles.trendContainer}>
+        <Line options={options} data={data} />
+      </div>
+      
+      </div>
+    );
+  }
 
-  return (
-    <div className={styles.ResponseTrend}>
-      <h2>Score trend</h2>
-    <div className={styles.trendContainer}>
-      <Line options={options} data={data} />
-    </div>
-    
-    </div>
-  )
 }

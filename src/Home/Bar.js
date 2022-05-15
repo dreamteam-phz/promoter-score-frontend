@@ -35,7 +35,9 @@ export default function Bar() {
     axios
       .get(URL_SURVEY_API)
       .then((response) => {
-        const data = response.data.sort((a, b) => a.name.localeCompare(b.name))
+
+        // const data = response.data.sort((a, b) => a.name.localeCompare(b.name))
+        const data = response.data.sort((a, b) => a._id.localeCompare(b._id))
         console.log(data);
 
         setSelectSurvey(data);
@@ -56,8 +58,6 @@ export default function Bar() {
       type: "DASHBOARD",
       payload: { surveyID: event.target.value }
     });
-    //   props.update(dashboard.data, event.target.value)
-    console.log("dashboard", dashboard);
   };
 
   const labelHandler = (event) => {
