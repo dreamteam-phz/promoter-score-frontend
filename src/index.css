@@ -90,3 +90,13 @@ button {
 
   background-color: var(--green-accent) !important;
 }
+.noData {
+  width: 100px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: calc(50%);
+  right: calc(50% - 50px);
+}

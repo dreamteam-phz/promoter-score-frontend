@@ -2,7 +2,9 @@ import styles from "./Pie.module.css";
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useRef } from 'react';
+import { getElementAtEvent } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -68,7 +70,7 @@ const howManyDetractors = (results, month) => {
 
 const Pie = () => {
   const results = useSelector((state) => state.dashboard.results);
-
+  const dispatch = useDispatch();
   const promoters = howManyPromoters(results, 'overall');
   const detractors = howManyDetractors(results, 'overall');
   const passives = howManyPassives(results, 'overall');
@@ -98,16 +100,44 @@ const Pie = () => {
       },
     ],
   };
-
-  return (
-    <div className={styles.Pie}>
-      <h2>Pie</h2>
-      <div className={styles.pieContainer}>
-        <Doughnut data={data} options={options} />  
+  
+  const chartRef = useRef();
+  const clickHandler = (event) => {
+    
+    let index = getElementAtEvent(chartRef.current, event)[0].index;
+    console.log(index)
+    if (index == 0) {
+      dispatch({ type: "DASHBOARD", payload: { comments: 0}});
+    } else if (index == 1) {
+      dispatch({ type: "DASHBOARD", payload: { comments: 1}});
+    } else if (index == 2) {
+      dispatch({ type: "DASHBOARD", payload: { comments: 2}});
+    } else {
+      console.log('Hello, PHZ!')
+    }
+  }
+  
+  if (results.length == 0) {
+    return (
+      <div className={styles.Pie}>
+        <h2>Pie</h2>
+        <div className={styles.pieContainer}>
+          
+        </div>
+        <div className='noData'>No data</div>
       </div>
-      <p className={styles.title}>{nps}</p>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className={styles.Pie}>
+        <h2>Pie</h2>
+        <div className={styles.pieContainer}>
+          <Doughnut ref={chartRef} data={data} options={options} onClick={clickHandler} />  
+        </div>
+        <p className={styles.title}>{nps}</p>
+      </div>
+    );
+  }
 };
 
 export default Pie;

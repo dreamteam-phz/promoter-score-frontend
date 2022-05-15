@@ -96,38 +96,7 @@ const howManyDetractors = (results, month) => {
 
 const Graph = () => {
   const results = useSelector((state) => state.dashboard.results);
-  // console.log(results);
-  // const results = [
-  //   {score: 1, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 2, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 3, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 7, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 9, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 10, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 1, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 3, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 2, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 2, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 6, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 7, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 9, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 10, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 3, date: 'Sun March 06 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 9, date: 'Sun March 06 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 7, date: 'Sun March 06 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 2, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 5, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 6, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 9, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 9, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 10, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 5, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 7, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 6, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 6, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 6, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 10, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'}
-  // ]
+
   const labels = getLabels(results, 'names');
   const labelsInNumbres = getLabels(results, 'numbers');
   const promoters = [];
@@ -163,12 +132,22 @@ const Graph = () => {
       },
     ],
   };
-  return (
+  if (results.length == 0) {
+    return (
       <div className={styles.graph}>
         <h2>Graph</h2>
-      <div className={styles.Bar}><Bar options={options} data={data} /></div>
+      <div className={styles.Bar}></div>
+      <div className='noData'>No data</div>
       </div>
   );
+  } else {
+    return (
+        <div className={styles.graph}>
+          <h2>Graph</h2>
+        <div className={styles.Bar}><Bar options={options} data={data} /></div>
+        </div>
+    );
+  }
 };
 
 export default Graph;

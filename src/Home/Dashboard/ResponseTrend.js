@@ -119,13 +119,22 @@ export default function ResponseTrend() {
     ],
   };
 
-  return (
-    <div className={styles.ResponseTrend}>
-      <h2>Response trend</h2>
-    <div className={styles.trendContainer}>
-      <Line options={options} data={data} />
-    </div>
-    
-    </div>
-  )
+  if (results.length == 0) {
+    return (
+      <div className={styles.ResponseTrend}>
+        <h2>Response trend</h2>
+        <div className='noData'>No data</div>
+      </div>
+    );
+  } else {
+    return (
+      <div className={styles.ResponseTrend}>
+        <h2>Response trend</h2>
+      <div className={styles.trendContainer}>
+        <Line options={options} data={data} />
+      </div>
+      </div>
+    );
+  }
+
 }
