@@ -87,3 +87,7 @@
     width: 90px;
     border-radius: 10px;
 }
+.question {
+    color: var(--green-accent);
+    font-weight: bold;
+}
