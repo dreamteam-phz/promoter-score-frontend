@@ -11,7 +11,7 @@ export default function Console() {
   switch (location) {
     case "create":
       return (
-        <div className={styles.console}>
+        <div className={styles.surveyConsole}>
           <Create />
         </div>
       );

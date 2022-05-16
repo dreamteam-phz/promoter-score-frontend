@@ -14,6 +14,11 @@ const initialState = {
     endDate: new Date(),
     filteredData: [],
   },
+  location: "surveys",
+  surveys: {
+    surveyItems: [],
+    linkToSurvey: ""
+  },
   loaded: false,
   selectedSurvey: ""
 
@@ -33,6 +38,14 @@ const reducer = (state = initialState, action) => {
           ...action.payload,
         },
       };
+    case "SURVEYS":
+      return {
+        ...state,
+        surveys: {
+          ...state.surveys,
+          ...action.payload,
+        }
+      }
     default:
       return { ...state, location: "dashboard" };
   }

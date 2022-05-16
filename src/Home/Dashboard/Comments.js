@@ -18,8 +18,10 @@ const convertDate = (date) => {
 }
 
 const Comments = () => {
+
   const results = useSelector((state) => state.dashboard.results);
   const filtering = useSelector((state) => state.dashboard.comments);
+  
   const resultsWithoutEmptyComments = results.filter(item => {
     if (item.comment !== '') return item;
   })
@@ -36,6 +38,7 @@ const Comments = () => {
   const [filteredResults, setFilteredResults] = useState(resultsWithoutEmptyComments);
   const [abc, setAbc] = useState(false);
   const [dateSort, setDateSort] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,7 +47,7 @@ const Comments = () => {
     if (filtering == 1) setFilteredResults(commentsPassives)
     if (filtering == 2) setFilteredResults(commentsDetractors)
   }, [filtering])
-  
+
   const commentsToDisplay = filteredResults.map(item => {
     return <Comment key={item.date} date={convertDate(item.date)} score={item.score} content={item.comment} />
   })
@@ -83,6 +86,7 @@ const Comments = () => {
     }
     setFilteredResults([...refilteredResults]);
   }
+
   const showAllComments = () => {
     dispatch({ type: "DASHBOARD", payload: { comments: 'all'}});
   }
