@@ -23,6 +23,8 @@ export default function Bar() {
 
   const URL_SURVEY_API = "http://localhost:4000/api/surveys";
   const [selectSurvey, setSelectSurvey] = useState([]);
+  const [selectQuestion, setSelectQuestion] = useState('hi');
+  const [data, setData] = useState([]);
   // for monthly time selector 
   const options = [
     { label: "1 month", value: "30" },
@@ -35,9 +37,11 @@ export default function Bar() {
     axios
       .get(URL_SURVEY_API)
       .then((response) => {
-        const data = response.data.sort((a, b) => a.name.localeCompare(b.name))
-        console.log(data);
 
+        // const data = response.data.sort((a, b) => a.name.localeCompare(b.name))
+        const data = response.data.sort((a, b) => a._id.localeCompare(b._id))
+        setData(data);
+        setSelectQuestion(data[0].question);
         setSelectSurvey(data);
       })
       .catch((error) => console.log(error.message));
@@ -51,13 +55,15 @@ export default function Bar() {
     });
   };
   const filterChangeHandlerSurvey = (event) => {
+    const question = data.filter(item => {
+      if (item._id == event.target.value) return item
+    })[0].question;
+    setSelectQuestion(question);
     dispatch({ type: "LOADED", payload: false });
     dispatch({
       type: "DASHBOARD",
       payload: { surveyID: event.target.value }
     });
-    //   props.update(dashboard.data, event.target.value)
-    console.log("dashboard", dashboard);
   };
 
   const labelHandler = (event) => {
@@ -92,9 +98,11 @@ export default function Bar() {
         <Label id='instructions' name='location' content={<FiHelpCircle />} change={labelHandler} />
         {(location === 'dashboard') &&
           <select name="selectedSurvey" onChange={filterChangeHandlerSurvey} className={styles.select}>
-            {selectSurvey.map((survey) => <option key={survey._id} value={survey._id}>{survey.name}</option>)}
+            {selectSurvey.map((survey) => <option key={survey._id} value={survey._id} question={survey.question}>{survey.name}</option>)}
           </select>}
+          <div className={styles.datePicker}>
         {(location === 'dashboard') &&
+        
           <DatePicker
             id="startDate"
             selected={dashboard.startDate}
@@ -116,19 +124,12 @@ export default function Bar() {
             scrollableMonthYearDropdown
             showWeekNumbers
           />
-        }
+        }</div>
+
 
       </div>
       <div className={styles.nav}>
-        {(location === 'dashboard') &&
-          <select name="selectedMonth" value={period} onChange={filterChangeHandler} className={styles.select}>
-            {options.map(option => <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-            )}
-          </select>}
-
-
+        <div className={styles.question}>{selectQuestion}</div>
         <button><Link to='/'><IoMdExit /></Link></button>
       </div>
     </div >

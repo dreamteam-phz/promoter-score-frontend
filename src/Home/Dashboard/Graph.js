@@ -10,7 +10,6 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { StyleSharp } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 
 ChartJS.register(
@@ -39,136 +38,116 @@ const options = {
 
 const whatMonth = (number) => {
   switch (number) {
-    case 0: return 'January'
-    case 1: return 'February'
-    case 2: return 'March'
-    case 3: return 'April'
+    case 0: return 'Jan'
+    case 1: return 'Feb'
+    case 2: return 'Mar'
+    case 3: return 'Apr'
     case 4: return 'May'
-    case 5: return 'June'
-    case 6: return 'July'
-    case 7: return 'August'
-    case 8: return 'September'
-    case 9: return 'October'
-    case 10: return 'November'
-    case 11: return 'December'
+    case 5: return 'Jun'
+    case 6: return 'Jul'
+    case 7: return 'Aug'
+    case 8: return 'Sep'
+    case 9: return 'Oct'
+    case 10: return 'Nov'
+    case 11: return 'Dec'
     default: return 0;
   }
 }
-const getLabels = (results, type) => {
+
+const getLabelsDetailed = (results) => {
   const notUniqueLabels = [];
   for (let item of results) {
     if (!notUniqueLabels.includes(item.date)) notUniqueLabels.push(new Date(item.date));
   }
-  const uniqueLabels = [];
+  const uniqueLabels = []; //objects {month: xx, year: yy}
   for (let item of notUniqueLabels) {
-    if (!uniqueLabels.includes(item.getMonth())) uniqueLabels.push(item.getMonth());
+    if (uniqueLabels.filter(elem => (elem.month == item.getMonth() && elem.year == item.getFullYear())).length == 0) {
+      uniqueLabels.push({month: item.getMonth(), year: item.getFullYear()});
+    };
   }
-  const labelsInNumbres = uniqueLabels.map(item => item);
-  const labelsInNames = labelsInNumbres.map(item => whatMonth(item));
-  if (type == 'names') return labelsInNames;
-  if (type == 'numbers') return labelsInNumbres;
+
+  return uniqueLabels;
+}
+const howManyPromotersDetailed = (results, year, month) => {
+  let count = 0;
+  for (let item of results) {
+    let date = new Date(item.date);
+    if (date.getFullYear() == year && date.getMonth() == month && item.score >= 9) count++;
+  }
+  return count;
+}
+const howManyPassivesDetailed = (results, year, month) => {
+  let count = 0;
+  for (let item of results) {
+    let date = new Date(item.date);
+    if (date.getFullYear() == year && date.getMonth() == month && item.score < 9 && item.score > 6) count++;
+  }
+  return count;
+}
+const howManyDetractorsDetailed = (results, year, month) => {
+  let count = 0;
+  for (let item of results) {
+    let date = new Date(item.date);
+    if (date.getFullYear() == year && date.getMonth() == month && item.score <= 6) count++;
+  }
+  return count;
 }
 
-const howManyPassives = (results, month) => {
-  let count = 0;
-  for (let item of results) {
-    let date = new Date(item.date);
-    if (date.getMonth() == month && item.score < 9 && item.score > 6) count++;
-  }
-  return count;
-}
-const howManyPromoters = (results, month) => {
-  let count = 0;
-  for (let item of results) {
-    let date = new Date(item.date);
-    if (date.getMonth() == month && item.score >= 9) count++;
-  }
-  return count;
-}
-const howManyDetractors = (results, month) => {
-  let count = 0;
-  for (let item of results) {
-    let date = new Date(item.date);
-    if (date.getMonth() == month && item.score <= 6) count++;
-  }
-  return count;
-}
 
 const Graph = () => {
   const results = useSelector((state) => state.dashboard.results);
-  // console.log(results);
-  // const results = [
-  //   {score: 1, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 2, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 3, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 7, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 9, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 10, date: 'Mon January 03 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 1, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 3, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 2, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 2, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 6, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 7, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 9, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 10, date: 'Sat February 05 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 3, date: 'Sun March 06 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 9, date: 'Sun March 06 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 7, date: 'Sun March 06 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 2, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 5, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 6, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 9, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 9, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 10, date: 'Mon April 04 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 5, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 7, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 6, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 6, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 6, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'},
-  //   {score: 10, date: 'Sat May 07 2022 13:42:35 GMT+0300 (Eastern European Summer Time)'}
-  // ]
-  const labels = getLabels(results, 'names');
-  const labelsInNumbres = getLabels(results, 'numbers');
-  const promoters = [];
-  const detractors = [];
-  const passives = [];
 
-  for (let label of labelsInNumbres) {
-    promoters.push(howManyPromoters(results, label));
-    detractors.push(howManyDetractors(results, label));
-    passives.push(howManyPassives(results, label));
+  const labelsDetailed = getLabelsDetailed(results);
+  const promotersMonthly = [];
+  const detractorsMonthly = [];
+  const passivesMonthly = [];
+  const labels = [];
+  for (let elem of labelsDetailed) {
+    labels.push(whatMonth(elem.month) + ' ' + elem.year.toString().slice(-2));
   }
-  
 
-  // console.log(promoters, detractors, passives);
+  for (let label of labelsDetailed) {
+    promotersMonthly.push(howManyPromotersDetailed(results, label.year, label.month));
+    passivesMonthly.push(howManyPassivesDetailed(results, label.year, label.month));
+    detractorsMonthly.push(howManyDetractorsDetailed(results, label.year, label.month));
+  }
 
   const data = {
     labels,
     datasets: [
       {
         label: 'Promoters',
-        data: promoters,
+        data: promotersMonthly,
         backgroundColor: '#02c39a',
       },
       {
         label: 'Detractors',
-        data: detractors,
+        data: detractorsMonthly,
         backgroundColor: '#ef476f',
       },
       {
         label: 'Passives',
-        data: passives,
+        data: passivesMonthly,
         backgroundColor: '#48cae4',
       },
     ],
   };
-  return (
+  if (results.length == 0) {
+    return (
       <div className={styles.graph}>
         <h2>Graph</h2>
-      <div className={styles.Bar}><Bar options={options} data={data} /></div>
+      <div className={styles.Bar}></div>
+      <div className='noData'>No data</div>
       </div>
   );
+  } else {
+    return (
+        <div className={styles.graph}>
+          <h2>Graph</h2>
+        <div className={styles.Bar}><Bar options={options} data={data} /></div>
+        </div>
+    );
+  }
 };
 
 export default Graph;

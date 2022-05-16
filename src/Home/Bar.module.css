@@ -11,8 +11,9 @@
 .nav {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     gap: 25px;
+    
 }
 
 .nav:first-child {
@@ -86,4 +87,20 @@
     text-align: center;
     width: 90px;
     border-radius: 10px;
+}
+.question {
+    font-size: 14px;
+    color: var(--green-accent);
+    font-weight: bold;
+}
+.datePicker input {
+    outline: none;
+}
+.datePicker input {
+    width: 100px;
+    margin-left: 25px;
+}
+.datePicker {
+    display: flex;
+    width: 220px;
 }

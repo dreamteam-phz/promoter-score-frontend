@@ -26,9 +26,9 @@ export default function Dashboard() {
   // get data
   const getResults = () => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
-      // console.log(response.data)
-      dispatch({ type: 'DASHBOARD', payload: { data: response.data} })
-      setData(response.data, surveyID);
+      const data = response.data.sort((a, b) => a.surveyID.localeCompare(b.surveyID))
+      dispatch({ type: 'DASHBOARD', payload: { data: data} })
+      setData(data, surveyID);
     });
   };
   const setData = (arrayOfObjects, surveyID = 0) => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Comment from "./Comment";
 import styles from "./Comments.module.css";
 import { FaSort } from 'react-icons/fa';
@@ -18,14 +18,35 @@ const convertDate = (date) => {
 }
 
 const Comments = () => {
-  const results = useSelector((state) => state.dashboard.results); console.log(results)
 
+  const results = useSelector((state) => state.dashboard.results);
+  const filtering = useSelector((state) => state.dashboard.comments);
+  
   const resultsWithoutEmptyComments = results.filter(item => {
     if (item.comment !== '') return item;
   })
+  const commentsPromoters = resultsWithoutEmptyComments.filter(item => {
+    if (item.score >= 9) return item;
+  })
+  const commentsPassives = resultsWithoutEmptyComments.filter(item => {
+    if (item.score > 6 && item.score < 9) return item;
+  })
+  const commentsDetractors = resultsWithoutEmptyComments.filter(item => {
+    if (item.score <= 6) return item;
+  })
+  
   const [filteredResults, setFilteredResults] = useState(resultsWithoutEmptyComments);
   const [abc, setAbc] = useState(false);
   const [dateSort, setDateSort] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (filtering == 'all') setFilteredResults(resultsWithoutEmptyComments)
+    if (filtering == 0) setFilteredResults(commentsPromoters)
+    if (filtering == 1) setFilteredResults(commentsPassives)
+    if (filtering == 2) setFilteredResults(commentsDetractors)
+  }, [filtering])
 
   const commentsToDisplay = filteredResults.map(item => {
     return <Comment key={item.date} date={convertDate(item.date)} score={item.score} content={item.comment} />
@@ -66,17 +87,32 @@ const Comments = () => {
     setFilteredResults([...refilteredResults]);
   }
 
-  return (
-    <div className={styles.Comments}>
-      <div className={styles.tableHeader}>
-        <div className={styles.date} onClick={sortHandlerDate}>Date <span><FaSort /></span></div>
-        <div className={styles.score} onClick={sortHandlerScore}>Score <span><FaSort /></span></div>
+  const showAllComments = () => {
+    dispatch({ type: "DASHBOARD", payload: { comments: 'all'}});
+  }
+  if (resultsWithoutEmptyComments.length == 0) {
+    return (
+      <div className={styles.Comments}>
+        <div className={styles.tableHeader}>
+        <div className={styles.date} onClick={sortHandlerDate}>Date <span><FaSort/></span></div>
+        <div className={styles.score} onClick={sortHandlerScore}>Score <span><FaSort/></span></div>
         <div className={styles.content}>Comments</div></div>
-      <div className={styles.commentsContainer}>
-        {commentsToDisplay}
+        <div className='noData'>No data</div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className={styles.Comments}>
+        <div className={styles.tableHeader}>
+        <div className={styles.date} onClick={sortHandlerDate}>Date <span><FaSort/></span></div>
+        <div className={styles.score} onClick={sortHandlerScore}>Score <span><FaSort/></span></div>
+        <div className={styles.content} onClick={showAllComments}>{(filtering == 'all' && 'Comments')}{(filtering !== 'all') && 'Back to all comments'}</div></div>
+        <div className={styles.commentsContainer}>
+          {commentsToDisplay}
+        </div>
+      </div>
+    );
+  }
 };
 
 export default Comments;

@@ -5,14 +5,14 @@ date.setDate(1);
 const initialState = {
   location: "dashboard",
   dashboard: {
-    comments: "",
+    comments: "all",
     selectedMonth: 180,
     data: [],
     scoreData: {},
     surveyID: 0,
     startDate: date,
     endDate: new Date(),
-    filteredData: []
+    filteredData: [],
   },
   location: "surveys",
   surveys: {
