@@ -101,7 +101,9 @@ export default function Bar() {
           <select name="selectedSurvey" onChange={filterChangeHandlerSurvey} className={styles.select}>
             {selectSurvey.map((survey) => <option key={survey._id} value={survey._id} question={survey.question}>{survey.name}</option>)}
           </select>}
+          <div className={styles.datePicker}>
         {(location === 'dashboard') &&
+        
           <DatePicker
             id="startDate"
             selected={dashboard.startDate}
@@ -123,7 +125,8 @@ export default function Bar() {
             scrollableMonthYearDropdown
             showWeekNumbers
           />
-        }
+        }</div>
+
 
       </div>
       <div className={styles.nav}>

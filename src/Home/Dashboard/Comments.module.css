@@ -10,11 +10,12 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
-  gap: 1.7%;
-  padding-top: 5px;
+  align-items: center;
+  gap: 10px;
+  padding-top: 8px;
 }
 .comment {
-  width: 100%;
+  width: 98.5%;
   height: fit-content;
   display: flex;
   align-items: center;
@@ -30,6 +31,7 @@
   background-color: var(--white);
   border-radius: 3px;
   font-size: 14px;
+  padding: 2px;
 }
 .date {
   width: 19%;
@@ -40,7 +42,6 @@
 .content {
   width: calc(65% - 10px);
   justify-content: flex-start;
-  padding: 10px;
 }
 .tableHeader {
   height: 35px;
