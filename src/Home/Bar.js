@@ -40,7 +40,6 @@ export default function Bar() {
 
         // const data = response.data.sort((a, b) => a.name.localeCompare(b.name))
         const data = response.data.sort((a, b) => a._id.localeCompare(b._id))
-        console.log(data);
         setData(data);
         setSelectQuestion(data[0].question);
         setSelectSurvey(data);
