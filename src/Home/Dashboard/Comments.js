@@ -18,14 +18,15 @@ const convertDate = (date) => {
 }
 
 const Comments = () => {
-  const results = useSelector((state) => state.dashboard.results);
+  const results = useSelector((state) => state.dashboard.results); console.log(results)
+
   const resultsWithoutEmptyComments = results.filter(item => {
     if (item.comment !== '') return item;
   })
   const [filteredResults, setFilteredResults] = useState(resultsWithoutEmptyComments);
   const [abc, setAbc] = useState(false);
   const [dateSort, setDateSort] = useState(false);
-  
+
   const commentsToDisplay = filteredResults.map(item => {
     return <Comment key={item.date} date={convertDate(item.date)} score={item.score} content={item.comment} />
   })
@@ -64,13 +65,13 @@ const Comments = () => {
     }
     setFilteredResults([...refilteredResults]);
   }
- 
+
   return (
     <div className={styles.Comments}>
       <div className={styles.tableHeader}>
-      <div className={styles.date} onClick={sortHandlerDate}>Date <span><FaSort/></span></div>
-      <div className={styles.score} onClick={sortHandlerScore}>Score <span><FaSort/></span></div>
-      <div className={styles.content}>Comments</div></div>
+        <div className={styles.date} onClick={sortHandlerDate}>Date <span><FaSort /></span></div>
+        <div className={styles.score} onClick={sortHandlerScore}>Score <span><FaSort /></span></div>
+        <div className={styles.content}>Comments</div></div>
       <div className={styles.commentsContainer}>
         {commentsToDisplay}
       </div>

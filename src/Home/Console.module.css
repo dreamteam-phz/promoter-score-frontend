@@ -6,3 +6,10 @@
     justify-content: center;
 
 }
+.surveyConsole{
+    width: 100vw;
+    height: 94vh;
+    display: flex;
+    background-color: var(--white-grey);
+
+}
