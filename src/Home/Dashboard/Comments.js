@@ -102,7 +102,7 @@ const Comments = () => {
         <div className={styles.tableHeader}>
         <div className={styles.date} onClick={sortHandlerDate}>Date <span><FaSort/></span></div>
         <div className={styles.score} onClick={sortHandlerScore}>Score <span><FaSort/></span></div>
-        <div className={styles.content} onClick={showAllComments}>{(filtering == 'all' && 'Comments')}{(filtering !== 'all') && 'Show all'}</div></div>
+        <div className={styles.content} onClick={showAllComments}>{(filtering == 'all' && 'Comments')}{(filtering !== 'all') && 'Back to all comments'}</div></div>
         <div className={styles.commentsContainer}>
           {commentsToDisplay}
         </div>

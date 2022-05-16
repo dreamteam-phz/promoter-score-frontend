@@ -11,6 +11,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const options = {
   maintainAspectRatio: false,
   responsive: true,
+  cutout: 45,
   plugins: {
     legend: {
       position: 'bottom',
@@ -96,7 +97,7 @@ const Pie = () => {
           '#48cae4',
           '#ef476f'
         ],
-        borderWidth: 1,
+        borderWidth: 1
       },
     ],
   };

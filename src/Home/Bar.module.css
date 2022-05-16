@@ -93,10 +93,10 @@
     color: var(--green-accent);
     font-weight: bold;
 }
-input {
+.datePicker input {
     outline: none;
 }
-input {
+.datePicker input {
     width: 100px;
     margin-left: 25px;
 }
