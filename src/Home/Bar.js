@@ -4,7 +4,6 @@ import Label from './Label';
 import { Link } from 'react-router-dom';
 import { BiAddToQueue } from 'react-icons/bi';
 import { IoMdStats } from 'react-icons/io';
-import { MdOutlineStorage } from 'react-icons/md';
 import { FiHelpCircle } from 'react-icons/fi';
 import { IoMdExit } from 'react-icons/io';
 import { useDispatch, useSelector } from "react-redux";
@@ -94,7 +93,6 @@ export default function Bar() {
 
         <Label id='create' name='location' content={<BiAddToQueue />} change={labelHandler} />
         <Label id='dashboard' name='location' value={true} content={<IoMdStats />} change={labelHandler} />
-        <Label id='settings' name='location' content={<MdOutlineStorage />} change={labelHandler} />
         <Label id='instructions' name='location' content={<FiHelpCircle />} change={labelHandler} />
         {(location === 'dashboard') &&
           <select name="selectedSurvey" onChange={filterChangeHandlerSurvey} className={styles.select}>
@@ -129,7 +127,7 @@ export default function Bar() {
 
       </div>
       <div className={styles.nav}>
-        <div className={styles.question}>{selectQuestion}</div>
+        {location === 'dashboard' && <div className={styles.question}>{selectQuestion}</div>}
         <button><Link to='/'><IoMdExit /></Link></button>
       </div>
     </div >

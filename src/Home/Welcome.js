@@ -13,9 +13,6 @@ export default function Welcome() {
         <h1>Survey</h1>
       </div>
       <div className={styles.login}>
-        <p>Enter your credentials</p>
-        <input placeholder='username' />
-        <input placeholder='password' />
         <button><Link to='/home'>Submit</Link></button>
       </div>
     </main>
