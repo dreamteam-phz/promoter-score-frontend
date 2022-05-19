@@ -88,8 +88,8 @@ export default function ResponseTrend() {
   for (let label of labelz) {
     labels.push('');
   }
-  
   const nps = [];
+
   for (let label of labelz) {
     let responds = howManyPromoters(results, label) + howManyDetractors(results, label) + howManyPassives(results, label);
     let score = (howManyPromoters(results, label) - howManyDetractors(results, label)) / responds * 100;
@@ -98,8 +98,27 @@ export default function ResponseTrend() {
 
   const options = {
     responsive: true,
+    scales: {
+      y: {
+        grid: {
+          color: (context) => {
+            if (context.tick.value === 0) {
+              return '#1d4e89'
+            }
+          }
+        },
+        ticks: {
+          font: {
+            family: "'Lato', sans-serif"
+          },
+        },
+        min: -100,
+        max: 100,
+      }
+    },
     plugins: {
       legend: {
+        display: false,
         position: 'top',
       },
       title: {
@@ -108,34 +127,35 @@ export default function ResponseTrend() {
       },
     },
   };
-    
+
   const data = {
     labels,
     datasets: [
       {
         label: 'Scores',
         data: nps,
-        borderColor: '#48cae4',
-        backgroundColor: '#48cae49f',
-        tension: 0.3
+        borderColor: '#ed6930',
+        backgroundColor: '#ed6930',
+        tension: 0.4,
+        borderWidth: 2,
+        pointRadius: 2,
       }
     ],
   };
   if (results.length == 0) {
     return (
       <div className={styles.ResponseTrend}>
-        <h2>Score trend</h2>
+        <h2>SCORE TREND</h2>
         <div className='noData'>No data</div>
       </div>
     );
   } else {
     return (
       <div className={styles.ResponseTrend}>
-        <h2>Score trend</h2>
-      <div className={styles.trendContainer}>
-        <Line options={options} data={data} />
-      </div>
-      
+        <div className={styles.trendContainer}>
+          <p>score trend</p>
+          <Line options={options} data={data} />
+        </div>
       </div>
     );
   }

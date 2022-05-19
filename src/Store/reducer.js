@@ -13,6 +13,7 @@ const initialState = {
     startDate: date,
     endDate: new Date(),
     filteredData: [],
+    scoreForChart: []
   },
   location: "surveys",
   surveys: {

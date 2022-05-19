@@ -21,18 +21,18 @@ export default function Dashboard() {
   useEffect(() => {
     getResults();
   }, [surveyID, period]);
-  
+
   // console.log(dashboard.results)
   // get data
   const getResults = () => {
     axios.get("http://localhost:4000/api/formscores").then((response) => {
       const data = response.data.sort((a, b) => a.surveyID.localeCompare(b.surveyID))
-      dispatch({ type: 'DASHBOARD', payload: { data: data} })
+      dispatch({ type: 'DASHBOARD', payload: { data: data } })
       setData(data, surveyID);
     });
   };
   const setData = (arrayOfObjects, surveyID = 0) => {
-    let results; 
+    let results;
     if (surveyID == 0) {
       results = arrayOfObjects[0].results;
     } else {
@@ -46,8 +46,8 @@ export default function Dashboard() {
     const filteredResults = results.filter((result) => dateHelper(result.date, period));
     // console.log(filteredResults)
     dispatch({
-          type: "DASHBOARD",
-          payload: { results: filteredResults },
+      type: "DASHBOARD",
+      payload: { results: filteredResults },
     });
     const scores = filteredResults.map((item) => item.score);
     for (let score of scores) {
@@ -75,28 +75,26 @@ export default function Dashboard() {
     }, 700);
     // dispatch({ type: "LOADED", payload: true });
   }
-  
+
   return (
-    
+
     <div className={styles.dashboard}>
       {/* <DisplayFilter update={setData} /> */}
       {loaded &&
         <div className={styles.data}>
           <div className={styles.box}>
             <Pie />
-            <ResponseTrend />
-            <ScoreTrend />
+            <div className={styles.trendBox}>
+              <ResponseTrend />
+              <ScoreTrend />
+            </div>
           </div>
           <div className={styles.box}>
             <Graph />
             <Comments />
           </div>
-
-          
-          
-          
         </div>}
-        {!loaded && <Loader/>}
+      {!loaded && <Loader />}
     </div>
   );
 

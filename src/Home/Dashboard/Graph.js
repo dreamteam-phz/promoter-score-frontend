@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { useSelector } from "react-redux";
+import { BloodtypeOutlined } from "@mui/icons-material";
 
 ChartJS.register(
   CategoryScale,
@@ -24,15 +25,58 @@ ChartJS.register(
 const options = {
   maintainAspectRatio: false,
   responsive: true,
+
   plugins: {
+
     legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Amount of responds',
+      onHover: (event, chartElement) => {
+        event.native.target.style.cursor = 'pointer';
+      },
+      onLeave: (event, chartElement) => {
+        event.native.target.style.cursor = 'default';
+      },
+      position: 'right',
+      align: 'start',
+      labels: {
+        boxWidth: 16,
+        font: {
+          family: "'Lato', sans-serif",
+        },
+      },
+      title: {
+        display: true,
+        //text: 'Amount of responds',
+      },
     },
   },
+  scales: {
+    x: {
+      ticks: {
+        font: {
+          family: "'Lato', sans-serif"
+        },
+      },
+    },
+    y: {
+      ticks: {
+        stepSize: 1,
+        font: {
+          family: "'Lato', sans-serif"
+        }
+      },
+      grid: {
+        lineWidth: 0.5,
+      },
+      title: {
+        display: true,
+        font: {
+          family: "'Lato', sans-serif"
+        },
+        text: "responses",
+        align: "end",
+      },
+    },
+  }
 };
 
 
@@ -61,11 +105,11 @@ const getLabelsDetailed = (results) => {
   }
   const uniqueLabels = []; //objects {month: xx, year: yy}
   for (let item of notUniqueLabels) {
-    if (uniqueLabels.filter(elem => (elem.month == item.getMonth() && elem.year == item.getFullYear())).length == 0) {
-      uniqueLabels.push({month: item.getMonth(), year: item.getFullYear()});
+    if (uniqueLabels.filter(elem =>
+      (elem.month == item.getMonth() && elem.year == item.getFullYear())).length == 0) {
+      uniqueLabels.push({ month: item.getMonth(), year: item.getFullYear() });
     };
   }
-
   return uniqueLabels;
 }
 const howManyPromotersDetailed = (results, year, month) => {
@@ -92,18 +136,33 @@ const howManyDetractorsDetailed = (results, year, month) => {
   }
   return count;
 }
+const promScoreDetailed = (results) => {
+  let promoters = 0;
+  let detractors = 0;
+  for (let item of results) {
+    if (item.score >= 9) {
+      promoters++;
+    }
+    else if (item.score <= 6) {
+      detractors++;
+    }
+  }
+  return ((promoters - detractors) / results.length) * 100;
+};
+
 
 
 const Graph = () => {
   const results = useSelector((state) => state.dashboard.results);
-
   const labelsDetailed = getLabelsDetailed(results);
   const promotersMonthly = [];
   const detractorsMonthly = [];
   const passivesMonthly = [];
   const labels = [];
+
   for (let elem of labelsDetailed) {
-    labels.push(whatMonth(elem.month) + ' ' + elem.year.toString().slice(-2));
+    console.log(elem);
+    labels.push(whatMonth(elem.month) + ' / ' + elem.year.toString().slice(-2));
   }
 
   for (let label of labelsDetailed) {
@@ -111,24 +170,26 @@ const Graph = () => {
     passivesMonthly.push(howManyPassivesDetailed(results, label.year, label.month));
     detractorsMonthly.push(howManyDetractorsDetailed(results, label.year, label.month));
   }
-
   const data = {
     labels,
     datasets: [
       {
         label: 'Promoters',
         data: promotersMonthly,
-        backgroundColor: '#02c39a',
+        backgroundColor: '#1d4e89',
+        hoverOffset: 200,
       },
       {
         label: 'Detractors',
         data: detractorsMonthly,
-        backgroundColor: '#ef476f',
+        backgroundColor: '#7dcfb6',
+        hoverOffset: 200,
       },
       {
         label: 'Passives',
         data: passivesMonthly,
-        backgroundColor: '#48cae4',
+        backgroundColor: '#0092ae',
+        hoverOffset: 200,
       },
     ],
   };
@@ -136,16 +197,16 @@ const Graph = () => {
     return (
       <div className={styles.graph}>
         <h2>Graph</h2>
-      <div className={styles.Bar}></div>
-      <div className='noData'>No data</div>
+        <div className={styles.Bar}></div>
+        <div className='noData'>No data</div>
       </div>
-  );
+    );
   } else {
     return (
-        <div className={styles.graph}>
-          <h2>Graph</h2>
+      <div className={styles.graph}>
+        <h2>GRAPH</h2>
         <div className={styles.Bar}><Bar options={options} data={data} /></div>
-        </div>
+      </div>
     );
   }
 };

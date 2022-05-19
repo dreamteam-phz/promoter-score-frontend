@@ -95,8 +95,19 @@ export default function ResponseTrend() {
 
   const options = {
     responsive: true,
+    scales: {
+      y: {
+        min: 0,
+        ticks: {
+          font: {
+            family: "'Lato', sans-serif"
+          },
+        },
+      },
+    },
     plugins: {
       legend: {
+        display: false,
         position: 'top',
       },
       title: {
@@ -105,34 +116,37 @@ export default function ResponseTrend() {
       },
     },
   };
-    
+
   const data = {
     labels,
     datasets: [
       {
         label: 'Responds',
         data: responders,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        tension: 0.3
-      }
+        borderColor: '#ed6930',
+        backgroundColor: '#ed6930',
+        tension: 0.4,
+        borderWidth: 2,
+        pointRadius: 2,
+      },
     ],
   };
 
   if (results.length == 0) {
     return (
       <div className={styles.ResponseTrend}>
-        <h2>Response trend</h2>
+        <h2>TRENDS</h2>
         <div className='noData'>No data</div>
       </div>
     );
   } else {
     return (
       <div className={styles.ResponseTrend}>
-        <h2>Response trend</h2>
-      <div className={styles.trendContainer}>
-        <Line options={options} data={data} />
-      </div>
+        <h2>TRENDS</h2>
+        <div className={styles.trendContainer}>
+          <p>response trend</p>
+          <Line options={options} data={data} />
+        </div>
       </div>
     );
   }
