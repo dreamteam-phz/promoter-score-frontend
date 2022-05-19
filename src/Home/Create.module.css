@@ -11,6 +11,7 @@
   height: 80vh;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  background-color: blue;
 }
 .createContainer {
   display: flex;
@@ -19,15 +20,16 @@
   justify-content: flex-start;
   gap: 15px;
   margin-top: 15px;
+  /* background-color: aquamarine; */
 }
 .new {
   width: 35vw;
-  height: 30vh;
+  /* height: 30vh; */
 }
 .old {
   width: 55vw;
 }
-.create h2 {
+/* .create h2 {
   background-color: transparent;
   height: 35px;
   font-size: 22px;
@@ -37,7 +39,7 @@
   justify-content: center;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-}
+} */
 .new input {
   width: 90%;
   height: 35px;
@@ -49,15 +51,21 @@
   font-size: 16px;
 }
 .new button {
-  width: 120px;
+  width: 250px;
   height: 35px;
   border: none;
   border-radius: 17.5px;
-  background-color: var(--green);
-  margin-right: calc(50% - 60px);
+  background-color: var(--green-accent);
+  margin-right: calc(50% - 125px);
 }
 .new button:hover {
-  background-color: var(--green-accent);
+  background-color: var(--green);
+}
+.new button:disabled {
+  background-color: var(--white);
+  border: solid 2px var(--green-accent);
+  color: var(--black);
+  pointer-events: none;
 }
 .new p {
   width: 200px;

@@ -10,10 +10,11 @@ export default function Create() {
   const [surveys, setSurveys] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [result, setResult] = useState('');
+  const [submittable, setSubmittable] = useState(false);
   const api_url = useSelector((state) => state.api_url);
   const URL_SURVEY_API = api_url + 'surveys';
-  // const src = 'http://localhost:3000/'; // for local
-  const src = 'https://promoter-score-frontend-ht8wtkb1f-dream-team-backend.vercel.app/';
+  const src = 'http://localhost:3000/'; // for local
+  // const src = 'https://promoter-score-frontend-ht8wtkb1f-dream-team-backend.vercel.app/';
 
   useEffect(() => loadData(), [isLoading]);
 
@@ -37,6 +38,7 @@ export default function Create() {
         .then(res => res.status == 200 ? setResult('Successfully created!') : setResult('Error while creating!'));
       setData({ name: "", question: "" })
       setIsLoading(true)
+      setSubmittable(false)
       setInterval(() => {
         setResult('');
       }, 3000);
@@ -44,8 +46,11 @@ export default function Create() {
   };
   const changeHandler = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
+    if (data.name !== '' && data.question !== '') {
+      setSubmittable(true);
+    }
   }
-  
+
   const deleteHandler = (event) => {
     axios
       .delete(api_url + "delete/survey/" + event.target.id)
@@ -56,16 +61,16 @@ export default function Create() {
   return (
     <div className={styles.create}>
       <div className={styles.new}>
-        <h2>Create new survey</h2>
+        <h2>CREATE NEW SURVEY</h2>
         <div className={styles.createContainer}>
           <input onChange={changeHandler} value={data.name} name="name" placeholder="Name of survey" />
           <input onChange={changeHandler} value={data.question} name="question" placeholder="Question of survey" />
-          <button onClick={submitHandler}>CREATE</button>
+          <button onClick={submitHandler} disabled={!submittable}>CREATE</button>
           <p className={styles.response}>{result}</p>
         </div>
       </div>
       <div className={styles.old}>
-        <h2>All surveys</h2>
+        <h2>ALL SURVEYS</h2>
         <div className={styles.surveyContainer}>
           {!isLoading && surveys.map(item => {
             return <AnotherSurvey delete={deleteHandler} id={item._id} key={item._id} name={item.name} question={item.question} link={src + item._id} />
