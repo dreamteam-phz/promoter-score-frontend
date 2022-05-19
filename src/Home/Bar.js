@@ -1,17 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import styles from "./Bar.module.css";
 import Label from './Label';
 import { Link } from 'react-router-dom';
 import { BiAddToQueue } from 'react-icons/bi';
 import { IoMdStats } from 'react-icons/io';
-import { FiHelpCircle } from 'react-icons/fi';
+import { MdOutlineInfo } from 'react-icons/md';
 import { IoMdExit } from 'react-icons/io';
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import DatePicker from 'react-datepicker';
-import axios from "axios";
-import 'react-datepicker/dist/react-datepicker.css';
+import { MdPlaylistAdd } from 'react-icons/md';
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import axios from "axios";
 
 
 export default function Bar() {
@@ -36,23 +37,20 @@ export default function Bar() {
     axios
       .get(URL_SURVEY_API)
       .then((response) => {
-        console.log(response);
-        // const data = response.data.sort((a, b) => a.name.localeCompare(b.name))
         const data = response.data.sort((a, b) => a._id.localeCompare(b._id))
         setData(data);
         setSelectQuestion(data[0].question);
         setSelectSurvey(data);
       })
       .catch((error) => console.log(error.message));
-
   }, []);
 
-  const filterChangeHandler = (event) => {
-    dispatch({
-      type: "DASHBOARD",
-      payload: { [event.target.name]: event.target.value },
-    });
-  };
+  // const filterChangeHandler = (event) => {
+  //   dispatch({
+  //     type: "DASHBOARD",
+  //     payload: { [event.target.name]: event.target.value },
+  //   });
+  // };
   const filterChangeHandlerSurvey = (event) => {
     const question = data.filter(item => {
       if (item._id == event.target.value) return item
@@ -86,21 +84,26 @@ export default function Bar() {
 
   return (
     <div className={styles.bar}>
-      <div className={styles.nav}>
-        {/* </div>
-            
-          <div className={styles.nav}>   */}
-
-        <Label id='create' name='location' content={<BiAddToQueue />} change={labelHandler} />
+      {/* <div className={styles.nav}> */}
+      <div className={styles.labels}>
+        {/* <div className={styles.iconContainer}> */}
+        <Label id='create' name='location' content={<MdPlaylistAdd />} change={labelHandler}></Label>
         <Label id='dashboard' name='location' value={true} content={<IoMdStats />} change={labelHandler} />
-        <Label id='instructions' name='location' content={<FiHelpCircle />} change={labelHandler} />
+        <Label id='instructions' name='location' content={<MdOutlineInfo />} change={labelHandler} />
+        {/* </div> */}
+      </div>
+      <div className={styles.questionContainer}>
         {(location === 'dashboard') &&
           <select name="selectedSurvey" onChange={filterChangeHandlerSurvey} className={styles.select}>
             {selectSurvey.map((survey) => <option key={survey._id} value={survey._id} question={survey.question}>{survey.name}</option>)}
           </select>}
-          <div className={styles.datePicker}>
+        {location === 'dashboard' && <div className={styles.question}>{selectQuestion}</div>}
+      </div>
+
+      {/* <div className={styles.nav}> */}
+      <div className={styles.datePicker}>
         {(location === 'dashboard') &&
-        
+
           <DatePicker
             id="startDate"
             selected={dashboard.startDate}
@@ -108,7 +111,8 @@ export default function Bar() {
             maxDate={new Date()}
             onSelect={startDateHandler}
             showYearDropdown
-            scrollableMonthYearDropdown />}
+            scrollableMonthYearDropdown
+            showWeekNumbes />}
         {(location === 'dashboard') &&
           <DatePicker
             id="endDate"
@@ -118,18 +122,18 @@ export default function Bar() {
             maxDate={new Date()}
             onSelect={endDateHandler}
             showYearDropdown
-            showMonthDropdown
             scrollableMonthYearDropdown
             showWeekNumbers
           />
-        }</div>
-
-
+        }
       </div>
-      <div className={styles.nav}>
-        {location === 'dashboard' && <div className={styles.question}>{selectQuestion}</div>}
-        <button><Link to='/'><IoMdExit /></Link></button>
-      </div>
+
+      <button>
+        <Link to='/'><IoMdExit /></Link>
+      </button>
+
+      {/* </div> */}
+
     </div >
   )
 }
