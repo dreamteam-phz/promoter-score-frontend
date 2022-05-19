@@ -1,9 +1,8 @@
 import styles from "./Pie.module.css";
-import React from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
+import { Chart, Doughnut } from 'react-chartjs-2';
 import { useDispatch, useSelector } from "react-redux";
-import { useRef } from 'react';
 import { getElementAtEvent } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -11,17 +10,31 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const options = {
   maintainAspectRatio: false,
   responsive: true,
-  cutout: 45,
+  cutout: '70%',
+  layout: {
+    padding: {
+      top: 0,
+      bottom: 40,
+      left: 30,
+      right: 30,
+    },
+  },
+
+  onHover: (event, chartElement) => {
+    if (chartElement.length === 1) {
+      event.native.target.style.cursor = 'pointer'
+    };
+    if (chartElement.length === 0) {
+      event.native.target.style.cursor = 'default'
+    };
+  },
   plugins: {
     legend: {
-      position: 'bottom',
-      labels: {
-        align: 'start'
-      }
-    },
-    title: {
-      display: true,
-      text: 'Amount of responds'
+      display: false,
+      // position: 'bottom',
+      // labels: {
+      //   align: 'start'
+      // },
     },
   },
 };
@@ -71,59 +84,63 @@ const howManyDetractors = (results, month) => {
 
 const Pie = () => {
   const results = useSelector((state) => state.dashboard.results);
+  const npsNow = useSelector((state) => state.dashboard.nps)
+  console.log(npsNow)
+  console.log(results, "results")
   const dispatch = useDispatch();
+  //variables
   const promoters = howManyPromoters(results, 'overall');
   const detractors = howManyDetractors(results, 'overall');
   const passives = howManyPassives(results, 'overall');
   const overall = promoters + detractors + passives;
-  const percentPro = Math.round(promoters / overall * 100)
-  const percentPas = Math.round(passives / overall * 100)
-  const percentDet = Math.round(detractors / overall * 100)
+  const percentPro = Math.round(promoters / overall * 100);
+  const percentPas = Math.round(passives / overall * 100);
+  const percentDet = Math.round(detractors / overall * 100);
   const nps = Math.round((promoters - detractors) / overall * 100);
+
 
   const data = {
     labels: [`Promoters  ${percentPro}%(${promoters})`, `Passives ${percentPas}%(${passives})`, `Detractors  ${percentDet}%(${detractors})`],
     datasets: [
       {
-        label: 'Hello',
         data: [promoters, passives, detractors],
         backgroundColor: [
-          '#02c39a',
-          '#48cae4',
-          '#ef476f'
+          '#1d4e89',
+          '#0092ae',
+          '#7dcfb6'
         ],
         borderColor: [
-          '#02c39a',
-          '#48cae4',
-          '#ef476f'
+          '#1d4e89',
+          '#00b2ca',
+          '#7dcfb6'
         ],
-        borderWidth: 1
+        borderWidth: 1,
+        hoverOffset: 4,
       },
     ],
   };
-  
+
   const chartRef = useRef();
+
   const clickHandler = (event) => {
-    
     let index = getElementAtEvent(chartRef.current, event)[0].index;
-    console.log(index)
     if (index == 0) {
-      dispatch({ type: "DASHBOARD", payload: { comments: 0}});
+      dispatch({ type: "DASHBOARD", payload: { comments: 0 } });
     } else if (index == 1) {
-      dispatch({ type: "DASHBOARD", payload: { comments: 1}});
+      dispatch({ type: "DASHBOARD", payload: { comments: 1 } });
     } else if (index == 2) {
-      dispatch({ type: "DASHBOARD", payload: { comments: 2}});
+      dispatch({ type: "DASHBOARD", payload: { comments: 2 } });
     } else {
       console.log('Hello, PHZ!')
     }
   }
-  
+
   if (results.length == 0) {
     return (
       <div className={styles.Pie}>
-        <h2>Pie</h2>
+        <h2>SCORE</h2>
         <div className={styles.pieContainer}>
-          
+
         </div>
         <div className='noData'>No data</div>
       </div>
@@ -131,11 +148,28 @@ const Pie = () => {
   } else {
     return (
       <div className={styles.Pie}>
-        <h2>Pie</h2>
-        <div className={styles.pieContainer}>
-          <Doughnut ref={chartRef} data={data} options={options} onClick={clickHandler} />  
+        <h2>SCORE</h2>
+        <div className={styles.pieContainer}>        <p>responses {results.length}</p>
+
+          <Doughnut className={styles.doughnut} ref={chartRef} data={data} options={options} onClick={clickHandler}
+          />
         </div>
         <p className={styles.title}>{nps}</p>
+        <div className={styles.customLegend}>
+          <ul>
+            <li className={styles.textName}>
+              <span className={styles.text}>Promoters: {promoters}  ({percentPro}%)</span>
+            </li>
+            <li className={styles.textName}>
+              <span className={styles.text}>Detractors: {detractors}  ({percentDet}%)</span>
+            </li>
+            <li className={styles.textName}>
+
+              <span className={styles.text}>Passives: {passives}  ({percentPas}%)</span>
+            </li>
+            {/* <li><span className={styles.passives}></span>Promoters: {passives}</li> */}
+          </ul>
+        </div>
       </div>
     );
   }

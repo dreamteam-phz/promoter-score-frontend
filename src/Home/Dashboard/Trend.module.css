@@ -1,12 +1,13 @@
-
 .ResponseTrend {
   width: 20vw;
-  height: 22.5vh;
+  /* height: 22.5vh; */
   background-color: transparent;
   position: relative;
-  background-color: var(--comment);
+  background-color: var(--background-white);
 }
 .trendContainer {
   width: 96%;
   margin-left: 2%;
+  border-radius: 5px;
+  text-align: center;
 }
