@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Loader from "../components/loader/Loader";
 import AnotherSurvey from "./AnotherSurvey";
 import styles from "./Create.module.css";
 
@@ -69,6 +70,7 @@ export default function Create() {
           {!isLoading && surveys.map(item => {
             return <AnotherSurvey delete={deleteHandler} id={item._id} key={item._id} name={item.name} question={item.question} link={src + item._id} />
           })}
+          {isLoading && <Loader />}
         </div>
       </div>
     </div>

@@ -122,7 +122,6 @@ margin: 10px;
 }
 .datePicker input {
     width: 100px;
-    margin-left: 25px;
 }
 .datePicker {
     display: flex;

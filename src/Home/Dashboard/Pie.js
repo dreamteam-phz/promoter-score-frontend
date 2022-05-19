@@ -99,7 +99,7 @@ const Pie = () => {
   const nps = Math.round((promoters - detractors) / overall * 100);
 
   const data = {
-    labels: [`Promoters  ${percentPro}%(${promoters})`, `Passives ${percentPas}%(${passives})`, `Detractors  ${percentDet}%(${detractors})`],
+    labels: [`Promoters  ${percentPro}% (${promoters})`, `Passives ${percentPas}% (${passives})`, `Detractors  ${percentDet}% (${detractors})`],
     datasets: [
       {
         data: [promoters, passives, detractors],
@@ -148,8 +148,7 @@ const Pie = () => {
         <h2>SCORE</h2>
         <div className={styles.pieContainer}>        <p>responses {results.length}</p>
 
-          <Doughnut className={styles.doughnut} ref={chartRef} data={data} options={options} onClick={clickHandler}
-          />
+          <Doughnut className={styles.doughnut} ref={chartRef} data={data} options={options} onClick={clickHandler}/>
         </div>
         <p className={styles.title}>{nps}</p>
         <div className={styles.customLegend}>
