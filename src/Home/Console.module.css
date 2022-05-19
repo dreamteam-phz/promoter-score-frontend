@@ -1,16 +1,14 @@
 .console {
     width: 100vw;
-    height: 94vh;
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--green-accent-backgound);
-
-
 }
 .surveyConsole{
     width: 100vw;
-    height: 94vh;
+    height: 90vh;
     display: flex;
     background-color: var(--white-grey);
 

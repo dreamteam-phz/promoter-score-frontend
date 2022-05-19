@@ -15,6 +15,7 @@
   padding-top: 8px;
 }
 .comment {
+  /* background-color: var(--background-white); */
   width: 98.5%;
   height: fit-content;
   display: flex;
@@ -32,6 +33,7 @@
   height: 100%;
   font-size: 15px;
   padding: 5px;
+  color: var(--black);
 }
 .date {
   width: 19%;
@@ -50,7 +52,7 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
-  background-color: var(--black);
+  background-color: var(--blackish);
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -60,6 +62,10 @@
   color: var(--white);
   font-weight: bold;
   justify-content: center;
+}
+.tableHeader .content{
+  justify-content: flex-start;
+  margin-left: 5px;
 }
 .tableHeader .score, .tableHeader .date, .tableHeader .content {
   cursor: pointer;

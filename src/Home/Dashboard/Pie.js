@@ -85,9 +85,8 @@ const howManyDetractors = (results, month) => {
 const Pie = () => {
   const results = useSelector((state) => state.dashboard.results);
   const npsNow = useSelector((state) => state.dashboard.nps)
-  console.log(npsNow)
-  console.log(results, "results")
   const dispatch = useDispatch();
+  const chartRef = useRef();
   //variables
   const promoters = howManyPromoters(results, 'overall');
   const detractors = howManyDetractors(results, 'overall');
@@ -97,7 +96,6 @@ const Pie = () => {
   const percentPas = Math.round(passives / overall * 100);
   const percentDet = Math.round(detractors / overall * 100);
   const nps = Math.round((promoters - detractors) / overall * 100);
-
 
   const data = {
     labels: [`Promoters  ${percentPro}%(${promoters})`, `Passives ${percentPas}%(${passives})`, `Detractors  ${percentDet}%(${detractors})`],
@@ -119,8 +117,6 @@ const Pie = () => {
       },
     ],
   };
-
-  const chartRef = useRef();
 
   const clickHandler = (event) => {
     let index = getElementAtEvent(chartRef.current, event)[0].index;
@@ -167,7 +163,6 @@ const Pie = () => {
 
               <span className={styles.text}>Passives: {passives}  ({percentPas}%)</span>
             </li>
-            {/* <li><span className={styles.passives}></span>Promoters: {passives}</li> */}
           </ul>
         </div>
       </div>

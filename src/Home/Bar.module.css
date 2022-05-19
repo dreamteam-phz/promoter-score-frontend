@@ -1,19 +1,18 @@
 .bar {
     background-color: var(--black);
     width: 100vw;
-    height: 6vh;
+    height: 10vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     box-shadow: 0 0 4px 0 var(--shadow);
 }
 
 .nav {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    gap: 25px;
-    
+    justify-content: space-evenly;
+    gap: 25px; 
 }
 
 .nav:first-child {
@@ -28,15 +27,15 @@
     display: none;
 } */
 
+
 .nav label {
     color: whitesmoke;
     cursor: pointer;
     font-weight: 600;
-    font-size: 25px;
+    font-size: 30px;
     transition-duration: 100ms;
     transition: ease;
     margin-bottom: -5px;
-
 }
 
 .nav button {
@@ -71,14 +70,13 @@
 } */
 
 .select {
-    height: 1.4rem;
+    height: 2rem;
     color: var(--white);
     text-align: left;
     cursor: pointer;
     outline: none;
     margin: 1.4rem 0 1.4rem 0;
     background-color: transparent;
-    border: none;
 }
 
 .select:first-child {
@@ -89,9 +87,9 @@
     border-radius: 10px;
 }
 .question {
-    font-size: 14px;
-    color: var(--green-accent);
+    font-size: 16px;
     font-weight: bold;
+    color: var(--background-white);
 }
 .datePicker input {
     outline: none;
