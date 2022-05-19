@@ -52,6 +52,7 @@ export default function Create() {
   }
 
   const deleteHandler = (event) => {
+    console.log(event, event.value, event.target.value)
     axios
       .delete(api_url + "delete/survey/" + event.target.id)
       .then(res => console.log(res.status));
@@ -90,7 +91,7 @@ export default function Create() {
         <h2>ALL SURVEYS</h2>
         <div className={styles.surveyContainer}>
           {!isLoading && surveys.map(item => {
-            return <AnotherSurvey delete={deleteHandler} id={item._id} key={item._id} name={item.name} question={item.question} link={src + item._id} />
+            return <AnotherSurvey delete={deleteHandler} value={item} id={item._id} key={item._id} name={item.name} question={item.question} link={src + item._id} />
           })}
           {isLoading && <Loader />}
         </div>
