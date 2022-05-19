@@ -36,7 +36,7 @@ export default function Bar() {
     axios
       .get(URL_SURVEY_API)
       .then((response) => {
-
+        console.log(response);
         // const data = response.data.sort((a, b) => a.name.localeCompare(b.name))
         const data = response.data.sort((a, b) => a._id.localeCompare(b._id))
         setData(data);

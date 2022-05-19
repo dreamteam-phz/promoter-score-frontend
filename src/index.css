@@ -101,4 +101,6 @@ button {
   top: calc(50%);
   right: calc(50% - 50px);
 }
-  
+.COPIED {
+  background-color: var(--effect-PHZorane) !important;
+}
