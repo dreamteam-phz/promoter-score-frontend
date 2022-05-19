@@ -1,13 +1,34 @@
 .cookieMessage{
     display: flex; 
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 60vh;
-    background-color: var(--background-white);
+    height: 100vh;
+    width:100vw;
+    background-color: var(--text-white);
+    gap:25px;
   }
   .cookieMessage .message{
     font-size: 2em;
     font-weight: bolder;
     color: var(--effect-PHZorane); 
    text-align: center;
-  }
+  }  
+  .disturbIcon{
+    color: var(--effect-PHZorane);
+    animation: appear 1.1s ease-in-out;
+    animation-fill-mode: forwards;
+    animation-delay: 0.2s;
+    opacity:0%;   
+    width:150px; 
+    height:150px;  
+    
+   }
+    @keyframes appear {
+        0% {
+        opacity: 0;
+            }
+        100% {
+            opacity: 1;
+            }
+        }
