@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import styles from "./FormMobile.module.css";
 import axios from "axios";
 import Label from './Label';
+import { useSelector } from 'react-redux';
+import EndMessage from "./EndMesage";
+import AccessDenied from "./AccessDenied";
 
 
 const FormMobile = () => {
@@ -12,9 +15,11 @@ const FormMobile = () => {
         comment: true,
     });
 
+    const [showMessage, setShowMessage] = useState(false);
     const [submittable, setSubmittable] = useState(false);
     const [accessable, setAccessable] = useState(true);
     const [form, setForm] = useState({ score: "", comment: "" });
+    const api_url = useSelector((state) => state.api_url);
     const params = useParams();
     useEffect(() => {
         cookieChecker();
@@ -24,7 +29,7 @@ const FormMobile = () => {
 
     const getData = () => {
         axios
-            .get("http://localhost:4000/api/surveys/" + params.id)
+            .get(api_url + "surveys/" + params.id)
             .then((response) => {
                 console.log(response.data);
                 setSurvey(response.data);
@@ -59,7 +64,7 @@ const FormMobile = () => {
     const submitHandler = (event) => {
         event.preventDefault();
         axios
-            .patch("http://localhost:4000/api/update/" + params.id, {
+            .patch(api_url + "update/" + params.id, {
                 results: [form],
             })
             .then((response) => {
@@ -67,18 +72,35 @@ const FormMobile = () => {
             });
         setForm({ score: "", comment: "" });
         console.log(form.score);
+        accessSetter();
+        setTimeout(() => {
+            setShowMessage(true);
+          }, 800);
     };
     const returnHandler = (event) => {
         event.preventDefault();
         setSubmittable(false);
         console.log("form.score is", form.score)
     }
+    const accessSetter = () => {
+        let now = new Date();
+        let minutes = 1;
+        now.setTime(now.getTime() + minutes * 60 * 1000);
+        document.cookie = `name=${params.id}; expires=${now.toUTCString()};`;
+      };
     const cookieChecker = () => {
         if (document.cookie === `name=${params.id}`) {
             console.log("cookie is set", document.cookie);
             setAccessable(false);
         }
     };
+    if (!accessable) {
+        return <AccessDenied />
+    } else {
+    if (showMessage) {
+        return <EndMessage />
+      }
+    else {
 
     return (
         <div className={styles.mobile}>
@@ -132,7 +154,9 @@ const FormMobile = () => {
             }
 
         </div >
-    );
+    
+    )};
+    };
 };
 
 export default FormMobile;

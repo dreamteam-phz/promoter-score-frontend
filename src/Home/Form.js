@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Loader from "../components/loader/Loader";
 import AccessDenied from "./AccessDenied";
 import EndMessage from "./EndMesage";
+import { useSelector } from "react-redux";
 
 const Form = () => {
   const [accessable, setAccessable] = useState(true);
@@ -19,7 +20,7 @@ const Form = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
   const params = useParams();
-
+  const api_url = useSelector((state) => state.api_url);
 
   useEffect(() => {
     cookieChecker();
@@ -30,7 +31,7 @@ const Form = () => {
   const getData = () => {
     //setIsLoading(true);
     axios
-      .get("http://localhost:4000/api/surveys/" + params.id)
+      .get(api_url + "surveys/" + params.id)
       .then((response) => {
         console.log('getData', response);
         if (response.status === 200) {
@@ -77,7 +78,7 @@ const Form = () => {
     //setIsLoading(true);
     event.preventDefault();
     axios
-      .patch("http://localhost:4000/api/update/" + params.id, {
+      .patch(api_url + "update/" + params.id, {
         results: [form],
       })
       .then((response) => {
