@@ -17,7 +17,7 @@
 .question{
   font-size: 24px;  
   display: flex;
-  text-align: left;
+  text-align: center;
   align-items: center;
   justify-content: center; 
   margin: 0 15px;
@@ -26,10 +26,6 @@
 }
 span{
     color: var(--effect-PHZorane);
-}
-.smallText{
-  color: var(--black);
-  opacity:0.8;
 }
 .mobile .tool{
   display: flex; 
@@ -113,7 +109,18 @@ span{
 .mobile textarea:focus{
   border: 1px solid var(--effect-PHZorane);
 }
- 
+textarea {
+  min-width: 350px;
+  width: var(--formwidth);
+  height: 200px;
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  margin-top: -20px;
+  font-size: 18px;
+  outline: none;
+  resize: none;
+  padding: 10px 15px;
+}
+
 
    
-

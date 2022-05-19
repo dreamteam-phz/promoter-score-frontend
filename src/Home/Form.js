@@ -33,7 +33,6 @@ const Form = () => {
     axios
       .get(api_url + "surveys/" + params.id)
       .then((response) => {
-        console.log('getData', response);
         if (response.status === 200) {
           setSurvey(response.data);
           setIsLoading(false)
@@ -41,7 +40,7 @@ const Form = () => {
         else {
           setTimeout(() => {
             setIsLoading(false)
-          }, 1000);
+          }, 800);
           // error message "something wrong" here 
         }
       })
@@ -49,7 +48,7 @@ const Form = () => {
         if (error) {
           setTimeout(() => {
             setIsLoading(false)
-          }, 1000);
+          }, 800);
           // error message "no Database connection" here 
         }
       });
@@ -82,7 +81,6 @@ const Form = () => {
         results: [form],
       })
       .then((response) => {
-        console.log(response, response.status);
         if (response.status === 200) {
           setIsLoading(false);
           // setForm({ score: "", comment: "" });
@@ -117,7 +115,6 @@ const Form = () => {
       setAccessable(false);
     }
   };
-
 
   if (!accessable) {
     return <AccessDenied />

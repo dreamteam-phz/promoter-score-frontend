@@ -13,6 +13,10 @@
     font-weight: bolder;
     color: var(--effect-PHZorane); 
    text-align: center;
+   animation: appear 1.1s ease-in-out;
+   animation-fill-mode: forwards;
+   animation-delay: 0.26s;
+   opacity:0%; 
   }  
   .disturbIcon{
     color: var(--effect-PHZorane);
