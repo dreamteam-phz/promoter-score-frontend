@@ -8,8 +8,10 @@ export default function Create() {
   const [surveys, setSurveys] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [result, setResult] = useState('');
-  const URL_SURVEY_API = 'http://localhost:4000/api/surveys';
-  const src = 'http://localhost:3000/';
+  const api_url = useSelector((state) => state.api_url);
+  const URL_SURVEY_API = api_url + 'surveys';
+  // const src = 'http://localhost:3000/'; // for local
+  const src = 'https://62860cdb037adb505a38c39a--eclectic-trifle-b4c620.netlify.app/';
 
   useEffect(() => loadData(), [isLoading]);
 
@@ -25,7 +27,7 @@ export default function Create() {
   const submitHandler = () => {
     if (data.name !== '' && data.question !== '') {
       axios
-        .post("http://localhost:4000/api/newsurvey", {
+        .post(api_url + "newsurvey", {
           name: data.name,
           question: data.question,
           comment: true
@@ -44,7 +46,7 @@ export default function Create() {
   
   const deleteHandler = (event) => {
     axios
-      .delete("http://localhost:4000/api//delete/survey/" + event.target.id)
+      .delete(api_url + "delete/survey/" + event.target.id)
       .then(res => console.log(res.status));
     setIsLoading(true)
   }
