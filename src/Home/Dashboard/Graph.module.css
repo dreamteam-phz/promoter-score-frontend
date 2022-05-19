@@ -1,21 +1,23 @@
 .graph {
   width: 60vw;
   height: calc(42vh + 12.5px);
-  background-color: var(--comment);
+  background-color: var(--background-white);
   display: flex;
   flex-direction: column;
   position: relative;
+  border-radius: 3px;
 }
 h2 {
   background-color: var(--black);
   height: 35px;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: normal;
   color: whitesmoke;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 .Bar {
   width: 90%;

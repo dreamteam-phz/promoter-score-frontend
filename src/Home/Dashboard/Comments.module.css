@@ -1,7 +1,7 @@
 .Comments {
   width: 60vw;
   height: calc(39vh + 12.5px);
-  background-color: var(--comment);
+  background-color: var(--background-white);
   position: relative;
 }
 .commentsContainer {
@@ -21,6 +21,8 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+  border-bottom: 0.5px solid var(--blackish);
+
 }
 .date, .score, .content {
   display: flex;
@@ -28,9 +30,7 @@
   justify-content: center;
   min-height: calc(((39vh + 12.5px - 35px) / 10) - 6px);
   height: 100%;
-  background-color: var(--white);
-  border-radius: 3px;
-  font-size: 14px;
+  font-size: 15px;
   padding: 5px;
 }
 .date {
@@ -40,7 +40,7 @@
   width: 15%;
 }
 .content {
-  width: calc(65% - 10px);
+  width: calc(65% - 30px);
   justify-content: flex-start;
 }
 .tableHeader {
@@ -51,8 +51,8 @@
   align-items: center;
   gap: 5px;
   background-color: var(--black);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 .tableHeader .date, .tableHeader .score, .tableHeader .content {
   height: 35px;
@@ -65,6 +65,6 @@
   cursor: pointer;
 }
 .tableHeader span{
-  color: var(--green-accent);
+  color: var(--background-white);
   margin-top: 3px;
 }

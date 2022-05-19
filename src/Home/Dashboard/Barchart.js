@@ -13,23 +13,17 @@ const BarChart = () => {
   const preSelectedData = useSelector(state => state.dashboard.filteredData)
 
 
-  // selecting data in correct datrange
+  // selecting data in correct daterange
   const dataToShow = preSelectedData.filter(item => {
     return new Date(item.date) >= startingDate && new Date(item.date) <= endingDate;
   })
 
   const options = { year: 'numeric', month: 'short', day: 'numeric' }
+
   //     return new Date(date).toLocaleDateString('en-GB', options)
-
   const days = dataToShow.map((item) => new Date(item).toLocaleDateString('en-GB', options));
-  console.log("days: ", days);
   const modifiedDates = days.map(date => new Date(date).toLocaleDateString('uk', { timeZone: 'Europe/Helsinki' }));
-  console.log("filtered data", preSelectedData);
-  console.log('toShow', dataToShow)
   const promotersDataset = dataToShow.map((item) => item.promoter);
-
-  console.log("dates: ", modifiedDates);
-
 
   const state = {
     // x-axis labels:
@@ -37,17 +31,14 @@ const BarChart = () => {
     // array of objects, can show several datasets
     datasets: [
       {
-        //type: 'bar',
         // label for each dataset
         label: "Promoters",
         //borderColor: 
         //backgroundColor: single or array
         // one-dimensonal array
-
         backgroundColor: ["#1D4E89"],
       },
       {
-        //type: 'bar',
         // label for each dataset
         label: "Passives",
         //borderColor: 

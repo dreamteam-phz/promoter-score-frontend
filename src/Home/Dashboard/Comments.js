@@ -21,7 +21,7 @@ const Comments = () => {
 
   const results = useSelector((state) => state.dashboard.results);
   const filtering = useSelector((state) => state.dashboard.comments);
-  
+
   const resultsWithoutEmptyComments = results.filter(item => {
     if (item.comment !== '') return item;
   })
@@ -34,7 +34,7 @@ const Comments = () => {
   const commentsDetractors = resultsWithoutEmptyComments.filter(item => {
     if (item.score <= 6) return item;
   })
-  
+
   const [filteredResults, setFilteredResults] = useState(resultsWithoutEmptyComments);
   const [abc, setAbc] = useState(false);
   const [dateSort, setDateSort] = useState(false);
@@ -88,15 +88,15 @@ const Comments = () => {
   }
 
   const showAllComments = () => {
-    dispatch({ type: "DASHBOARD", payload: { comments: 'all'}});
+    dispatch({ type: "DASHBOARD", payload: { comments: 'all' } });
   }
   if (resultsWithoutEmptyComments.length == 0) {
     return (
       <div className={styles.Comments}>
         <div className={styles.tableHeader}>
-        <div className={styles.date} onClick={sortHandlerDate}>Date <span><FaSort/></span></div>
-        <div className={styles.score} onClick={sortHandlerScore}>Score <span><FaSort/></span></div>
-        <div className={styles.content}>Comments</div></div>
+          <div className={styles.date} onClick={sortHandlerDate}>DATE <span><FaSort /></span></div>
+          <div className={styles.score} onClick={sortHandlerScore}>SCORE <span><FaSort /></span></div>
+          <div className={styles.content}>COMMENTS</div></div>
         <div className='noData'>No data</div>
       </div>
     );
@@ -104,9 +104,9 @@ const Comments = () => {
     return (
       <div className={styles.Comments}>
         <div className={styles.tableHeader}>
-        <div className={styles.date} onClick={sortHandlerDate}>Date <span><FaSort/></span></div>
-        <div className={styles.score} onClick={sortHandlerScore}>Score <span><FaSort/></span></div>
-        <div className={styles.content} onClick={showAllComments}>{(filtering == 'all' && 'Comments')}{(filtering !== 'all') && 'Back to all comments'}</div></div>
+          <div className={styles.date} onClick={sortHandlerDate}>DATE <span><FaSort /></span></div>
+          <div className={styles.score} onClick={sortHandlerScore}>SCORE <span><FaSort /></span></div>
+          <div className={styles.content} onClick={showAllComments}>{(filtering == 'all' && 'Comments')}{(filtering !== 'all') && 'Back to all comments'}</div></div>
         <div className={styles.commentsContainer}>
           {commentsToDisplay}
         </div>
