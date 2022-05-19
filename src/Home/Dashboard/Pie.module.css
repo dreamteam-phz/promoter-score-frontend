@@ -22,12 +22,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50%;
+  width: 30%;
   height: 50px;
   font-size: 30px;
   font-weight: bold;
   position: absolute;
-  left: 25%;
+  left: 35%;
   top: calc((100% - 80px)/2);
 }
 
