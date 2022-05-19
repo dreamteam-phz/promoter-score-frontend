@@ -59,12 +59,29 @@ export default function Create() {
   }
 
   return (
+    //
+    // <label htmlFor="nameInput">survey name<span> *</span></label>
+    // <input
+    //   id="nameInput"
+    //   name="name"
+    //   type="text"
+    //   placeholder="enter name"
+    //   onChange={inputHandler}
+    //   value={data.name}
+    // />
+    //
     <div className={styles.create}>
       <div className={styles.new}>
         <h2>CREATE NEW SURVEY</h2>
         <div className={styles.createContainer}>
-          <input onChange={changeHandler} value={data.name} name="name" placeholder="Name of survey" />
-          <input onChange={changeHandler} value={data.question} name="question" placeholder="Question of survey" />
+          <div className={styles.createContent}>
+            <label htmlFor="nameInput">survey name <span> *</span></label>
+            <input id="nameInput" onChange={changeHandler} value={data.name} name="name" />
+          </div>
+          <div className={styles.createContent}>
+            <label htmlFor="questionInput">survey question <span> *</span></label>
+            <input id="questionInput" onChange={changeHandler} value={data.question} name="question" />
+          </div>
           <button onClick={submitHandler} disabled={!submittable}>CREATE</button>
           <p className={styles.response}>{result}</p>
         </div>
