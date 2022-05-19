@@ -10,11 +10,9 @@ export default function Welcome() {
       {/* <h1 className={styles.mainTitle}>NPS</h1> */}
       <div className={styles.logo}>
         <img className={styles.logo} src={logo} />
-        <h1>Survey</h1>
       </div>
-      <div className={styles.login}>
-        <button><Link to='/home'>Submit</Link></button>
-      </div>
+        <button><Link to='/home'>EXPLORE</Link></button>
+        <div className={styles.developed}>Developed by DreamTeam 2022. Business College Helsinki</div>
     </main>
   )
 }

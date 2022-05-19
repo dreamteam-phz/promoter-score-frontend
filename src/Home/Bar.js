@@ -18,10 +18,10 @@ import axios from "axios";
 export default function Bar() {
   const dashboard = useSelector((state) => state.dashboard); // for testing
   const location = useSelector((state) => state.location); // for testing
-  // const period = useSelector((state) => state.dashboard.selectedMonth);
+  const api_url = useSelector((state) => state.api_url);
   const dispatch = useDispatch();
 
-  const URL_SURVEY_API = "http://localhost:4000/api/surveys";
+  const URL_SURVEY_API = api_url + "surveys";
   const [selectSurvey, setSelectSurvey] = useState([]);
   const [selectQuestion, setSelectQuestion] = useState('hi');
   const [data, setData] = useState([]);

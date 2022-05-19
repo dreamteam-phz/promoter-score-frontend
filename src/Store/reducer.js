@@ -15,6 +15,8 @@ const initialState = {
     filteredData: [],
     scoreForChart: []
   },
+  // api_url: 'http://localhost:4000/api/', // for local use
+  api_url: 'https://backend.ainozerie1.repl.co/api/', // deployed backend
   location: "surveys",
   surveys: {
     surveyItems: [],

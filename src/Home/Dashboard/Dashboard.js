@@ -17,6 +17,7 @@ export default function Dashboard() {
   const dashboard = useSelector((state) => state.dashboard); // for testing
   const surveyID = useSelector((state) => state.dashboard.surveyID);
   const dispatch = useDispatch();
+  const api_url = useSelector((state) => state.api_url);
   const period = Math.round((dashboard.endDate - dashboard.startDate) / 86400000); // how many days
   useEffect(() => {
     getResults();
@@ -25,8 +26,9 @@ export default function Dashboard() {
   // console.log(dashboard.results)
   // get data
   const getResults = () => {
-    axios.get("http://localhost:4000/api/formscores").then((response) => {
+    axios.get(api_url + "formscores").then((response) => {
       const data = response.data.sort((a, b) => a.surveyID.localeCompare(b.surveyID))
+
       dispatch({ type: 'DASHBOARD', payload: { data: data } })
       setData(data, surveyID);
     });
