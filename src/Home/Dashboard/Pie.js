@@ -8,15 +8,16 @@ import { getElementAtEvent } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const options = {
-  maintainAspectRatio: false,
+  aspectRatio: 1,
+  maintainAspectRatio: true,
   responsive: true,
   cutout: '70%',
   layout: {
     padding: {
       top: 0,
-      bottom: 40,
-      left: 30,
-      right: 30,
+      bottom: 60,
+      left: 60,
+      right: 60,
     },
   },
 
@@ -163,6 +164,7 @@ const Pie = () => {
 
               <span className={styles.text}>Passives: {passives}  ({percentPas}%)</span>
             </li>
+
           </ul>
         </div>
       </div>

@@ -84,13 +84,15 @@ export default function Bar() {
 
   return (
     <div className={styles.bar}>
-      <div className={styles.nav}>
+      {/* <div className={styles.nav}> */}
+      <div className={styles.labels}>
         {/* <div className={styles.iconContainer}> */}
         <Label id='create' name='location' content={<MdPlaylistAdd />} change={labelHandler}></Label>
         <Label id='dashboard' name='location' value={true} content={<IoMdStats />} change={labelHandler} />
         <Label id='instructions' name='location' content={<MdOutlineInfo />} change={labelHandler} />
         {/* </div> */}
-
+      </div>
+      <div className={styles.questionContainer}>
         {(location === 'dashboard') &&
           <select name="selectedSurvey" onChange={filterChangeHandlerSurvey} className={styles.select}>
             {selectSurvey.map((survey) => <option key={survey._id} value={survey._id} question={survey.question}>{survey.name}</option>)}
@@ -98,39 +100,39 @@ export default function Bar() {
         {location === 'dashboard' && <div className={styles.question}>{selectQuestion}</div>}
       </div>
 
-      <div className={styles.nav}>
-        <div className={styles.datePicker}>
-          {(location === 'dashboard') &&
+      {/* <div className={styles.nav}> */}
+      <div className={styles.datePicker}>
+        {(location === 'dashboard') &&
 
-            <DatePicker
-              id="startDate"
-              selected={dashboard.startDate}
-              dateFormat="dd/MM/yyyy"
-              maxDate={new Date()}
-              onSelect={startDateHandler}
-              showYearDropdown
-              scrollableMonthYearDropdown
-              showWeekNumbes />}
-          {(location === 'dashboard') &&
-            <DatePicker
-              id="endDate"
-              selected={dashboard.endDate}
-              dateFormat="dd/MM/yyyy"
-              minDate={dashboard.startDate}
-              maxDate={new Date()}
-              onSelect={endDateHandler}
-              showYearDropdown
-              scrollableMonthYearDropdown
-              showWeekNumbers
-            />
-          }
-        </div>
-
-        <button>
-          <Link to='/'><IoMdExit /></Link>
-        </button>
-
+          <DatePicker
+            id="startDate"
+            selected={dashboard.startDate}
+            dateFormat="dd/MM/yyyy"
+            maxDate={new Date()}
+            onSelect={startDateHandler}
+            showYearDropdown
+            scrollableMonthYearDropdown
+            showWeekNumbes />}
+        {(location === 'dashboard') &&
+          <DatePicker
+            id="endDate"
+            selected={dashboard.endDate}
+            dateFormat="dd/MM/yyyy"
+            minDate={dashboard.startDate}
+            maxDate={new Date()}
+            onSelect={endDateHandler}
+            showYearDropdown
+            scrollableMonthYearDropdown
+            showWeekNumbers
+          />
+        }
       </div>
+
+      <button>
+        <Link to='/'><IoMdExit /></Link>
+      </button>
+
+      {/* </div> */}
 
     </div >
   )

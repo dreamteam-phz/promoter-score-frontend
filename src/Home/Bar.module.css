@@ -1,19 +1,25 @@
 .bar {
     background-color: var(--black);
     width: 100vw;
-    height: 10vh;
+    height: 8vh;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     box-shadow: 0 0 4px 0 var(--shadow);
 }
 
-.nav {
+/* .nav {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     gap: 25px; 
+} */
+.bar .labels{
+    width: 20vw; 
+    display: flex;
+    justify-content: space-around;
 }
+
 
 .nav:first-child {
     margin-left: 3vw;
@@ -28,7 +34,7 @@
 } */
 
 
-.nav label {
+.bar label {
     color: whitesmoke;
     cursor: pointer;
     font-weight: 600;
@@ -38,7 +44,7 @@
     margin-bottom: -5px;
 }
 
-.nav button {
+.bar button {
     color: var(--shadow);
     cursor: pointer;
     font-size: 16px;
@@ -68,28 +74,48 @@
 /* .select:last-child {
     width: 280px;
 } */
+.bar .questionContainer{
+    width: 40vw; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:5px;
+    padding-right: 15px;
+    
+    }
 
-.select {
+.questionContainer .select {
+   width: 100%;
     height: 2rem;
     color: var(--white);
     text-align: left;
     cursor: pointer;
     outline: none;
-    margin: 1.4rem 0 1.4rem 0;
+margin: 10px; 
     background-color: transparent;
 }
 
 .select:first-child {
-    background-color: var(--whitesmoke);
-    color: var(--black);
+    background-color: transparent;
+    color: var(--background-white);
     text-align: center;
-    width: 90px;
-    border-radius: 10px;
+    width:max-content;
+    border-radius: 2px;
+    border:none;
 }
-.question {
+.questionContainer {
+    position: relative;
     font-size: 16px;
     font-weight: bold;
     color: var(--background-white);
+}
+.question:before{
+    position: absolute;
+    content: 'selected question'; 
+    color:var(--green-accent); 
+    font-size: 10px;
+    top: -2px;
+    font-weight: normal;
 }
 .datePicker input {
     outline: none;
@@ -100,5 +126,5 @@
 }
 .datePicker {
     display: flex;
-    width: 220px;
+    width: 10vw;
 }
