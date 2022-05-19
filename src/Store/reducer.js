@@ -15,6 +15,7 @@ const initialState = {
     filteredData: [],
     scoreForChart: []
   },
+  api_url: 'http://localhost:4000/api/',
   location: "surveys",
   surveys: {
     surveyItems: [],
