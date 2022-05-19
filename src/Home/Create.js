@@ -12,8 +12,8 @@ export default function Create() {
   const [result, setResult] = useState('');
   const api_url = useSelector((state) => state.api_url);
   const URL_SURVEY_API = api_url + 'surveys';
-  // const src = 'http://localhost:3000/'; // for local
-  const src = 'https://promoter-score-frontend-ht8wtkb1f-dream-team-backend.vercel.app/';
+  const src = 'http://localhost:3000/'; // for local
+  // const src = 'https://promoter-score-frontend-ht8wtkb1f-dream-team-backend.vercel.app/';
 
   useEffect(() => loadData(), [isLoading]);
 
@@ -45,7 +45,7 @@ export default function Create() {
   const changeHandler = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
   }
-  
+
   const deleteHandler = (event) => {
     axios
       .delete(api_url + "delete/survey/" + event.target.id)

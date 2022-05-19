@@ -18,9 +18,11 @@ const FormMobile = () => {
     const [showMessage, setShowMessage] = useState(false);
     const [submittable, setSubmittable] = useState(false);
     const [accessable, setAccessable] = useState(true);
+    const [scoreMemory, setScoreMemory] = useState(null);
     const [form, setForm] = useState({ score: "", comment: "" });
     const api_url = useSelector((state) => state.api_url);
     const params = useParams();
+
     useEffect(() => {
         cookieChecker();
         if (accessable) getData();
@@ -28,10 +30,10 @@ const FormMobile = () => {
     }, []);
 
     const getData = () => {
+        setScoreMemory(0);
         axios
             .get(api_url + "surveys/" + params.id)
             .then((response) => {
-                console.log(response.data);
                 setSurvey(response.data);
             });
     };
@@ -42,12 +44,12 @@ const FormMobile = () => {
         setTimeout(() => {
             setForm({ ...form, [event.target.name]: +event.target.value });
             setSubmittable(true)
-        }, 450);
+        }, 600);
     }
     const clickHandler = (event) => {
-        console.log(event.target.outerText);
         if (form.score == event.target.outerText) {
             setSubmittable(true);
+            setScoreMemory(form.score);
         }
     }
 
@@ -71,23 +73,22 @@ const FormMobile = () => {
                 console.log(response);
             });
         setForm({ score: "", comment: "" });
-        console.log(form.score);
         accessSetter();
         setTimeout(() => {
             setShowMessage(true);
-          }, 800);
+        }, 600);
     };
     const returnHandler = (event) => {
         event.preventDefault();
         setSubmittable(false);
-        console.log("form.score is", form.score)
+        labelsToDisplay();
     }
     const accessSetter = () => {
         let now = new Date();
         let minutes = 1;
         now.setTime(now.getTime() + minutes * 60 * 1000);
         document.cookie = `name=${params.id}; expires=${now.toUTCString()};`;
-      };
+    };
     const cookieChecker = () => {
         if (document.cookie === `name=${params.id}`) {
             console.log("cookie is set", document.cookie);
@@ -97,65 +98,63 @@ const FormMobile = () => {
     if (!accessable) {
         return <AccessDenied />
     } else {
-    if (showMessage) {
-        return <EndMessage />
-      }
-    else {
-
-    return (
-        <div className={styles.mobile}>
-            <div className={styles.question}>
-                <p>
-                    {survey.question}
-                    <span> *</span>
-                </p>
-            </div>
-            {!submittable &&
-                <>
-                    <p className={styles.smallText}>extreamly likely</p>
-                    <div className={styles.tool}>{labelsToDisplay}
+        if (showMessage) {
+            return <EndMessage />
+        }
+        else {
+            return (
+                <div className={styles.mobile}>
+                    <div className={styles.question}>
+                        <p>
+                            {survey.question}
+                            <span> *</span>
+                        </p>
                     </div>
-                    <div className={styles.describers}>
-                        <p className={styles.smallText}>not likely at all</p>
-                    </div>
-                </>
-            }
-            {submittable &&
-                <>
-                    <div className='score'>
-                        <input type="text" value={form.score} readOnly></input>
-                    </div>
+                    {!submittable &&
+                        <>
+                            <p className={styles.smallText}>not likely at all</p>
+                            <div className={styles.tool}>{labelsToDisplay}
+                            </div>
+                            <div className={styles.describers}>
+                                <p className={styles.smallText}>extreamly likely</p>
+                            </div>
+                        </>
+                    }
+                    {submittable &&
+                        <>
+                            <div className={styles.score}>
+                                <input type="text" value={form.score} readOnly></input>
+                            </div>
 
-                    {survey.comment && (
-                        <div className={styles.precomment}>
-                            <p>Why / Why not?</p>
-                        </div>
-                    )}
-                    {survey.comment && (
-                        <textarea
-                            onChange={textAreaHandler}
-                            name="comment"
-                            rows="6"
-                            cols="30"
-                            placeholder="type your message here"
-                            defaultValue={form.comment}
-                        />
-                    )}
-                </>
-            }
+                            {survey.comment && (
+                                <div className={styles.precomment}>
+                                    <p>Why / Why not?</p>
+                                </div>
+                            )}
+                            {survey.comment && (
+                                <textarea
+                                    onChange={textAreaHandler}
+                                    name="comment"
+                                    rows="6"
+                                    cols="30"
+                                    placeholder="type your message here"
+                                    defaultValue={form.comment}
+                                />
+                            )}
+                        </>
+                    }
 
-            <button onClick={submitHandler} disabled={!submittable}>
-                Submit
-            </button>
-            {submittable &&
-                <>
-                    <button onClick={returnHandler} className={styles.cancelButton}>Cancel</button>
-                </>
-            }
-
-        </div >
-    
-    )};
+                    <button onClick={submitHandler} disabled={!submittable}>
+                        Submit
+                    </button>
+                    {submittable &&
+                        <>
+                            <button onClick={returnHandler} className={styles.cancelButton}>Cancel</button>
+                        </>
+                    }
+                </div >
+            )
+        };
     };
 };
 
