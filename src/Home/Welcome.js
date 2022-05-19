@@ -11,8 +11,9 @@ export default function Welcome() {
       <div className={styles.logo}>
         <img className={styles.logo} src={logo} />
       </div>
-        <button><Link to='/home'>EXPLORE</Link></button>
-        <div className={styles.developed}>Developed by DreamTeam 2022. Business College Helsinki</div>
+      <button><Link to='/home'>EXPLORE</Link></button>
+      <div className={styles.developed}>Developed by DreamTeam 2022. Business College Helsinki</div>
+
     </main>
   )
 }

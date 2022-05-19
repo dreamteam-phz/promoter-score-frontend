@@ -5,29 +5,28 @@
   align-items: flex-start;
   justify-content: center;
   margin-top: 5vh;
-  gap: 15px;
+  gap: 50px;
 }
 .new, .old {
   height: 80vh;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  background-color: var(--whitesmoke);
 }
 .createContainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-start;
-  gap: 15px;
-  margin-top: 15px;
+  align-items: center;
+  margin-top: 25px;
 }
 .new {
-  width: 35vw;
-  height: 30vh;
+  width: 30vw;
+  /* height: 30vh; */
 }
 .old {
-  width: 55vw;
+  width: 50vw;
 }
-.create h2 {
+/* .create h2 {
   background-color: transparent;
   height: 35px;
   font-size: 22px;
@@ -37,27 +36,44 @@
   justify-content: center;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+} */
+.createContent{
+  width:80%;
 }
 .new input {
-  width: 90%;
+  width: 100%;
   height: 35px;
   border: none;
-  margin-right: 5%;
   padding: 2px;
   outline: none;
   border-radius: 2px;
   font-size: 16px;
+  box-shadow: 1px 1px 5px var(--shadow);
+  margin-bottom: 18px;
 }
+.new input:focus{
+  border: 1px solid var(--effect-PHZorane)
+}
+.new input label{
+  /* margin-left: 10px;
+  margin-right:10px; */
+  margin-bottom: 12px;
+}
+input,label{display: block; color:var(--black)}
 .new button {
-  width: 120px;
+  width: 250px;
   height: 35px;
   border: none;
   border-radius: 17.5px;
-  background-color: var(--green);
-  margin-right: calc(50% - 60px);
-}
-.new button:hover {
   background-color: var(--green-accent);
+  margin-top: 30px;
+}
+
+.new button:disabled {
+  background-color: var(--white);
+  border: solid 2px var(--green-accent);
+  color: var(--black);
+  pointer-events: none;
 }
 .new p {
   width: 200px;
@@ -74,7 +90,6 @@
   height: 70vh;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   gap: 15px;
   margin-top: 15px;
   margin-left: 55px;
@@ -120,7 +135,7 @@
   background-color: var(--green);
   font-size: 14px;
   margin-right: 10px;
-  border-radius: 5px;
+  border-radius:20px;
   color: var(--black);
 }
 .survey a:last-child {
@@ -136,4 +151,10 @@
   background-color: transparent;
   border: none;
   
+}
+.deleteButton{
+  color:#6e6e6e;
+  opacity:0.5;
+  font-size: 22px;
+  pointer-events: none;
 }
