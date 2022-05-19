@@ -39,10 +39,10 @@
   border-top-right-radius: 8px;
 }
 .new input {
-  width: 80%;
+  width: 90%;
   height: 35px;
   border: none;
-  margin-right: 10%;
+  margin-right: 5%;
   padding: 2px;
   outline: none;
   border-radius: 2px;
@@ -80,7 +80,7 @@
 }
 .survey {
   height: 115px;
-  width: 98%;
+  width: 97%;
   display: flex;
   background-color: var(--white);
   flex-direction: column;
@@ -117,17 +117,22 @@
   justify-content: center;
   text-decoration: none;
   background-color: var(--green);
+  font-size: 14px;
   margin-right: 10px;
+  border-radius: 5px;
+  color: var(--black);
 }
 .survey a:last-child {
   width: 130px;
 }
 .survey button {
+  width: fit-content;
   position: absolute;
   font-size: 20px;
   color: var(--blackish);
   top: 5px;
-  right: 10px;
+  right: 15px;
   background-color: transparent;
   border: none;
+  
 }
