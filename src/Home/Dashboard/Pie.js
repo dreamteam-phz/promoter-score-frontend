@@ -8,8 +8,8 @@ import { getElementAtEvent } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const options = {
-  aspectRatio: 1,
-  maintainAspectRatio: true,
+  // aspectRatio: 1,
+  maintainAspectRatio: false,
   responsive: true,
   cutout: '70%',
   layout: {

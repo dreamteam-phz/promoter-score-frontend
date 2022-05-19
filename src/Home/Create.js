@@ -13,7 +13,7 @@ export default function Create() {
   const api_url = useSelector((state) => state.api_url);
   const URL_SURVEY_API = api_url + 'surveys';
   // const src = 'http://localhost:3000/'; // for local
-  const src = 'https://62860cdb037adb505a38c39a--eclectic-trifle-b4c620.netlify.app/';
+  const src = 'https://promoter-score-frontend-ht8wtkb1f-dream-team-backend.vercel.app/';
 
   useEffect(() => loadData(), [isLoading]);
 
