@@ -141,12 +141,12 @@ const Form = () => {
               <p>not likely at all</p>
               <p>extreamly likely</p>
             </div>
-            {survey.comment && (
+            
               <div className={styles.precomment}>
                 <p>Why / Why not? </p>
               </div>
-            )}
-            {survey.comment && (
+            
+            
               <textarea
                 onChange={textAreaHandler}
                 name="comment"
@@ -155,7 +155,7 @@ const Form = () => {
                 placeholder="Your message here"
                 value={form.comment}
               />
-            )}
+            
             <div className={styles.buttonArea}>
               <button onClick={clearHandler} className={styles.cancelButton} >CLEAR</button>
               <button onClick={submitHandler} className={styles.button} disabled={!submittable}>
