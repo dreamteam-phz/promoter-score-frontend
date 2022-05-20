@@ -13,9 +13,9 @@ export default function Create() {
   const [submittable, setSubmittable] = useState(false);
   const api_url = useSelector((state) => state.api_url);
   const URL_SURVEY_API = api_url + 'surveys';
-  const src = 'http://localhost:3000/'; // for local
-  // const src = 'https://promoter-score-frontend-ht8wtkb1f-dream-team-backend.vercel.app/';
-
+  // const src = 'http://localhost:3000/'; // for local
+  const src = 'https://promoter-score-frontend-ht8wtkb1f-dream-team-backend.vercel.app/'; 
+  console.log(src);
   useEffect(() => loadData(), [isLoading]);
 
   const loadData = () => {
