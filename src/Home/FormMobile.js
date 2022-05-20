@@ -126,21 +126,17 @@ const FormMobile = () => {
                                 <input type="text" value={form.score} readOnly></input>
                             </div>
 
-                            {survey.comment && (
                                 <div className={styles.precomment}>
                                     <p>Why / Why not?</p>
                                 </div>
-                            )}
-                            {survey.comment && (
                                 <textarea
                                     onChange={textAreaHandler}
-                                    name="comment"
+                                    name="comment" 
                                     rows="6"
                                     cols="30"
                                     placeholder="type your message here"
                                     defaultValue={form.comment}
                                 />
-                            )}
                         </>
                     }
 
