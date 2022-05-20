@@ -15,9 +15,8 @@ export default function Create() {
   const URL_SURVEY_API = api_url + 'surveys';
   // const src = 'http://localhost:3000/'; // for local
   const src = 'https://promoter-score-frontend-ht8wtkb1f-dream-team-backend.vercel.app/'; 
-  console.log(src);
   useEffect(() => loadData(), [isLoading]);
-
+  console.log('src:', src);
   const loadData = () => {
     axios.get(URL_SURVEY_API)
       .then(response => {
